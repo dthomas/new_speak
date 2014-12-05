@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :accounts, only: [:new, :create]
+  resources :sessions, only: [:new, :create, :destroy]
   # resources :institutes, only: :create
 
   # The priority is based upon order of creation: first created -> highest priority.
