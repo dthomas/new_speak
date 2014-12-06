@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :institute do
-    name "MyString"
-abbreviation "MyString"
-subdomain "MyString"
-custom_domain "MyString"
-institute_type "MyString"
-owner nil
+    name "Public School, Palakara"
+		abbreviation "PSP"
+		subdomain "psps"
+		phone "282139"
+		custom_domain "psp.ac.in"
+		institute_type 0
   end
 
 end

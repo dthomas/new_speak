@@ -8,12 +8,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
-gem 'slim-rails'
-gem 'bootstrap_form'
+# gem 'slim-rails'
 gem 'country_select'
 gem 'bootstrap-sass', '~> 3.3.1'
-gem 'autoprefixer-rails'
-
+gem 'bootstrap_form'
+gem 'warden'
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server

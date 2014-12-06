@@ -1,4 +1,6 @@
 class AccountsController < ApplicationController
+  skip_before_action :ensure_authenticated
+  
   def new
   	@institute ||= Institute.new
   	@institute.users.build

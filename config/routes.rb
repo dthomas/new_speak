@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  resources :accounts, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :dashboards, only: :index
+
+  class NewSpeakMain
+    def self.matches?(request)
+      request.host.match /\A(www.|)newspeak.com\z/i
+    end
+  end
+
+  constraints NewSpeakMain do
+    resources :accounts, only: [:new, :create]
+  end
   # resources :institutes, only: :create
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,24 @@
+<header>
+	<div class="row" %>
+		<div class="col-md-12">
+			<nav class="navbar navbar-default" role="navigation">
+			  <div class=".container-fluid">
+			    <div class="navbar-header">
+			    	<%= link_to "NewSpeak", new_session_path, class: "navbar-brand" %>
+			    </div>
+
+			    <div class="collapse navbar-collapse">
+				    <ul class="nav navbar-nav navbar-right">
+				    	<% if signed_in? %>
+				    		<li> <%= link_to "Sign Out", session_path("current"), method: :delete  %> </li>
+				    	<% else %>
+				    		<li> <%= link_to "Sign In", new_session_path, icon: "sign-in"  %> </li>
+			    		<% end %>
+				    </ul>
+			    </div>
+
+			  </div>
+			</nav>
+		</div>
+	</div>
+</header>
