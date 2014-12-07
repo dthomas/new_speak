@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do
   describe "associations" do
     it { should belong_to :institute }
+    it { should have_many :students }
   end
 
   describe "validations" do
