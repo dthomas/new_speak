@@ -1,8 +1,11 @@
 class CourseSession < ActiveRecord::Base
   # Associations
 
-  belongs_to :course
-  belongs_to :institute
+  belongs_to :course, inverse_of: :course_sessions
+  belongs_to :institute, inverse_of: :course_sessions
+
+  has_many :course_session_participants
+  has_many :students, through: :course_session_participants
 
   # Validations
 

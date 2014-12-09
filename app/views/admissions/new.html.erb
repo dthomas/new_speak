@@ -1,0 +1,96 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Dashboard', dashboards_path %> </li>
+	  <li> <%= link_to 'Admissions', admissions_path %> </li>
+	  <li class="active">New Admission</li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-8">
+  	<%= bootstrap_form_for(@family, url: admissions_path, layout: :horizontal) do |f| %>
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">New Admission</h3>
+			  </div>
+
+			  <div class="panel-body" id="student-info">
+			  	<%= f.hidden_field :institute_id %>
+		  		<%= f.fields_for :students do |student| %>
+		  			<%= render "student", f: student %>
+		  		<% end %>
+			  </div>
+
+				  <div class="panel panel-default">
+				  	<div class="panel-heading">
+				  		Family Information
+				  	</div>
+
+				  	<div class="panel-body">
+				  		<%= f.fields_for :parents do |parent| %>
+				  				<div class="panel panel-default" id="parent-<%= parent.index %>">
+				  					<div class="panel-heading">
+							  			<%= parent.form_group :relation, label: { text: "Relationship with Student" }, label_col: "col-sm-4", control_col: "col-sm-8" do %>
+											  <%= parent.radio_button :relation, 0, label: "Father", inline: true %>
+											  <%= parent.radio_button :relation, 1, label: "Mother", inline: true %>
+											  <%= parent.radio_button :relation, 2, label: "Guardian", inline: true %>
+											<% end %>
+				  					</div>
+				  					<div class="panel-body">
+									  	<div class="panel-body">
+								  			<%= parent.fields_for :personal_profile do |profile| %>
+													<%= render "profile", f: profile %>
+								  			<% end %>
+								  			<%= parent.hidden_field :institute_id %>
+									  	</div>
+				  					</div>
+				  				</div>
+				  		<% end %>
+				  	</div>
+				  </div>
+
+				  <div class="panel panel-default">
+				  	<div class="panel-heading">
+				  		Admission Information
+				  	</div>
+
+				  	<div class="panel-body">
+				  		<%= f.text_field :name, placeholder: 'Family Name' %>
+				  	</div>
+				  </div>
+
+			  <div class="panel-footer">
+			  	<%= hidden_field_tag("course_session_id", @course_session.id) %>
+			  	<%= f.submit "Complete Admission" %>
+			  </div>
+			</div>
+	  	<% end %>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">About this course</h3>
+			</div>
+
+			<div class="panel-body">
+				<strong>
+					<%= @course_session.course.name %>
+				</strong>
+			</div>
+			<ul class="list-group">
+			  <li class="list-group-item">
+			  	<span class="badge"><%= @course_session.start_date.to_formatted_s(:rfc822) %></span>
+			  	Start Date
+			  </li>
+			  <li class="list-group-item">
+			  	<span class="badge"><%= @course_session.end_date.to_formatted_s(:rfc822) %></span>
+			  	End Date
+			  </li>
+			  <li class="list-group-item">
+			  	<span class="badge"><%= @course_session.students.count %></span>
+			  	Currently registered students
+			  </li>
+			</ul>
+		</div>
+	</div>
+</div>

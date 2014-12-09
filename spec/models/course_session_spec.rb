@@ -4,6 +4,9 @@ RSpec.describe CourseSession, :type => :model do
   describe "associations" do
     it { should belong_to :institute }
     it { should belong_to :course }
+
+    it { should have_many :course_session_participants }
+    it { should have_many :students }
   end
 
   describe "validations" do

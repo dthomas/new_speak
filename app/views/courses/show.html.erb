@@ -1,0 +1,58 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Settings', dashboards_path %> </li>
+	  <li> <%= link_to 'Courses', courses_path %> </li>
+	  <li class="active"><%= @course.name %></li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-default">
+		  <div class="panel-heading"> <%= @course.name %> (<%= @course.abbreviation %>) </div>
+
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Session Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Total Terms</th>
+						<th>Current Term</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @course.course_sessions.each_with_index do |session, index| %>
+					<tr>
+						<td> <%= index + 1 %> </td>
+						<td> <%= link_to session.name, '#' %> </td>
+						<td> <%= session.start_date.to_formatted_s(:rfc822) %> </td>
+						<td> <%= session.end_date.to_formatted_s(:rfc822) %> </td>
+						<td> <%= session.terms %> </td>
+						<td> <%= session.current_term %> </td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<div class="panel-footer">
+				<%= link_to 'Add new session', new_course_path, class: 'btn btn-default' %>
+				<%= link_to 'Admit a student', new_course_path, class: 'btn btn-default' %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Last Session - Summary</h3>
+			</div>
+
+			<div class="panel-body">
+				Some help text
+			</div>
+		</div>
+	</div>
+</div>

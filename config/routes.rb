@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :dashboards, only: :index
+  resources :courses do
+    resources :course_sessions, shallow: true
+  end
+
+  resources :admissions, only: [:index, :new, :create]
+  resources :students, except: [:new, :create]
 
   class NewSpeakMain
     def self.matches?(request)

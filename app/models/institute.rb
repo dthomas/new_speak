@@ -2,7 +2,11 @@ class Institute < ActiveRecord::Base
   # Associations
   belongs_to :owner, class_name: "User"
   has_many :users
-  has_many :people
+  has_many :personal_profiles
+  has_many :families
+  has_many :courses, inverse_of: :institute
+  has_many :course_sessions, inverse_of: :institute
+  has_many :course_session_participants, inverse_of: :institute
 
   # Validations
 

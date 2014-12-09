@@ -1,0 +1,43 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Student Information
+	</div>
+
+	<div class="panel-body">
+			<%= f.fields_for :personal_profile do |profile| %>
+				<div class="row">
+					<div class="col-sm-4">
+						<%= profile.text_field :first_name, placeholder: 'First Name', required: true, control_col: "col-sm-12", hide_label: true %>
+					</div>
+						
+					<div class="col-sm-4">
+						<%= profile.text_field :middle_name, placeholder: 'Middle Name', control_col: "col-sm-12", hide_label: true %>
+					</div>
+						
+					<div class="col-sm-4">
+						<%= profile.text_field :last_name, placeholder: 'Last Name', required: true, control_col: "col-sm-12", hide_label: true %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-4">
+						<%= profile.date_field :date_of_birth, placeholder: 'Date of Birth', required: true, control_col: "col-sm-12", hide_label: true, icon: "calendar" %>
+					</div>
+
+					<div class="col-sm-4">
+						<%= profile.form_group :gender, label: { text: "Gender" }, label_col: 'col-sm-3', control_col: "col-sm-9" do %>
+						  <%= profile.radio_button :gender, "female", label: "Female", inline: true %>
+						  <%= profile.radio_button :gender, "male", label: "Male", inline: true %>
+					<% end %>
+					</div>
+					<%= profile.hidden_field :institute_id %>
+				<% end %>
+
+				<div class="col-sm-4">
+  				<%= f.text_field :date_of_admission, placeholder: "Date of Admission", hide_label: true, icon: "calendar", control_col: "col-sm-12" %>
+				</div>
+					<%= f.hidden_field :date_of_leaving %>
+				<%= f.hidden_field :institute_id %>
+			</div>
+	</div>
+</div>

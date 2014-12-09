@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe Course, :type => :model do
   describe "associations" do
     it { should belong_to :institute }
+    it { should have_many :course_sessions }
+    it { should have_many :course_session_participants }
+    it { should have_many :students }
   end
 
   describe "validations" do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207115016) do
+ActiveRecord::Schema.define(version: 20141209035810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,16 +58,12 @@ ActiveRecord::Schema.define(version: 20141207115016) do
 
   create_table "families", force: true do |t|
     t.string   "name",         null: false
-    t.integer  "parent_id",    null: false
-    t.integer  "student_id",   null: false
     t.integer  "institute_id", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
   add_index "families", ["institute_id"], name: "index_families_on_institute_id", using: :btree
-  add_index "families", ["parent_id"], name: "index_families_on_parent_id", using: :btree
-  add_index "families", ["student_id"], name: "index_families_on_student_id", using: :btree
 
   create_table "institutes", force: true do |t|
     t.string   "name",                              null: false
@@ -90,30 +86,14 @@ ActiveRecord::Schema.define(version: 20141207115016) do
   create_table "parents", force: true do |t|
     t.date     "wedding_anniversery"
     t.string   "relation",            null: false
-    t.integer  "person_id"
     t.integer  "institute_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "family_id"
   end
 
+  add_index "parents", ["family_id"], name: "index_parents_on_family_id", using: :btree
   add_index "parents", ["institute_id"], name: "index_parents_on_institute_id", using: :btree
-  add_index "parents", ["person_id"], name: "index_parents_on_person_id", using: :btree
-
-  create_table "people", force: true do |t|
-    t.string   "first_name",     null: false
-    t.string   "middle_name"
-    t.string   "last_name",      null: false
-    t.date     "date_of_birth",  null: false
-    t.integer  "gender",         null: false
-    t.integer  "person_type_id"
-    t.integer  "institute_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "people", ["id", "person_type_id"], name: "index_people_on_id_and_person_type_id", unique: true, using: :btree
-  add_index "people", ["institute_id"], name: "index_people_on_institute_id", using: :btree
-  add_index "people", ["person_type_id"], name: "index_people_on_person_type_id", using: :btree
 
   create_table "person_types", force: true do |t|
     t.string   "name",       null: false
@@ -123,19 +103,35 @@ ActiveRecord::Schema.define(version: 20141207115016) do
 
   add_index "person_types", ["name"], name: "index_person_types_on_name", unique: true, using: :btree
 
+  create_table "personal_profiles", force: true do |t|
+    t.string   "first_name",       null: false
+    t.string   "middle_name"
+    t.string   "last_name",        null: false
+    t.date     "date_of_birth",    null: false
+    t.integer  "gender",           null: false
+    t.integer  "institute_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "profileable_id"
+    t.string   "profileable_type"
+  end
+
+  add_index "personal_profiles", ["institute_id"], name: "index_personal_profiles_on_institute_id", using: :btree
+  add_index "personal_profiles", ["profileable_type", "profileable_id"], name: "index_personal_profiles_on_profileable_type_and_profileable_id", using: :btree
+
   create_table "students", force: true do |t|
     t.date     "date_of_admission", null: false
     t.date     "date_of_leaving",   null: false
     t.integer  "admission_number",  null: false
     t.integer  "user_id"
-    t.integer  "person_id",         null: false
     t.integer  "institute_id",      null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "family_id"
   end
 
+  add_index "students", ["family_id"], name: "index_students_on_family_id", using: :btree
   add_index "students", ["institute_id"], name: "index_students_on_institute_id", using: :btree
-  add_index "students", ["person_id"], name: "index_students_on_person_id", using: :btree
   add_index "students", ["user_id"], name: "index_students_on_user_id", using: :btree
 
   create_table "teachers", force: true do |t|
@@ -143,14 +139,14 @@ ActiveRecord::Schema.define(version: 20141207115016) do
     t.date     "date_of_leaving"
     t.integer  "employee_number"
     t.integer  "user_id"
-    t.integer  "person_id"
     t.integer  "institute_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "family_id"
   end
 
+  add_index "teachers", ["family_id"], name: "index_teachers_on_family_id", using: :btree
   add_index "teachers", ["institute_id"], name: "index_teachers_on_institute_id", using: :btree
-  add_index "teachers", ["person_id"], name: "index_teachers_on_person_id", using: :btree
   add_index "teachers", ["user_id"], name: "index_teachers_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
@@ -171,17 +167,14 @@ ActiveRecord::Schema.define(version: 20141207115016) do
   add_foreign_key "course_sessions", "institutes"
   add_foreign_key "courses", "institutes"
   add_foreign_key "families", "institutes"
-  add_foreign_key "families", "parents"
-  add_foreign_key "families", "students"
+  add_foreign_key "parents", "families"
   add_foreign_key "parents", "institutes"
-  add_foreign_key "parents", "people"
-  add_foreign_key "people", "institutes"
-  add_foreign_key "people", "person_types"
+  add_foreign_key "personal_profiles", "institutes"
+  add_foreign_key "students", "families"
   add_foreign_key "students", "institutes"
-  add_foreign_key "students", "people"
   add_foreign_key "students", "users"
+  add_foreign_key "teachers", "families"
   add_foreign_key "teachers", "institutes"
-  add_foreign_key "teachers", "people"
   add_foreign_key "teachers", "users"
   add_foreign_key "users", "institutes"
 end

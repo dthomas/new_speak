@@ -1,13 +1,13 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<div class="panel panel-default">
-			<div class="panel-body">
-				<%= bootstrap_form_tag(url: accounts_path, layout: :horizontal, control_col: "col-sm-12") do |f| %>
-					<%= f.text_field :name, placeholder: 'Institute Name', required: true, hide_label: true %>
-					<%= f.text_field :abbreviation, placeholder: 'Name Abbreviation', required: true, hide_label: true %>
-					<%= f.text_field :subdomain, placeholder: 'Subdomain', append: ".newspeak.com", required: true, hide_label: true %>
-					<%= f.telephone_field :phone, placeholder: 'Phone Number', prepend: "+91", icon: "phone-alt", required: true, hide_label: true %>
-					<%= f.fields_for :users do |uf| %>
+			<div class="panel-body" id="sign-up-form">
+				<%= bootstrap_form_tag(url: accounts_path, layout: :horizontal) do |f| %>
+					<%= f.text_field "institute[name]", placeholder: 'Institute Name', required: true, hide_label: true %>
+					<%= f.text_field "institute[abbreviation]", placeholder: 'Name Abbreviation', required: true, hide_label: true %>
+					<%= f.text_field "institute[subdomain]", placeholder: 'Subdomain', append: ".newspeak.com", required: true, hide_label: true %>
+					<%= f.telephone_field "institute[phone]", placeholder: 'Phone Number', prepend: "+91", icon: "phone-alt", required: true, hide_label: true %>
+					<%= f.fields_for :users_attributes do |uf| %>
 						<%= uf.email_field :email, placeholder: 'Email Address', icon: "user", required: true, hide_label: true %>
 						<%= uf.password_field :password, placeholder: 'Password', icon: "lock", required: true, hide_label: true %>
 						<%= uf.password_field :password_confirmation, label: 'Confirmation Password', placeholder: 'Confirmation Password', icon: "lock", required: true, hide_label: true %>

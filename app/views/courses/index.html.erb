@@ -1,0 +1,52 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Settings', dashboards_path %> </li>
+	  <li class="active">Courses</li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-default">
+		  <div class="panel-heading">All Courses</div>
+
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Course Name</th>
+						<th>Abbreviation</th>
+						<th>Number of sessions</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @courses.each_with_index do |course, index| %>
+					<tr>
+						<td> <%= index + 1 %> </td>
+						<td> <%= link_to course.name, course_path(course) %> </td>
+						<td> <%= course.abbreviation %> </td>
+						<td> <%= course.course_sessions.count %> </td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<div class="panel-footer">
+				<%= link_to 'New Course', new_course_path %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Some title</h3>
+			</div>
+
+			<div class="panel-body">
+				Some help text
+			</div>
+		</div>
+	</div>
+</div>

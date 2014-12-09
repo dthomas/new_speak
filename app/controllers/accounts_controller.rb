@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
   	@institute = Institute.new(account_params)
   	if @institute.save
   		@institute.update(owner: @institute.users.first)
-  		redirect_to "/"
+  		redirect_to new_session_path, notice: "Account created successfully! Please check your email."
   	else
   		render :new
   	end

@@ -1,6 +1,14 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li class="active">Settings</li>
+	</ol>
+<% end %>
+
 <div class="row">
 	<div class="col-md-12">
 		<ul>
+			<li> <%= link_to 'Courses', courses_path %> </li>
+			<li> <%= link_to 'Admissions', admissions_path %> </li>
 			<li>Students</li>
 		</ul>
 	</div>

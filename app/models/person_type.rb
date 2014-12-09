@@ -1,9 +1,9 @@
 class PersonType < ActiveRecord::Base
 	# Associations
 
-	has_many :people
+	# has_many :people
 
 	# Validations
 	
-	validates :name, presence: true
+	# validates :name, presence: true
 end
