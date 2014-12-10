@@ -31,7 +31,7 @@ feature "Student Admissions" do
     end
 
     within("#parent-0") do
-      choose "Father"
+      select "Father"
       fill_in "First Name", with: father_profile[:first_name]
       fill_in "Middle Name", with: father_profile[:middle_name]
       fill_in "Last Name", with: father_profile[:last_name]
@@ -40,7 +40,7 @@ feature "Student Admissions" do
     end
 
     within("#parent-1") do
-      choose "Mother"
+      select "Mother"
       fill_in "First Name", with: mother_profile[:first_name]
       fill_in "Middle Name", with: mother_profile[:middle_name]
       fill_in "Last Name", with: mother_profile[:last_name]
@@ -49,6 +49,7 @@ feature "Student Admissions" do
     end
 
     fill_in "Family Name", with: family[:name]
+    choose course_session.name
     click_button "Complete Admission"
     expect(current_path).to eq admissions_path
     expect(page).to have_content("Thank you.")

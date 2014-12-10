@@ -15,8 +15,8 @@
 					<tr>
 						<th>#</th>
 						<th>Course Name</th>
-						<th>Abbreviation</th>
-						<th>Number of sessions</th>
+						<th>Total Sessions</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 
@@ -24,9 +24,9 @@
 					<% @courses.each_with_index do |course, index| %>
 					<tr>
 						<td> <%= index + 1 %> </td>
-						<td> <%= link_to course.name, course_path(course) %> </td>
-						<td> <%= course.abbreviation %> </td>
+						<td> <%= link_to course.name, course %> </td>
 						<td> <%= course.course_sessions.count %> </td>
+						<td> <%= link_to 'Add Session', new_course_course_session_path(course) %> </td>
 					</tr>
 					<% end %>
 				</tbody>

@@ -16,4 +16,8 @@ class CourseSession < ActiveRecord::Base
   validates :end_date, presence: true
   validates :terms, presence:true, numericality: true
   validates :current_term, presence:true, numericality: true
+
+  # Scopes
+  scope :admissions_open, -> { where(admissions_open: true) }
+  scope :admissions_closed, -> { where(admissions_open: false) }
 end

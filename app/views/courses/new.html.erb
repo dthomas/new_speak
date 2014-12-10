@@ -14,8 +14,15 @@
 			    <h3 class="panel-title">Add a new course</h3>
 			  </div>
 			  <div class="panel-body">
-			  		<%= f.text_field :name, placeholder: 'New Course Name' %>
-			  		<%= f.text_field :abbreviation, placeholder: 'Course Abbreviation' %>
+	  			<div class="row">
+	  				<div class="col-sm-8">
+				  		<%= f.text_field :name, placeholder: 'New Course Name', control_col: "col-sm-12", hide_label: true %>
+	  				</div>
+
+	  				<div class="col-sm-4">
+				  		<%= f.text_field :abbreviation, placeholder: 'Course Abbreviation', control_col: "col-sm-12", hide_label: true %>
+	  				</div>
+	  			</div>
 
 			  		<%= f.fields_for :course_sessions do |sf| %>
 				  		<div class="panel panel-default">
@@ -24,11 +31,35 @@
 				  			</div>
 				  			<div class="panel-body">
 						  			<%= sf.hidden_field :institute_id %>
-						  			<%= sf.text_field :name, placeholder: 'Session Name' %>
-						  			<%= sf.date_field :start_date, placeholder: 'Session Start Date' %>
-						  			<%= sf.date_field :end_date, placeholder: 'Session End Date' %>
-						  			<%= sf.number_field :terms, placeholder: 'Total Terms' %>
-						  			<%= sf.number_field :current_term, placeholder: 'Current Term' %>
+						  			<div class="row">
+						  				<div class="col-sm-6">
+								  			<%= sf.text_field :name, placeholder: 'Session Name', control_col: "col-sm-12", hide_label: true %>
+						  				</div>
+						  				<div class="col-sm-6">
+												<%= sf.form_group :admissions_open, label: { text: "Admissions Open" }, label_col: "col-sm-6", control_col: "col-sm-6" do %>
+												  <%= sf.radio_button :admissions_open, "true", label: "Yes", inline: true %>
+												  <%= sf.radio_button :admissions_open, "false", label: "No", inline: true %>
+												<% end %>
+						  				</div>
+						  			</div>
+						  			<div class="row">
+						  				<div class="col-sm-6">
+								  			<%= sf.date_field :start_date, placeholder: 'Session Start Date', control_col: "col-sm-12", hide_label: true, icon: "calendar" %>
+						  				</div>
+
+						  				<div class="col-sm-6">
+								  			<%= sf.date_field :end_date, placeholder: 'Session End Date', control_col: "col-sm-12", hide_label: true, icon: "calendar" %>
+						  				</div>
+						  			</div>
+						  			<div class="row">
+						  				<div class="col-sm-6">
+								  			<%= sf.number_field :terms, placeholder: 'Total Terms', control_col: "col-sm-12", hide_label: true %>
+						  				</div>
+
+						  				<div class="col-sm-6">
+								  			<%= sf.number_field :current_term, placeholder: 'Current Term', control_col: "col-sm-12", hide_label: true %>
+						  				</div>
+						  			</div>
 				  			</div>
 				  		</div>
 			  		<% end %>

@@ -41,7 +41,6 @@ feature "Admin User Activities" do
 
 		expect(current_path).to eq courses_path
 		expect(page).to have_content(course.name)
-		expect(page).to have_content(course.abbreviation)
 	end
 
 	scenario "create a course and course_session" do

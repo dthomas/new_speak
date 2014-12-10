@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209035810) do
+ActiveRecord::Schema.define(version: 20141210111303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,15 +29,16 @@ ActiveRecord::Schema.define(version: 20141209035810) do
   add_index "course_session_participants", ["student_id"], name: "index_course_session_participants_on_student_id", using: :btree
 
   create_table "course_sessions", force: true do |t|
-    t.string   "name",         null: false
-    t.date     "start_date",   null: false
-    t.date     "end_date",     null: false
-    t.integer  "terms",        null: false
-    t.integer  "current_term", null: false
+    t.string   "name",                           null: false
+    t.date     "start_date",                     null: false
+    t.date     "end_date",                       null: false
+    t.integer  "terms",                          null: false
+    t.integer  "current_term",                   null: false
     t.integer  "course_id"
     t.integer  "institute_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "admissions_open", default: true
   end
 
   add_index "course_sessions", ["course_id"], name: "index_course_sessions_on_course_id", using: :btree
@@ -84,12 +85,12 @@ ActiveRecord::Schema.define(version: 20141209035810) do
   add_index "institutes", ["subdomain"], name: "index_institutes_on_subdomain", unique: true, using: :btree
 
   create_table "parents", force: true do |t|
-    t.date     "wedding_anniversery"
-    t.string   "relation",            null: false
+    t.string   "relation",     null: false
     t.integer  "institute_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "family_id"
+    t.string   "occupation"
   end
 
   add_index "parents", ["family_id"], name: "index_parents_on_family_id", using: :btree
@@ -121,13 +122,13 @@ ActiveRecord::Schema.define(version: 20141209035810) do
 
   create_table "students", force: true do |t|
     t.date     "date_of_admission", null: false
-    t.date     "date_of_leaving",   null: false
     t.integer  "admission_number",  null: false
     t.integer  "user_id"
     t.integer  "institute_id",      null: false
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "family_id"
+    t.date     "date_of_leaving"
   end
 
   add_index "students", ["family_id"], name: "index_students_on_family_id", using: :btree

@@ -7,6 +7,8 @@ class Teacher < ActiveRecord::Base
 
   # Validations
 
+  # validates :institute, presence: true
+  include VerifyInstitute
   validates :date_of_joining, presence: true
   validates :employee_number, presence: true
 

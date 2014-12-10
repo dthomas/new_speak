@@ -3,7 +3,7 @@ class Student < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :institute
-  belongs_to :family
+  belongs_to :family, inverse_of: :students
 
   has_one  :personal_profile, as: :profileable
   has_many :course_session_participants

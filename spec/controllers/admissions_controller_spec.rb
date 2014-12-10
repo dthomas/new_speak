@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe AdmissionsController, :type => :controller do
 
-  describe "GET new", pending: true do
+  describe "GET index", pending: false do
     it "returns http success" do
-      get :new
+    	sign_in
+      get :index
       expect(response).to have_http_status(:success)
     end
   end

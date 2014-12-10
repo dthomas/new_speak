@@ -1,8 +1,8 @@
 class Family < ActiveRecord::Base
 	# Associations
 
-  has_many :parents
-  has_many :students
+  has_many :parents, inverse_of: :family
+  has_many :students, inverse_of: :family
   belongs_to :institute
 
   # Validations

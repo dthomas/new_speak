@@ -6,4 +6,8 @@ RSpec.describe CourseSessionParticipant, :type => :model do
     it { should belong_to :student }
     it { should belong_to :institute }
   end
+
+  describe "validations" do
+    it { should validate_presence_of :institute }
+  end
 end

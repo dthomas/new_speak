@@ -17,11 +17,14 @@
 		<%= f.date_field :date_of_birth, placeholder: 'Date of Birth', required: true, control_col: "col-sm-12", hide_label: true, icon: "calendar" %>
 	</div>
 
-	<div class="col-sm-6">
-		<%= f.form_group :gender, label: { text: "Gender" } do %>
+	<div class="col-sm-4">
+		<%= f.form_group :gender, label: { text: "Gender" }, label_col: "col-sm-3", control_col: "col-sm-9" do %>
 		  <%= f.radio_button :gender, "female", label: "Female", inline: true %>
 		  <%= f.radio_button :gender, "male", label: "Male", inline: true %>
 	<% end %>
 	</div>
+
+	<%= yield %>
+
 	<%= f.hidden_field :institute_id %>
 </div>

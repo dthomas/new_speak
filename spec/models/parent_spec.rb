@@ -12,5 +12,6 @@ RSpec.describe Parent, :type => :model do
   describe "validations" do
     it { should validate_presence_of :institute }
     it { should validate_presence_of :relation }
+    it { should validate_presence_of :occupation }
   end
 end

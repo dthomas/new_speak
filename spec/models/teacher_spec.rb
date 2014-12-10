@@ -9,6 +9,7 @@ RSpec.describe Teacher, :type => :model do
   end
 
   describe "validations" do
+    it { should validate_presence_of :institute }
     it { should validate_presence_of :date_of_joining }
     it { should validate_presence_of :employee_number }
   end
