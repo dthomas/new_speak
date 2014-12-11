@@ -7,6 +7,9 @@ RSpec.describe Institute, :type => :model do
     it { should have_many :personal_profiles }
     it { should have_many :courses }
     it { should have_many :families }
+    it { should have_many :teachers }
+    it { should have_many :students }
+    it { should have_many :parents }
     it { should have_many :course_sessions }
     it { should have_many :course_session_participants }
   end

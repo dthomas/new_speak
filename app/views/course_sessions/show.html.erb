@@ -1,0 +1,29 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li><%= link_to 'Settings', dashboards_path %></li>
+	  <li><%= link_to 'Courses', courses_path %></li>
+	  <li> <%= link_to @course_session.course.name, course_path(@course_session.course) %> </li>
+	  <li class="active"> <%= @course_session.name %> </li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">About <%= @course_session.name %></h3>
+			</div>
+			<div class="panel-body">
+				<div class="well well-sm">
+					There are <%= @course_session.students.length %> students attending this session.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">Some Info</div>
+			<div class="panel-body"></div>
+		</div>
+	</div>
+</div>

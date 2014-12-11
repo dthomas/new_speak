@@ -14,4 +14,14 @@ class Teacher < ActiveRecord::Base
 
   # Nested Attributes
   accepts_nested_attributes_for :personal_profile
+
+  # Delegations
+
+  delegate  :first_name, :middle_name, :last_name, :gender, :date_of_birth,
+            to: :personal_profile
+
+  # Instance Methods
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

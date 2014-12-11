@@ -13,3 +13,7 @@ body{
 	@extend .alert-dismissible;
 }
 
+.default-panel {
+	@extend .panel;
+	@extend .panel-default;
+}

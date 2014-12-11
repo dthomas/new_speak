@@ -15,6 +15,10 @@ class CourseSessionsController < ApplicationController
   	end
   end
 
+  def show
+    @course_session = current_account.course_sessions.find(params[:id])
+  end
+
   private
 
   def course_session_params

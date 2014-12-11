@@ -4,6 +4,9 @@ class Institute < ActiveRecord::Base
   has_many :users
   has_many :personal_profiles
   has_many :families
+  has_many :parents
+  has_many :teachers
+  has_many :students
   has_many :courses, inverse_of: :institute
   has_many :course_sessions, inverse_of: :institute
   has_many :course_session_participants, inverse_of: :institute

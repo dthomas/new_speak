@@ -9,7 +9,11 @@
 <div class="row">
 	<div class="col-md-8">
 		<div class="panel panel-default">
-		  <div class="panel-heading"> <%= @course.name %> (<%= @course.abbreviation %>) </div>
+		  <div class="panel-heading">
+		  	<h3 class="panel-title">
+		  		<%= @course.name %> (<%= @course.abbreviation %>)
+	  		</h3>
+  		</div>
 
 			<table class="table table-condensed">
 				<thead>
@@ -27,7 +31,7 @@
 					<% @course.course_sessions.each_with_index do |session, index| %>
 					<tr>
 						<td> <%= index + 1 %> </td>
-						<td> <%= link_to session.name, '#' %> </td>
+						<td> <%= link_to session.name, course_session_path(session) %> </td>
 						<td> <%= session.start_date.to_formatted_s(:rfc822) %> </td>
 						<td> <%= session.end_date.to_formatted_s(:rfc822) %> </td>
 						<td> <%= session.terms %> </td>
@@ -38,8 +42,7 @@
 			</table>
 
 			<div class="panel-footer">
-				<%= link_to 'Add new session', new_course_path, class: 'btn btn-default' %>
-				<%= link_to 'Admit a student', new_course_path, class: 'btn btn-default' %>
+				<%= link_to 'Add new session', new_course_path %>
 			</div>
 		</div>
 	</div>

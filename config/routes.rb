@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :admissions, only: [:index, :new, :create]
   resources :students, except: [:new, :create]
+  resources :teachers
 
   class NewSpeakMain
     def self.matches?(request)
