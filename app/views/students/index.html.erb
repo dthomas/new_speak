@@ -1,17 +1,15 @@
 <%= content_for(:breadcrumb) do %>
 	<ol class="breadcrumb">
 	  <li><%= link_to 'Settings', dashboards_path %></li>
-	  <li><%= link_to 'Courses', courses_path %></li>
-	  <li> <%= link_to @course_session.course.name, course_path(@course_session.course) %> </li>
-	  <li class="active"> <%= @course_session.name %> </li>
+	  <li class="active">Students</li>
 	</ol>
 <% end %>
 
 <div class="row">
 	<div class="col-sm-8">
-		<div class="panel panel-default">
+		<div class="default-panel">
 			<div class="panel-heading">
-				<h3 class="panel-title">About <%= @course_session.name %></h3>
+				<h3 class="panel-title">Students Info</h3>
 			</div>
 			<table class="table table-condensed">
 				<thead>
@@ -28,7 +26,7 @@
 
 				<% if @students.blank? %>
 					<tr>
-						<td colspan="4">There seems to be no one attending this session.</td>
+						<td colspan="4">Please select a course session from right.</td>
 					</tr>
 				<% end %>
 
@@ -44,15 +42,22 @@
 
 				</tbody>
 			</table>
-			<div class="panel-footer">
-				<%= link_to "Edit", edit_course_session_path(@course_session), class: 'btn btn-xs btn-danger' %>
-			</div>
+			<div class="panel-footer"></div>
 		</div>
 	</div>
 	<div class="col-sm-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">Notifications</div>
-			<div class="panel-body"></div>
+		<div class="default-panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">Active Sessions</h3>
+			</div>
+			<ul class="list-group">
+				<% @course_sessions.each do |session| %>
+					<li class="list-group-item">
+						<span class="badge"><%= session.students.length %></span>
+						<%= link_to session.name, students_path(session_id: session.id) %>
+					</li>
+				<% end %>
+			</ul>
 		</div>
 	</div>
 </div>

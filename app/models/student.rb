@@ -21,4 +21,13 @@ class Student < ActiveRecord::Base
 
   # Nested Attributes
   accepts_nested_attributes_for :personal_profile
+
+  # Delegations
+  delegate  :first_name, :middle_name, :last_name, :date_of_birth, :gender,
+            to: :personal_profile
+
+  # Instance Methods
+  def name
+    "#{first_name} #{middle_name} #{last_name}"
+  end
 end

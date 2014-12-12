@@ -2,23 +2,23 @@
 	<ol class="breadcrumb">
 	  <li><%= link_to 'Settings', dashboards_path %></li>
 	  <li><%= link_to 'Courses', courses_path %></li>
-	  <li class="active">New Session</li>
+	  <li class="active"><%= @course_session.name %></li>
 	</ol>
 <% end %>
 
 <div class="row">
 	<div class="col-sm-8">
-		<%= bootstrap_form_for([@course, @course_session]) do |f| %>
+		<%= bootstrap_form_for(@course_session) do |f| %>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">New Course Session</h3>
+				<h3 class="panel-title">Editing <%= @course_session.name %></h3>
 			</div>
 				<div class="panel-body">
 					<%= render "form", f: f %>
 				</div>
 
 				<div class="panel-footer">
-					<%= f.submit 'Add Session' %>
+					<%= f.submit 'Update Session' %>
 				</div>
 			</div>
 		<% end %>

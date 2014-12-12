@@ -2,7 +2,8 @@ class Teacher < ActiveRecord::Base
 	# Associations
 
   belongs_to 	:user
-  belongs_to 	:institute
+  belongs_to  :institute
+  belongs_to 	:family, inverse_of: :teacher
   has_one 		:personal_profile, as: :profileable
 
   # Validations

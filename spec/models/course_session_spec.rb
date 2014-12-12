@@ -6,6 +6,7 @@ RSpec.describe CourseSession, :type => :model do
     it { should belong_to :course }
 
     it { should have_many :course_session_participants }
+    it { should have_many :class_groups }
     it { should have_many :students }
   end
 

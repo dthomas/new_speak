@@ -26,6 +26,16 @@ class TeachersController < ApplicationController
   	@teacher = current_account.teachers.find(params[:id])
   end
 
+  def edit
+    # @teacher = current_account.teachers.find(params[:id])
+    # if @teachers.parents.empty?
+    #   2.times do
+    #     @teachers.parents.build(institute: current_account)
+    #     @teachers.parents.build_personal_profile(institute: current_account)
+    #   end
+    # end
+  end
+
   private
 
   def teacher_params

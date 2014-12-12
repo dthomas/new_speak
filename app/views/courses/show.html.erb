@@ -24,6 +24,7 @@
 						<th>End Date</th>
 						<th>Total Terms</th>
 						<th>Current Term</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 
@@ -36,13 +37,14 @@
 						<td> <%= session.end_date.to_formatted_s(:rfc822) %> </td>
 						<td> <%= session.terms %> </td>
 						<td> <%= session.current_term %> </td>
+						<td> <%= link_to "Edit", edit_course_session_path(session) %> </td>
 					</tr>
 					<% end %>
 				</tbody>
 			</table>
 
 			<div class="panel-footer">
-				<%= link_to 'Add new session', new_course_path %>
+				<%= link_to 'Add new session', new_course_course_session_path(@course) %>
 			</div>
 		</div>
 	</div>

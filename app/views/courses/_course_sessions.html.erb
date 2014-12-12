@@ -1,0 +1,30 @@
+<%= f.hidden_field :institute_id %>
+<div class="row">
+	<div class="col-sm-6">
+		<%= f.text_field :name, placeholder: 'Session Name', control_col: "col-sm-12", hide_label: true %>
+	</div>
+	<div class="col-sm-6">
+		<%= f.form_group :admissions_open, label: { text: "Admissions Open" }, label_col: "col-sm-6", control_col: "col-sm-6" do %>
+		  <%= f.radio_button :admissions_open, "true", label: "Yes", inline: true %>
+		  <%= f.radio_button :admissions_open, "false", label: "No", inline: true %>
+		<% end %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<%= f.date_field :start_date, placeholder: 'Session Start Date', control_col: "col-sm-12", hide_label: true, icon: "calendar" %>
+	</div>
+
+	<div class="col-sm-6">
+		<%= f.date_field :end_date, placeholder: 'Session End Date', control_col: "col-sm-12", hide_label: true, icon: "calendar" %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<%= f.number_field :terms, placeholder: 'Total Terms', control_col: "col-sm-12", hide_label: true %>
+	</div>
+
+	<div class="col-sm-6">
+		<%= f.number_field :current_term, placeholder: 'Current Term', control_col: "col-sm-12", hide_label: true %>
+	</div>
+</div>

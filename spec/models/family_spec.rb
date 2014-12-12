@@ -5,6 +5,7 @@ RSpec.describe Family, :type => :model do
     it { should belong_to :institute }
     it { should have_many :parents }
     it { should have_many :students }
+    it { should have_many :teachers }
   end
 
   describe "validations" do

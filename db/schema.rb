@@ -11,10 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210111303) do
+ActiveRecord::Schema.define(version: 20141212042626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "class_group_students", force: true do |t|
+    t.integer  "roll_number"
+    t.integer  "class_group_id"
+    t.integer  "student_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "class_group_students", ["class_group_id"], name: "index_class_group_students_on_class_group_id", using: :btree
+  add_index "class_group_students", ["institute_id"], name: "index_class_group_students_on_institute_id", using: :btree
+  add_index "class_group_students", ["roll_number", "class_group_id", "institute_id"], name: "unique_class_group_roll_number_idx", unique: true, using: :btree
+  add_index "class_group_students", ["student_id", "class_group_id", "institute_id"], name: "unique_class_group_students_idx", unique: true, using: :btree
+  add_index "class_group_students", ["student_id"], name: "index_class_group_students_on_student_id", using: :btree
+
+  create_table "class_groups", force: true do |t|
+    t.string   "name",              null: false
+    t.date     "start_date",        null: false
+    t.date     "end_date",          null: false
+    t.integer  "course_session_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "class_groups", ["course_session_id"], name: "index_class_groups_on_course_session_id", using: :btree
+  add_index "class_groups", ["institute_id"], name: "index_class_groups_on_institute_id", using: :btree
+  add_index "class_groups", ["name", "course_session_id", "institute_id"], name: "unique_class_group_idx", unique: true, using: :btree
 
   create_table "course_session_participants", force: true do |t|
     t.integer  "student_id"
@@ -161,6 +190,11 @@ ActiveRecord::Schema.define(version: 20141210111303) do
   add_index "users", ["email", "institute_id"], name: "index_users_on_email_and_institute_id", unique: true, using: :btree
   add_index "users", ["institute_id"], name: "index_users_on_institute_id", using: :btree
 
+  add_foreign_key "class_group_students", "class_groups"
+  add_foreign_key "class_group_students", "institutes"
+  add_foreign_key "class_group_students", "students"
+  add_foreign_key "class_groups", "course_sessions"
+  add_foreign_key "class_groups", "institutes"
   add_foreign_key "course_session_participants", "course_sessions"
   add_foreign_key "course_session_participants", "institutes"
   add_foreign_key "course_session_participants", "students"

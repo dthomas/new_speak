@@ -3,6 +3,7 @@ class Family < ActiveRecord::Base
 
   has_many :parents, inverse_of: :family
   has_many :students, inverse_of: :family
+  has_many :teachers, inverse_of: :family
   belongs_to :institute
 
   # Validations
