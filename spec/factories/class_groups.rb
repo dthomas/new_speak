@@ -1,8 +1,10 @@
 FactoryGirl.define do
   factory :class_group do
-    name "MyString"
-institute nil
-course_session nil
+    sequence(:name) { |n| "#{n}-A" }
+    start_date { 8.months.ago }
+    end_date { 4.months.from_now }
+		institute nil
+		course_session nil
   end
 
 end

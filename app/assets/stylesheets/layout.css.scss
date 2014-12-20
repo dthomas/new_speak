@@ -17,3 +17,15 @@ body{
 	@extend .panel;
 	@extend .panel-default;
 }
+
+.primary-label {
+	display: inline-block;
+	@extend .label;
+	@extend .label-primary;
+}
+
+.success-label {
+	display: inline-block;
+	@extend .label;
+	@extend .label-success;
+}

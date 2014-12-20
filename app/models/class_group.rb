@@ -6,6 +6,9 @@ class ClassGroup < ActiveRecord::Base
   belongs_to :course_session, inverse_of: :class_groups
   belongs_to :institute, inverse_of: :class_groups
 
+  has_many :class_group_students, inverse_of: :class_group
+  has_many :students, -> { uniq } ,through: :class_group_students, inverse_of: :class_groups
+
   # Validations
 
   validates :name, presence: true, uniqueness: { case_sensistive: false, scope: [:course_session_id, :institute_id] }
@@ -13,4 +16,12 @@ class ClassGroup < ActiveRecord::Base
   validates :end_date, presence: true
   validates :course_session, presence: true
   validates :institute, presence: true
+
+  # Scopes
+
+  scope :active, -> { where('? BETWEEN start_date AND end_date', Date.today) }
+
+  # Nested Attributes
+
+  accepts_nested_attributes_for :class_group_students
 end

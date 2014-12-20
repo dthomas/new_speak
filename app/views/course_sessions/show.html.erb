@@ -11,7 +11,10 @@
 	<div class="col-sm-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">About <%= @course_session.name %></h3>
+				About <%= @course_session.name %>
+				<span class="pull-right">
+					<%= link_to "Edit", edit_course_session_path(@course_session) %>
+				</span>
 			</div>
 			<table class="table table-condensed">
 				<thead>
@@ -45,14 +48,24 @@
 				</tbody>
 			</table>
 			<div class="panel-footer">
-				<%= link_to "Edit", edit_course_session_path(@course_session), class: 'btn btn-xs btn-danger' %>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-default">
-			<div class="panel-heading">Notifications</div>
-			<div class="panel-body"></div>
+			<div class="panel-heading">
+				Class Groups
+				<span class="pull-right">
+					<%#= link_to 'Students => Class Groups', assign_group_course_session_path(@course_session) %>
+				</span>
+			</div>
+			<div class="panel-body">
+				<% @course_session.class_groups.each do |group| %>
+					<%= link_to group do %>
+						<span class="primary-label"><%= group.name %></span>
+					<% end %>
+				<% end %>
+			</div>
 		</div>
 	</div>
 </div>

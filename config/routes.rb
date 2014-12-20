@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :course_sessions, only: [:show, :edit, :update, :destroy] do
-    resources :course_groups, shallow: true
+    resources :class_groups, shallow: true
   end
 
   resources :admissions, only: [:index, :new, :create]

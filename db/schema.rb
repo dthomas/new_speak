@@ -16,22 +16,18 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "class_group_students", force: true do |t|
-    t.integer  "roll_number"
+  create_table "class_group_students", force: :cascade do |t|
     t.integer  "class_group_id"
     t.integer  "student_id"
-    t.integer  "institute_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
   add_index "class_group_students", ["class_group_id"], name: "index_class_group_students_on_class_group_id", using: :btree
-  add_index "class_group_students", ["institute_id"], name: "index_class_group_students_on_institute_id", using: :btree
-  add_index "class_group_students", ["roll_number", "class_group_id", "institute_id"], name: "unique_class_group_roll_number_idx", unique: true, using: :btree
-  add_index "class_group_students", ["student_id", "class_group_id", "institute_id"], name: "unique_class_group_students_idx", unique: true, using: :btree
+  add_index "class_group_students", ["student_id", "class_group_id"], name: "unique_class_group_students_idx", unique: true, using: :btree
   add_index "class_group_students", ["student_id"], name: "index_class_group_students_on_student_id", using: :btree
 
-  create_table "class_groups", force: true do |t|
+  create_table "class_groups", force: :cascade do |t|
     t.string   "name",              null: false
     t.date     "start_date",        null: false
     t.date     "end_date",          null: false
@@ -45,7 +41,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "class_groups", ["institute_id"], name: "index_class_groups_on_institute_id", using: :btree
   add_index "class_groups", ["name", "course_session_id", "institute_id"], name: "unique_class_group_idx", unique: true, using: :btree
 
-  create_table "course_session_participants", force: true do |t|
+  create_table "course_session_participants", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "course_session_id"
     t.integer  "institute_id"
@@ -57,7 +53,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "course_session_participants", ["institute_id"], name: "index_course_session_participants_on_institute_id", using: :btree
   add_index "course_session_participants", ["student_id"], name: "index_course_session_participants_on_student_id", using: :btree
 
-  create_table "course_sessions", force: true do |t|
+  create_table "course_sessions", force: :cascade do |t|
     t.string   "name",                           null: false
     t.date     "start_date",                     null: false
     t.date     "end_date",                       null: false
@@ -74,7 +70,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "course_sessions", ["institute_id"], name: "index_course_sessions_on_institute_id", using: :btree
   add_index "course_sessions", ["name", "course_id", "institute_id"], name: "index_course_sessions_on_name_and_course_id_and_institute_id", unique: true, using: :btree
 
-  create_table "courses", force: true do |t|
+  create_table "courses", force: :cascade do |t|
     t.string   "name",         null: false
     t.string   "abbreviation", null: false
     t.integer  "institute_id"
@@ -86,7 +82,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "courses", ["institute_id"], name: "index_courses_on_institute_id", using: :btree
   add_index "courses", ["name", "institute_id"], name: "index_courses_on_name_and_institute_id", unique: true, using: :btree
 
-  create_table "families", force: true do |t|
+  create_table "families", force: :cascade do |t|
     t.string   "name",         null: false
     t.integer  "institute_id", null: false
     t.datetime "created_at",   null: false
@@ -95,7 +91,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
 
   add_index "families", ["institute_id"], name: "index_families_on_institute_id", using: :btree
 
-  create_table "institutes", force: true do |t|
+  create_table "institutes", force: :cascade do |t|
     t.string   "name",                              null: false
     t.string   "abbreviation",                      null: false
     t.string   "subdomain",                         null: false
@@ -113,7 +109,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "institutes", ["owner_id"], name: "index_institutes_on_owner_id", using: :btree
   add_index "institutes", ["subdomain"], name: "index_institutes_on_subdomain", unique: true, using: :btree
 
-  create_table "parents", force: true do |t|
+  create_table "parents", force: :cascade do |t|
     t.string   "relation",     null: false
     t.integer  "institute_id"
     t.datetime "created_at",   null: false
@@ -125,7 +121,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "parents", ["family_id"], name: "index_parents_on_family_id", using: :btree
   add_index "parents", ["institute_id"], name: "index_parents_on_institute_id", using: :btree
 
-  create_table "person_types", force: true do |t|
+  create_table "person_types", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -133,7 +129,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
 
   add_index "person_types", ["name"], name: "index_person_types_on_name", unique: true, using: :btree
 
-  create_table "personal_profiles", force: true do |t|
+  create_table "personal_profiles", force: :cascade do |t|
     t.string   "first_name",       null: false
     t.string   "middle_name"
     t.string   "last_name",        null: false
@@ -149,7 +145,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "personal_profiles", ["institute_id"], name: "index_personal_profiles_on_institute_id", using: :btree
   add_index "personal_profiles", ["profileable_type", "profileable_id"], name: "index_personal_profiles_on_profileable_type_and_profileable_id", using: :btree
 
-  create_table "students", force: true do |t|
+  create_table "students", force: :cascade do |t|
     t.date     "date_of_admission", null: false
     t.integer  "admission_number",  null: false
     t.integer  "user_id"
@@ -164,7 +160,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "students", ["institute_id"], name: "index_students_on_institute_id", using: :btree
   add_index "students", ["user_id"], name: "index_students_on_user_id", using: :btree
 
-  create_table "teachers", force: true do |t|
+  create_table "teachers", force: :cascade do |t|
     t.date     "date_of_joining"
     t.date     "date_of_leaving"
     t.integer  "employee_number"
@@ -179,7 +175,7 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "teachers", ["institute_id"], name: "index_teachers_on_institute_id", using: :btree
   add_index "teachers", ["user_id"], name: "index_teachers_on_user_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
     t.string   "password_digest", null: false
     t.integer  "institute_id"
@@ -191,7 +187,6 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "users", ["institute_id"], name: "index_users_on_institute_id", using: :btree
 
   add_foreign_key "class_group_students", "class_groups"
-  add_foreign_key "class_group_students", "institutes"
   add_foreign_key "class_group_students", "students"
   add_foreign_key "class_groups", "course_sessions"
   add_foreign_key "class_groups", "institutes"

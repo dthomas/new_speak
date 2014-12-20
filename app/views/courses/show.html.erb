@@ -22,9 +22,8 @@
 						<th>Session Name</th>
 						<th>Start Date</th>
 						<th>End Date</th>
-						<th>Total Terms</th>
-						<th>Current Term</th>
 						<th>Action</th>
+						<th>Class Groups</th>
 					</tr>
 				</thead>
 
@@ -35,9 +34,17 @@
 						<td> <%= link_to session.name, course_session_path(session) %> </td>
 						<td> <%= session.start_date.to_formatted_s(:rfc822) %> </td>
 						<td> <%= session.end_date.to_formatted_s(:rfc822) %> </td>
-						<td> <%= session.terms %> </td>
-						<td> <%= session.current_term %> </td>
 						<td> <%= link_to "Edit", edit_course_session_path(session) %> </td>
+						<td> 
+							<% session.class_groups.each do |group| %>
+								<%= link_to group do %>
+									<span class="primary-label"><%= group.name %></span>
+								<% end %>
+							<% end %>
+							<%= link_to new_course_session_class_group_path(session)  do %>
+							<span class="success-label">+</span>
+							<% end %>
+						</td>
 					</tr>
 					<% end %>
 				</tbody>

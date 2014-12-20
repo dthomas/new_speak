@@ -4,6 +4,9 @@ RSpec.describe ClassGroup, :type => :model do
   describe "associations" do
     it { should belong_to :course_session }
     it { should belong_to :institute }
+
+    it { should have_many :class_group_students }
+    it { should have_many :students }
   end
 
   describe "validations" do

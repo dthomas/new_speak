@@ -4,16 +4,16 @@
 	  <li> <%= link_to 'Courses', courses_path %> </li>
 	  <li><%= link_to @course_session.course.name, @course_session.course %></li>
 	  <li><%= link_to @course_session.name, @course_session %></li>
-	  <li class="active">New Class Group</li>
+	  <li class="active"><%= @class_group.name %></li>
 	</ol>
 <% end %>
 
 <div class="row">
 	<div class="col-md-8">
-		<%= bootstrap_form_for([@course_session, @class_group]) do |f| %>
+		<%= bootstrap_form_for(@class_group) do |f| %>
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-			  	<h3 class="panel-title"> New Class Group in <%= @course_session.name %> </h3>
+			  	<h3 class="panel-title"> Editing <%= @class_group.name %> </h3>
 	  		</div>
 
 	  		<div class="panel-body">
@@ -34,7 +34,9 @@
 					</thead>
 
 					<tbody>
-						<% @course_session.students.joins(:personal_profile).sort_by(&:first_name).each_with_index do |student, index| %>
+						 <%= console %>
+						 <%= hidden_field_tag "class_group[student_ids][]", nil %>
+						<% @students.each_with_index do |student, index| %>
 							<tr>
 								<td><%= index + 1 %></td>
 								<td>
@@ -51,7 +53,7 @@
 				</table>
 
 				<div class="panel-footer">
-					<%= f.submit "Add Class Group" %>
+					<%= f.submit "Update Class Group" %>
 				</div>
 			</div>
 		<% end %>

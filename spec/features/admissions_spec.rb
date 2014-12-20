@@ -6,7 +6,7 @@ feature "Student Admissions" do
 	given(:course) { FactoryGirl.create(:course, institute: institute) }
 	given!(:course_session) { FactoryGirl.create(:course_session, course: course, institute: institute) }
 	given(:family) { FactoryGirl.attributes_for(:family) }
-	given(:studen) { FactoryGirl.attributes_for(:student) }
+	given(:student) { FactoryGirl.attributes_for(:student) }
   given(:father) { FactoryGirl.attributes_for(:parent) }
   given(:mother) { FactoryGirl.attributes_for(:parent) }
   given(:student_profile) { FactoryGirl.attributes_for(:personal_profile) }

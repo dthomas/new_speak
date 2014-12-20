@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
-  skip_before_action :ensure_authenticated
+  skip_before_action :ensure_authenticated, except: :destroy
   
   def new
+    redirect_to dashboards_path, notice: "You are already signed in." and return if signed_in?
     flash.now.alert = warden.message if (warden && warden.message.present?)
   end
 

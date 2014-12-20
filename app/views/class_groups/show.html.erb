@@ -1,0 +1,57 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Settings', dashboards_path %> </li>
+	  <li> <%= link_to 'Courses', courses_path %> </li>
+	  <li><%= link_to @course_session.course.name, @course_session.course %></li>
+	  <li><%= link_to @course_session.name, @course_session %></li>
+	  <li class="active"><%= @class_group.name %></li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	<h3 class="panel-title"> <%= @class_group.name %> </h3>
+  		</div>
+
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>Admission#</th>
+						<th>Student Name</th>
+						<th>Date of Birth</th>
+						<th>Date of Admission</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @class_group.students.joins(:class_group_students).sort_by(&:first_name).each do |student| %>
+						<tr>
+							<td><%= student.admission_number %></td>
+							<td><%= student.name %></td>
+							<td><%= student.personal_profile.date_of_birth.to_formatted_s(:rfc822) %></td>
+							<td><%= student.date_of_admission.to_formatted_s(:rfc822) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<div class="panel-footer">
+				<%= link_to 'Edit', edit_class_group_path(@class_group) %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Last Session - Summary</h3>
+			</div>
+
+			<div class="panel-body">
+				Some help text
+			</div>
+		</div>
+	</div>
+</div>

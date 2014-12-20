@@ -11,6 +11,8 @@ class Student < ActiveRecord::Base
   has_many :siblings, through: :family, source: :student, class_name: "Student"
   has_many :course_sessions, through: :course_session_participants
   has_many :courses, through: :course_sessions
+  has_many :class_group_students
+  has_many :class_groups, through: :class_group_students
 
   # Validations
 
