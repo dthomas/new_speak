@@ -38,7 +38,7 @@ class CourseSessionsController < ApplicationController
   private
 
   def course_session_params
-  	params.require(:course_session).permit(:name, :start_date, :end_date, :terms, :current_term, :admissions_open,
+  	params.require(:course_session).permit(:name, :start_date, :end_date, :terms, :current_term_id, :admissions_open,
       class_groups_attributes: [:id, :name, :start_date, :end_date, :course_session_id, :institute_id])
   end
 end

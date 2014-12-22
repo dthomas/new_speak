@@ -1,0 +1,60 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Settings', dashboards_path %> </li>
+	  <li> <%= link_to 'Courses', courses_path %> </li>
+	  <li> <%= link_to @course.name, course_path(@course) %> </li>
+	  <li class="active"><%= @term.title %></li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title"><%= @term.title %></h3>
+		  </div>
+		  <div class="panel-heading">Subjects</div>
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>Code</th>
+						<th>Teaching Hours</th>
+						<th>Weightage</th>
+						<th>Grade Points</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @term.course_subjects.each_with_index do |subject, index| %>
+					<tr>
+						<td> <%= index + 1 %> </td>
+						<td> <%= subject.title %> </td>
+						<td> <%= subject.code %> </td>
+						<td> <%= subject.teaching_hours %> </td>
+						<td> <%= subject.weightage %> </td>
+						<td> <%= subject.grade_points %> </td>
+						<td> <%= subject.active ? "Active" : "Inactive" %> </td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		  <div class="panel-footer">
+		  	<%= link_to '[+ Subject]', new_academic_term_course_subject_path(@term) %>
+		  </div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Data Specific to term</h3>
+			</div>
+
+			<div class="panel-body">
+				Data Specific Term
+			</div>
+		</div>
+	</div>
+</div>

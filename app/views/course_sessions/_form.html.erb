@@ -4,9 +4,9 @@
 	</div>
 
 	<div class="col-sm-6">
-		<%= f.form_group :admissions_open, label: { text: "Admissions Open" }, label_col: "col-sm-6", control_col: "col-sm-6" do %>
-		  <%= f.radio_button :admissions_open, "true", label: "Yes", inline: true %>
-		  <%= f.radio_button :admissions_open, "false", label: "No", inline: true %>
+		<%= f.form_group :admissions_open, label: { text: "Admissions" }, label_col: "col-sm-6", control_col: "col-sm-6" do %>
+		  <%= f.radio_button :admissions_open, "true", label: "Open", inline: true %>
+		  <%= f.radio_button :admissions_open, "false", label: "Closed", inline: true %>
 		<% end %>
 	</div>
 </div>
@@ -23,11 +23,11 @@
 
 <div class="row">
 	<div class="col-sm-6">
-		<%= f.number_field :terms, placeholder: 'Total Terms', control_col: "col-sm-12", hide_label: true %>
+		<%#= f.number_field :terms, placeholder: 'Total Terms', control_col: "col-sm-12", hide_label: true %>
 	</div>
 
 	<div class="col-sm-6">
-		<%= f.number_field :current_term, placeholder: 'Current Term', control_col: "col-sm-12", hide_label: true %>
+		<%= f.number_field :current_term_id, placeholder: 'Current Term', control_col: "col-sm-12", hide_label: true %>
 	</div>
 </div>
 

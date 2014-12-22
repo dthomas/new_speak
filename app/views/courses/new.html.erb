@@ -11,7 +11,7 @@
   	<%= bootstrap_form_for(@course, layout: :horizontal) do |f| %>
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">Add a new course</h3>
+			    <h3 class="panel-title">Add New Course</h3>
 			  </div>
 			  <div class="panel-body">
 	  			<div class="row">
@@ -24,15 +24,15 @@
 	  				</div>
 	  			</div>
 
-		  		<%= f.fields_for :course_sessions do |sf| %>
+		  		<%= f.fields_for :academic_terms do |tf| %>
 			  		<div class="row">
 			  			<div class="col-sm-12">
-			  				<div class="well well-sm">Course Session #<%= sf.index + 1 %></div>
+			  				<div class="well well-sm">Term #<%= tf.index + 1 %></div>
 			  			</div>
 			  		</div>
-		  			<div class="row">
+		  			<div class="row" id="term-<%= tf.index+1 %>">
 		  				<div class="col-sm-12">
-			  				<%= render "course_sessions", f: sf %>
+			  				<%= render "academic_terms/form", f: tf %>
 		  				</div>
 		  			</div>
 		  		<% end %>

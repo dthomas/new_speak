@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212042626) do
+ActiveRecord::Schema.define(version: 20141221192717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "academic_terms", force: :cascade do |t|
+    t.string   "title",                    null: false
+    t.string   "code",                     null: false
+    t.integer  "course_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "term_type",    default: 0
+  end
+
+  add_index "academic_terms", ["code", "course_id", "institute_id"], name: "index_academic_terms_on_code_and_course_id_and_institute_id", unique: true, using: :btree
+  add_index "academic_terms", ["course_id"], name: "index_academic_terms_on_course_id", using: :btree
+  add_index "academic_terms", ["institute_id"], name: "index_academic_terms_on_institute_id", using: :btree
+  add_index "academic_terms", ["title", "course_id", "institute_id"], name: "index_academic_terms_on_title_and_course_id_and_institute_id", unique: true, using: :btree
 
   create_table "class_group_students", force: :cascade do |t|
     t.integer  "class_group_id"
@@ -57,18 +72,36 @@ ActiveRecord::Schema.define(version: 20141212042626) do
     t.string   "name",                           null: false
     t.date     "start_date",                     null: false
     t.date     "end_date",                       null: false
-    t.integer  "terms",                          null: false
-    t.integer  "current_term",                   null: false
     t.integer  "course_id"
     t.integer  "institute_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.boolean  "admissions_open", default: true
+    t.integer  "current_term_id"
   end
 
   add_index "course_sessions", ["course_id"], name: "index_course_sessions_on_course_id", using: :btree
+  add_index "course_sessions", ["current_term_id"], name: "index_course_sessions_on_current_term_id", using: :btree
   add_index "course_sessions", ["institute_id"], name: "index_course_sessions_on_institute_id", using: :btree
   add_index "course_sessions", ["name", "course_id", "institute_id"], name: "index_course_sessions_on_name_and_course_id_and_institute_id", unique: true, using: :btree
+
+  create_table "course_subjects", force: :cascade do |t|
+    t.string   "title",                           null: false
+    t.string   "code",                            null: false
+    t.integer  "teaching_hours",                  null: false
+    t.decimal  "weightage"
+    t.decimal  "grade_points"
+    t.boolean  "active",           default: true
+    t.integer  "academic_term_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "course_subjects", ["academic_term_id"], name: "index_course_subjects_on_academic_term_id", using: :btree
+  add_index "course_subjects", ["code", "academic_term_id", "institute_id"], name: "uniqe_subject_code_idx", unique: true, using: :btree
+  add_index "course_subjects", ["institute_id"], name: "index_course_subjects_on_institute_id", using: :btree
+  add_index "course_subjects", ["title", "academic_term_id", "institute_id"], name: "uniqe_subject_title_idx", unique: true, using: :btree
 
   create_table "courses", force: :cascade do |t|
     t.string   "name",         null: false
@@ -186,6 +219,8 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_index "users", ["email", "institute_id"], name: "index_users_on_email_and_institute_id", unique: true, using: :btree
   add_index "users", ["institute_id"], name: "index_users_on_institute_id", using: :btree
 
+  add_foreign_key "academic_terms", "courses"
+  add_foreign_key "academic_terms", "institutes"
   add_foreign_key "class_group_students", "class_groups"
   add_foreign_key "class_group_students", "students"
   add_foreign_key "class_groups", "course_sessions"
@@ -195,6 +230,8 @@ ActiveRecord::Schema.define(version: 20141212042626) do
   add_foreign_key "course_session_participants", "students"
   add_foreign_key "course_sessions", "courses"
   add_foreign_key "course_sessions", "institutes"
+  add_foreign_key "course_subjects", "academic_terms"
+  add_foreign_key "course_subjects", "institutes"
   add_foreign_key "courses", "institutes"
   add_foreign_key "families", "institutes"
   add_foreign_key "parents", "families"

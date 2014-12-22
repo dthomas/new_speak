@@ -6,6 +6,7 @@ RSpec.describe Course, :type => :model do
     it { should have_many :course_sessions }
     it { should have_many :course_session_participants }
     it { should have_many :students }
+    it { should have_many :academic_terms }
   end
 
   describe "validations" do

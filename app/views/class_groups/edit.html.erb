@@ -34,8 +34,7 @@
 					</thead>
 
 					<tbody>
-						 <%= console %>
-						 <%= hidden_field_tag "class_group[student_ids][]", nil %>
+					<%= hidden_field_tag "class_group[student_ids][]", nil %>
 						<% @students.each_with_index do |student, index| %>
 							<tr>
 								<td><%= index + 1 %></td>

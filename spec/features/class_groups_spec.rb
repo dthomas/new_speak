@@ -4,7 +4,8 @@ feature "Class Groups" do
   given(:institute) { FactoryGirl.create(:institute, custom_domain: "www.enchild.com") }
   given(:user) { FactoryGirl.create(:user, institute: institute) }
 	given(:course) { FactoryGirl.create(:course, institute: institute) }
-	given!(:course_session) { FactoryGirl.create(:course_session, course: course, institute: institute) }
+ 	given(:academic_terms) { FactoryGirl.create_list(:academic_term, 2, course: course, institute: institute) }
+	given!(:course_session) { FactoryGirl.create(:course_session, course: course, current_term: academic_terms[0], institute: institute) }
 	given(:family) { FactoryGirl.create(:family, institute: institute) }
 	given(:father) { FactoryGirl.create(:parent, family: family, institute: institute) }
 	given(:mother) { FactoryGirl.create(:parent, family: family, institute: institute) }

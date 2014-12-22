@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
 
   def new
   	@course = current_account.courses.build
-  	@course.course_sessions.build(institute: current_account)
+  	2.times { @course.academic_terms.build(institute: current_account) }
   end
 
   def create
@@ -26,6 +26,6 @@ class CoursesController < ApplicationController
 
   def course_params
   	params.require(:course).permit(:name, :abbreviation,
-  		course_sessions_attributes: [:name, :start_date, :end_date, :terms, :current_term, :institute_id])
+  		academic_terms_attributes: [:title, :code, :term_type,:institute_id])
   end
 end

@@ -1,0 +1,19 @@
+<div class="row">
+	<%= f.hidden_field :institute_id %>
+	<div class="col-sm-6">
+		<%= f.text_field :title, placeholder: 'Term Title', control_col: "col-sm-12", hide_label: true %>
+	</div>
+
+	<div class="col-sm-6">
+		<%= f.text_field :code, placeholder: 'Term Code', control_col: "col-sm-12", hide_label: true %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<%= f.form_group :term_type, label: { text: "Term Type" }, label_col: "col-sm-2", control_col: "col-sm-10" do %>
+		  <%= f.radio_button :term_type, "year", label: "Year", inline: true %>
+		  <%= f.radio_button :term_type, "semester", label: "Semester", inline: true %>
+		  <%= f.radio_button :term_type, "trimester", label: "Trimester", inline: true %>
+		<% end %>
+	</div>
+</div>

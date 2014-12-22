@@ -2,6 +2,7 @@ class CourseSession < ActiveRecord::Base
   # Associations
 
   belongs_to :course, inverse_of: :course_sessions
+  belongs_to :current_term, inverse_of: :course_sessions, class_name: "AcademicTerm"
   belongs_to :institute, inverse_of: :course_sessions
 
   has_many :course_session_participants
@@ -15,8 +16,7 @@ class CourseSession < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { case_sensitive: false, scope: [:course_id, :institute_id] }
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :terms, presence:true, numericality: true
-  validates :current_term, presence:true, numericality: true
+  validates :current_term, presence:true
 
   # Scopes
   scope :admissions_open, -> { where(admissions_open: true) }

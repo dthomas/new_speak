@@ -3,11 +3,16 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :dashboards, only: :index
   resources :courses do
+    resources :academic_terms, only: [:index, :new, :create]
     resources :course_sessions, only: [:index, :new, :create]
   end
 
   resources :course_sessions, only: [:show, :edit, :update, :destroy] do
     resources :class_groups, shallow: true
+  end
+
+  resources :academic_terms, only: [:show, :edit, :update, :destroy] do
+    resources :course_subjects, shallow: true
   end
 
   resources :admissions, only: [:index, :new, :create]

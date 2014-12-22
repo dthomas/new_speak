@@ -15,6 +15,7 @@
 					<tr>
 						<th>#</th>
 						<th>Course Name</th>
+						<th>Terms</th>
 						<th>Total Sessions</th>
 						<th>Action</th>
 					</tr>
@@ -25,8 +26,12 @@
 					<tr>
 						<td> <%= index + 1 %> </td>
 						<td> <%= link_to course.name, course %> </td>
-						<td> <%= course.course_sessions.count %> </td>
-						<td> <%= link_to 'Add Session', new_course_course_session_path(course) %> </td>
+						<td> <%= course.academic_terms.length %> </td>
+						<td> <%= course.course_sessions.length %> </td>
+						<td>
+							<%= link_to '[+ Session]', new_course_course_session_path(course) %>
+							<%= link_to '[+ Term]', new_course_academic_term_path(course) %>
+						</td>
 					</tr>
 					<% end %>
 				</tbody>

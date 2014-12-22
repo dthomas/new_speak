@@ -3,8 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Session-#{n}" }
 		start_date { Date.today }
 		end_date { start_date + 4.years }
-		terms 6
-		current_term 2
+		current_term nil
 		course nil
 		institute nil
   end

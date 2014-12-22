@@ -15,6 +15,7 @@
 	  		</h3>
   		</div>
 
+			<div class="panel-heading">Course Sessions</div>
 			<table class="table table-condensed">
 				<thead>
 					<tr>
@@ -42,7 +43,7 @@
 								<% end %>
 							<% end %>
 							<%= link_to new_course_session_class_group_path(session)  do %>
-							<span class="success-label">+</span>
+								<span class="success-label">+</span>
 							<% end %>
 						</td>
 					</tr>
@@ -50,8 +51,24 @@
 				</tbody>
 			</table>
 
+			<div class="panel-heading">Terms</div>
+
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-sm-12">
+					<dl class="dl-horizontal">
+						<% @course.academic_terms.each do |term| %>
+							<dt><%= link_to term.title, term %></dt>
+							<dd><%= term.course_subjects.collect { |subject| subject.title }.join(", ") %></dd>
+						<% end %>
+					</dl>
+					</div>
+				</div>
+			</div>
+
 			<div class="panel-footer">
-				<%= link_to 'Add new session', new_course_course_session_path(@course) %>
+				<%= link_to '[+ Session]', new_course_course_session_path(@course) %>
+				<%= link_to '[+ Term]', new_course_academic_term_path(@course) %>
 			</div>
 		</div>
 	</div>
