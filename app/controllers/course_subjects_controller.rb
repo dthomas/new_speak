@@ -18,6 +18,28 @@ class CourseSubjectsController < ApplicationController
 		end
 	end
 
+	def edit
+		@subject = current_account.course_subjects.find(params[:id])
+		@term = @subject.academic_term
+		@course = @term.course
+	end
+
+	def show
+		@subject = current_account.course_subjects.find(params[:id])
+		@assignments = current_account.teaching_assignments.where(course_subject: @subject)
+	end
+
+	def update
+		@subject = current_account.course_subjects.find(params[:id])
+		if @subject.update(course_subject_params)
+			redirect_to @subject, notice: "#{@subject.title} has been updated"
+		else
+			@term = @subject.academic_term
+			@course = @term.course
+			render :edit	
+		end
+	end
+
 	private
 
 	def course_subject_params

@@ -16,6 +16,29 @@
 			<div class="panel-body">
 				TODO
 			</div>
+
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Subject</th>
+						<th>Class Group</th>
+						<th>Course Session</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @course_subjects.uniq.each_with_index do |subject, index| %>
+						<tr>
+							<td><%= index + 1 %></td>
+							<td><%= subject.title %></td>
+							<td><%= subject.class_groups.last.name %></td>
+							<td><%= subject.class_groups.last.course_session.name %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
 			<div class="panel-footer"></div>
 		</div>
 	</div>

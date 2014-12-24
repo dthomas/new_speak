@@ -1,0 +1,52 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Settings', dashboards_path %> </li>
+	  <li> <%= link_to 'Courses', courses_path %> </li>
+	  <li> <%= link_to @subject.academic_term.course.name, course_path(@subject.academic_term.course) %> </li>
+	  <li> <%= link_to @subject.academic_term.title, academic_term_path(@subject.academic_term) %> </li>
+	  <li class="active"><%= @subject.title %></li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-md-8">
+	<div class="default-panel">
+		<div class="panel-heading">Teacher Subject Assignments</div>
+  	<table class="table table-condensed">
+  		<thead>
+  			<tr>
+  				<th>#</th>
+  				<th>Teacher</th>
+  				<th>Class Group</th>
+  				<th>Course Session</th>
+  			</tr>
+  		</thead>
+
+  		<tbody>
+  			<% @assignments.each_with_index do |assignment, index| %>
+  				<tr>
+  					<td><%= index+1 %></td>
+  					<td><%= assignment.teacher.name %></td>
+  					<td><%= assignment.class_group.name %></td>
+  					<td><%= assignment.class_group.course_session.name %></td>
+  				</tr>
+  			<% end %>
+  		</tbody>
+  	</table>
+	<div class="panel-footer">
+		<%= link_to 'Edit', edit_course_subject_path(@subject) %>
+	</div>
+	</div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Some title</h3>
+			</div>
+
+			<div class="panel-body">
+				Some help text
+			</div>
+		</div>
+	</div>
+</div>

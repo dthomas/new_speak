@@ -16,8 +16,20 @@
 			  	<h3 class="panel-title"> New Class Group in <%= @course_session.name %> </h3>
 	  		</div>
 
+
 	  		<div class="panel-body">
-	  			<%= render "course_sessions/class_group", f: f %>
+	  			<%= render "form", f: f %>
+	  		</div>
+
+	  		<div class="panel-heading">Subject Allottment</div>
+	  		<div class="panel-body">
+	  			<%= f.fields_for :teaching_assignments do |taf| %>
+		  			<%= render "teaching_assignments/form", f: taf %>
+		  		<% end %>
+	  		</div>
+	  		
+	  		<div class="panel-heading">
+	  			Students in the group
 	  		</div>
 
 				<table class="table table-condensed">

@@ -11,7 +11,9 @@ class Institute < ActiveRecord::Base
   has_many :course_sessions, inverse_of: :institute
   has_many :course_session_participants, inverse_of: :institute
   has_many :class_groups, inverse_of: :institute
+  has_many :course_subjects, inverse_of: :institute
   has_many :academic_terms, inverse_of: :institute
+  has_many :teaching_assignments, inverse_of: :institute
 
   # Validations
 

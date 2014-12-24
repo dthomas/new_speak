@@ -6,6 +6,9 @@ RSpec.describe Teacher, :type => :model do
     it { should belong_to :user }
 
     it { should have_one :personal_profile }
+    it { should have_many :teaching_assignments }
+    it { should have_many :course_subjects }
+    it { should have_many :class_groups }
   end
 
   describe "validations" do

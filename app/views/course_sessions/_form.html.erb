@@ -27,7 +27,7 @@
 	</div>
 
 	<div class="col-sm-6">
-		<%= f.number_field :current_term_id, placeholder: 'Current Term', control_col: "col-sm-12", hide_label: true %>
+		<%= f.select :current_term_id, options_from_collection_for_select(@course_session.course.academic_terms, "id", "title"), prompt: "Select current term" ,control_col: "col-sm-12", hide_label: true %>
 	</div>
 </div>
 
@@ -39,7 +39,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<%= render "class_group", f: cgf %>
+			<%= render "class_groups/form", f: cgf %>
 			<%= cgf.hidden_field :institute_id %>
 			<%= cgf.hidden_field :course_session_id %>
 		</div>

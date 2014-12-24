@@ -8,6 +8,10 @@ class ClassGroupsController < ApplicationController
     @course_session.students.each do |student|
       @class_group.class_group_students.build(student_id: student.id)
     end
+    
+    @course_session.current_term.course_subjects.each do |subject|
+      @class_group.teaching_assignments.build(course_subject: subject, institute: current_account)
+    end
   end
 
   def create
@@ -31,6 +35,9 @@ class ClassGroupsController < ApplicationController
   	@class_group = current_account.class_groups.find(params[:id])
     @course_session = @class_group.course_session
     @students = @course_session.students.joins(:personal_profile).sort_by(&:first_name)
+    @course_session.current_term.course_subjects.each do |subject|
+      @class_group.teaching_assignments.build(course_subject: subject, institute: current_account)
+    end
   end
 
   def update
@@ -39,6 +46,8 @@ class ClassGroupsController < ApplicationController
     if @class_group.update(class_group_params)
       redirect_to @class_group, notice: "Class Group has been updated."
     else
+      @course_session = @class_group.course_session
+      @students = @course_session.students.joins(:personal_profile).sort_by(&:first_name)
       render :edit
     end
   end
@@ -46,6 +55,7 @@ class ClassGroupsController < ApplicationController
   private
 
   def class_group_params
-    params.require(:class_group).permit(:name, :start_date, :end_date, student_ids: [])
+    params.require(:class_group).permit(:name, :start_date, :end_date, student_ids: [],
+      teaching_assignments_attributes: [:id, :course_subject_id, :teacher_id, :institute_id])
   end
 end

@@ -10,7 +10,7 @@ class CourseSessionsController < ApplicationController
   	@course_session = @course.course_sessions.build(course_session_params)
   	@course_session.institute = current_account
   	if @course_session.save
-  		redirect_to courses_path, notice: "New Course Session Added" and return
+  		redirect_to courses_path, notice: "New Course Session Added"
   	else
   		render :new
   	end

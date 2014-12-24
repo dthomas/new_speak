@@ -21,6 +21,7 @@
 					<tr>
 						<th>#</th>
 						<th>Session Name</th>
+						<th>Current Term</th>
 						<th>Start Date</th>
 						<th>End Date</th>
 						<th>Action</th>
@@ -33,6 +34,7 @@
 					<tr>
 						<td> <%= index + 1 %> </td>
 						<td> <%= link_to session.name, course_session_path(session) %> </td>
+						<td> <%= session.current_term.title %> </td>
 						<td> <%= session.start_date.to_formatted_s(:rfc822) %> </td>
 						<td> <%= session.end_date.to_formatted_s(:rfc822) %> </td>
 						<td> <%= link_to "Edit", edit_course_session_path(session) %> </td>
@@ -59,7 +61,7 @@
 					<dl class="dl-horizontal">
 						<% @course.academic_terms.each do |term| %>
 							<dt><%= link_to term.title, term %></dt>
-							<dd><%= term.course_subjects.collect { |subject| subject.title }.join(", ") %></dd>
+							<dd><%= raw term.course_subjects.collect { |subject| link_to subject.title, subject }.join(", ") %></dd>
 						<% end %>
 					</dl>
 					</div>

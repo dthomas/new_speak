@@ -7,6 +7,9 @@ RSpec.describe ClassGroup, :type => :model do
 
     it { should have_many :class_group_students }
     it { should have_many :students }
+    it { should have_many :teaching_assignments }
+    it { should have_many :course_subjects }
+    it { should have_many :teachers }
   end
 
   describe "validations" do

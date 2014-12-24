@@ -7,6 +7,10 @@ class ClassGroup < ActiveRecord::Base
   belongs_to :institute, inverse_of: :class_groups
 
   has_many :class_group_students, inverse_of: :class_group
+  has_many :teaching_assignments, inverse_of: :class_group
+  has_many :course_subjects, through: :teaching_assignments, inverse_of: :class_groups
+  has_many :teachers, through: :teaching_assignments, inverse_of: :class_groups
+  has_many :course_subjects, through: :teaching_assignments, inverse_of: :class_group
   has_many :students, -> { uniq } ,through: :class_group_students, inverse_of: :class_groups
 
   # Validations
@@ -24,4 +28,9 @@ class ClassGroup < ActiveRecord::Base
   # Nested Attributes
 
   accepts_nested_attributes_for :class_group_students
+  accepts_nested_attributes_for :teaching_assignments, reject_if: :teaching_assignment_is_invalid?
+
+  def teaching_assignment_is_invalid?(attributes)
+    attributes[:course_subject_id].blank? || attributes[:teacher_id].blank?
+  end
 end

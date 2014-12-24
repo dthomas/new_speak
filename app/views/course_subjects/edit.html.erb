@@ -1,0 +1,38 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Settings', dashboards_path %> </li>
+	  <li> <%= link_to 'Courses', courses_path %> </li>
+	  <li> <%= link_to @course.name, course_path(@course) %> </li>
+	  <li> <%= link_to @term.title, @term %> </li>
+	  <li class="active"><%= @subject.title %></li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-md-8">
+  	<%= bootstrap_form_for(@subject, layout: :horizontal) do |f| %>
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><%= @subject.title %></h3>
+			  </div>
+			  <div class="panel-body">
+			  	<%= render "form", f: f %>
+			  </div>
+			  <div class="panel-footer">
+			  	<%= f.submit 'Update Subject' %>
+			  </div>
+			</div>
+	  	<% end %>
+	</div>
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Some title</h3>
+			</div>
+
+			<div class="panel-body">
+				Some help text
+			</div>
+		</div>
+	</div>
+</div>

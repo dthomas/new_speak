@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141221192717) do
+ActiveRecord::Schema.define(version: 20141223071422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,21 @@ ActiveRecord::Schema.define(version: 20141221192717) do
   add_index "teachers", ["institute_id"], name: "index_teachers_on_institute_id", using: :btree
   add_index "teachers", ["user_id"], name: "index_teachers_on_user_id", using: :btree
 
+  create_table "teaching_assignments", force: :cascade do |t|
+    t.integer  "course_subject_id"
+    t.integer  "teacher_id"
+    t.integer  "class_group_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "teaching_assignments", ["class_group_id"], name: "index_teaching_assignments_on_class_group_id", using: :btree
+  add_index "teaching_assignments", ["course_subject_id", "teacher_id", "class_group_id", "institute_id"], name: "uniqe_subject_teacher_idx", unique: true, using: :btree
+  add_index "teaching_assignments", ["course_subject_id"], name: "index_teaching_assignments_on_course_subject_id", using: :btree
+  add_index "teaching_assignments", ["institute_id"], name: "index_teaching_assignments_on_institute_id", using: :btree
+  add_index "teaching_assignments", ["teacher_id"], name: "index_teaching_assignments_on_teacher_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
     t.string   "password_digest", null: false
@@ -243,5 +258,9 @@ ActiveRecord::Schema.define(version: 20141221192717) do
   add_foreign_key "teachers", "families"
   add_foreign_key "teachers", "institutes"
   add_foreign_key "teachers", "users"
+  add_foreign_key "teaching_assignments", "class_groups"
+  add_foreign_key "teaching_assignments", "course_subjects"
+  add_foreign_key "teaching_assignments", "institutes"
+  add_foreign_key "teaching_assignments", "teachers"
   add_foreign_key "users", "institutes"
 end
