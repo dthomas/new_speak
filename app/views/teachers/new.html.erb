@@ -9,7 +9,7 @@
 <div class="row">
 	<div class="col-sm-8">
 		<%= bootstrap_form_for @teacher do |f| %>
-			<div class="default-panel">
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">New Teacher</h3>
 				</div>
@@ -19,7 +19,7 @@
 					<%= f.fields_for :personal_profile do |pf| %>
 						<%= render layout: "admissions/profile", locals: { f: pf } do %>
 							<div class="col-sm-4">
-								<%= f.date_field :date_of_joining, placeholder: "Date of Joining", control_col: "col-sm-12", label_col: "", hide_label: true, icon: "calendar" %>
+								<%= f.date_field :date_of_joining, placeholder: "Date of Joining", control_col: "col-sm-12", label_col: "", hide_label: true, icon: "calendar", data: { provide: 'datepicker' } %>
 							</div>
 						<% end %>
 					<% end %>

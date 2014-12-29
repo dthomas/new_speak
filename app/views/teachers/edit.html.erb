@@ -1,0 +1,64 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Settings', dashboards_path %> </li>
+	  <li> <%= link_to 'Teachers', teachers_path %> </li>
+	  <li class="active">Edit Teacher</li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-8">
+		<%= bootstrap_form_for @teacher do |f| %>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Editing <%= @teacher.name %></h3>
+				</div>
+
+				<div class="panel-body" id="teacher-info">
+
+					<%= f.fields_for :personal_profile do |pf| %>
+						<%= render layout: "admissions/profile", locals: { f: pf } do %>
+							<div class="col-sm-4">
+								<%= f.date_field :date_of_joining, placeholder: "Date of Joining", control_col: "col-sm-12", label_col: "", hide_label: true, icon: "calendar" %>
+							</div>
+						<% end %>
+					<% end %>
+
+					<%= f.fields_for :user do |uf| %>
+
+			  		<div class="row">
+			  			<div class="col-sm-12">
+			  				<div class="well well-sm">Login Information</div>
+			  			</div>
+			  		</div>
+			  		
+						<div class="row">
+							<div class="col-sm-4">
+								<%= uf.text_field :email, placeholder: "Email Address", control_col: "col-sm-12", label_col: "", hide_label: true %>
+							</div>
+							
+							<div class="col-sm-4">
+								<%= uf.password_field :password, placeholder: "Password", control_col: "col-sm-12", label_col: "", hide_label: true %>
+							</div>
+
+							<div class="col-sm-4">
+								<%= uf.password_field :password_confirmation, placeholder: "Confirmation Password", control_col: "col-sm-12", label_col: "", hide_label: true %>
+								<%= uf.hidden_field :institute_id %>
+							</div>
+						</div>
+					<% end %>
+
+				</div>
+
+				<div class="panel-footer">
+					<%= f.submit "Update Teacher Information" %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+
+	<div class="col-sm-4">
+		Sidebar
+		To do : educational qualifications
+	</div>
+</div>

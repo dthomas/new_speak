@@ -1,10 +1,10 @@
 class Teacher < ActiveRecord::Base
 	# Associations
 
-  belongs_to 	:user
   belongs_to  :institute
   belongs_to 	:family, inverse_of: :teacher
   has_one 		:personal_profile, as: :profileable
+  has_one     :user, as: :loginable
   has_many    :teaching_assignments
   has_many    :course_subjects, through: :teaching_assignments, inverse_of: :teachers
   has_many    :class_groups, through: :teaching_assignments, inverse_of: :teachers
@@ -18,6 +18,7 @@ class Teacher < ActiveRecord::Base
 
   # Nested Attributes
   accepts_nested_attributes_for :personal_profile
+  accepts_nested_attributes_for :user
 
   # Scopes
 

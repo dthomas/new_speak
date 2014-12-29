@@ -6,6 +6,7 @@ RSpec.describe TeachingAssignment, :type => :model do
     it { should belong_to :class_group }
     it { should belong_to :teacher }
     it { should belong_to :course_subject }
+    it { should have_many :assessments }
   end
 
   describe "validations" do

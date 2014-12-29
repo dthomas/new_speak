@@ -5,12 +5,5 @@
 <% end %>
 
 <div class="row">
-	<div class="col-md-12">
-		<ul>
-			<li> <%= link_to 'Courses', courses_path %> </li>
-			<li> <%= link_to 'Admissions', admissions_path %> </li>
-			<li> <%= link_to 'Teachers', teachers_path %> </li>
-			<li> <%= link_to 'Students', students_path %> </li>
-		</ul>
-	</div>
+	<%= render @type %>
 </div>

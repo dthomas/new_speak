@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Associations
 
   belongs_to :institute
-  has_many :students
+  belongs_to :loginable, polymorphic: true
 
   # Validations
   validates :email, presence: true, uniqueness: { case_sensitive: false, scope: :institute_id }

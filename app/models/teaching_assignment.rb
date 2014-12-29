@@ -6,6 +6,8 @@ class TeachingAssignment < ActiveRecord::Base
   belongs_to :class_group, inverse_of: :teaching_assignments
   belongs_to :institute, inverse_of: :teaching_assignments
 
+  has_many :assessments
+
   # Validations
 
   validates :course_subject, presence: true

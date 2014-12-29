@@ -3,9 +3,9 @@
 		<%= f.text_field :name, placeholder: 'Group Name', hide_label: true, label_col: "", control_col: "col-sm-12" %>
 	</div>
 	<div class="col-sm-4">
-		<%= f.date_field :start_date, placeholder: 'Start Date', hide_label: true, label_col: "", control_col: "col-sm-12", icon: "calendar" %>
+		<%= f.date_field :start_date, placeholder: 'Start Date', hide_label: true, label_col: "", control_col: "col-sm-12", icon: "calendar", data: { provide: 'datepicker' } %>
 	</div>
 	<div class="col-sm-4">
-		<%= f.date_field :end_date, placeholder: 'End Date', hide_label: true, label_col: "", control_col: "col-sm-12", icon: "calendar" %>
+		<%= f.date_field :end_date, placeholder: 'End Date', hide_label: true, label_col: "", control_col: "col-sm-12", icon: "calendar", data: { provide: 'datepicker' } %>
 	</div>
 </div>

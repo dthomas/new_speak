@@ -28,19 +28,28 @@ class TeachersController < ApplicationController
   end
 
   def edit
-    # @teacher = current_account.teachers.find(params[:id])
-    # if @teachers.parents.empty?
-    #   2.times do
-    #     @teachers.parents.build(institute: current_account)
-    #     @teachers.parents.build_personal_profile(institute: current_account)
-    #   end
-    # end
+    @teacher = current_account.teachers.find(params[:id])
+    if @teacher.user.blank?
+      @teacher.build_user(institute: current_account)
+    else
+      @teacher.user = nil
+    end
+  end
+
+  def update
+    @teacher = current_account.teachers.find(params[:id])
+    if @teacher.update(teacher_params)
+      redirect_to @teacher, notice: "The information has been updated"
+    else
+      render :new
+    end
   end
 
   private
 
   def teacher_params
   	params.require(:teacher).permit(:date_of_joining,
-  		personal_profile_attributes: [:first_name, :middle_name, :last_name, :date_of_birth, :gender, :institute_id])
+  		personal_profile_attributes: [:first_name, :middle_name, :last_name, :date_of_birth, :gender, :institute_id],
+      user_attributes: [:email, :password, :password_confirmation, :institute_id])
   end
 end

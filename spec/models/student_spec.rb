@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Student, :type => :model do
   describe "associations" do
     it { should belong_to :institute }
-    it { should belong_to :user }
     it { should belong_to :family }
     it { should have_one  :personal_profile }
     it { should have_many :parents }

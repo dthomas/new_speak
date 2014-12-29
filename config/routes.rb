@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :academic_terms, shallow: true do
-      resources :course_subjects, shallow: true
+      resources :course_subjects, shallow: true do
+        resources :teaching_assignments, shallow: true do
+          resources :assessments, shallow: true
+        end
+      end
     end
 
     resources :course_sessions, shallow: true do

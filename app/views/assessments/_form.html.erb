@@ -1,0 +1,26 @@
+<div class="row">
+	<div class="col-sm-8">
+		<%= f.text_field :title, placeholder: "Assessment Title", control_col: "col-sm-12", label_col: "", hide_label: true %>
+	</div>
+	<div class="col-sm-4">
+		<%= f.text_field :due_date, placeholder: "Due Date", control_col: "col-sm-12", label_col: "", hide_label: true, icon: "calendar", data: { provide: 'datepicker' } %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<%= f.text_area :description, placeholder: "Assessment Description", control_col: "col-sm-12", label_col: "", hide_label: true %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-4">
+		<%= f.text_field :weightage, placeholder: "Weightage" %>
+	</div>
+	<div class="col-sm-4">
+		<%= f.text_field :maximum_marks, placeholder: "Maximum Marks" %>
+	</div>
+	<div class="col-sm-4">
+		<%= f.select :strategy, options_for_select([["Cumulative", "cumulative"], ["Best", "best"], ["Best Of", "best_of_n"], ["Average", "mean"]]) %>
+	</div>
+</div>
