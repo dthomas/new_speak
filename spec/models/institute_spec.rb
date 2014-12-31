@@ -17,6 +17,9 @@ RSpec.describe Institute, :type => :model do
     it { should have_many :academic_terms }
     it { should have_many :teaching_assignments }
     it { should have_many :assessments }
+    it { should have_many :assessment_results }
+    it { should have_many :tasks }
+    it { should have_many :task_results }
   end
 
   describe "validations" do

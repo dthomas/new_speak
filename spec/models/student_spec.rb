@@ -12,6 +12,8 @@ RSpec.describe Student, :type => :model do
     it { should have_many :courses }
     it { should have_many :class_group_students }
     it { should have_many :class_groups }
+    it { should have_many :assessment_results }
+    it { should have_many :task_results }
   end
 
   it { should validate_presence_of :date_of_admission }

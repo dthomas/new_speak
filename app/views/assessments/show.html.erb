@@ -1,23 +1,83 @@
 <%= content_for(:breadcrumb) do %>
 	<ol class="breadcrumb">
 	  <li> <%= link_to 'Dashboard', dashboards_path %> </li>
-	  <li class="active"><%= @assessment.title %></li>
+	  <li> <%= link_to @assessment.teaching_assignment.class_group.course_session.name, @assessment.teaching_assignment.class_group.course_session %></li>
+	  <li> <%= link_to @assessment.teaching_assignment.class_group.name, @assessment.teaching_assignment.class_group %></li>
+	  <li> <%= link_to @assessment.teaching_assignment.course_subject.title, @assessment.teaching_assignment.course_subject %></li>
+	  <li class="active"> <%= @assessment.title %></li>
 	</ol>
 <% end %>
+
 
 <div class="row">
 	<div class="col-sm-8">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						<%= @assessment.title %>
-					</h3>
+					<h3 class="panel-title">Tasks</h3>
 				</div>
 
-				<div class="panel-body">
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>Name</td>
+							<td>Description</td>
+							<td>Due Date</td>
+							<td>Max. Marks</td>
+							<td>Weightage</td>
+						</tr>
+					</thead>
 
-				</div>
+					<tbody>
+						<% @assessment.tasks.each_with_index do |task, index| %>
+							<tr>
+								<td><%= index + 1 %></td>
+								<td><%= link_to task.name, task %></td>
+								<td><%= task.description %></td>
+								<td><%= task.due_date.to_formatted_s(:rfc822) %></td>
+								<td><%= task.maximum_marks %></td>
+								<td><%= task.weightage %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+
 				<div class="panel-footer">
+					<%= link_to 'New Task', new_assessment_task_path(@assessment) %>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Result Summary</h3>
+				</div>
+
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>Student Name</td>
+							<td>Admission #</td>
+							<td>Marks</td>
+							<td>Grade</td>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% @assessment.assessment_results.each_with_index do |result, index| %>
+							<tr>
+								<td><%= index + 1 %></td>
+								<td><%= result.student.name %></td>
+								<td><%= result.student.admission_number %></td>
+								<td><%= result.marks_obtained %></td>
+								<td><%= result.grade %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+
+				<div class="panel-footer">
+					<%= link_to 'Assign Grade', '#' %>
 				</div>
 			</div>
 	</div>
@@ -28,20 +88,30 @@
 			</div>
 
 			<div class="panel-body">
-				<dl class="dl-horizontal">
-					<dt>Description</dt>
-					<dd><%= @assessment.description %></dd>
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Description</h6>
+			    <p class="list-group-item-text"><%= @assessment.description %></p>
+				</div>
 
-					<dt>Due Date</dt>
-					<dd><%= @assessment.due_date.to_formatted_s(:rfc822) %></dd>
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Due Date</h6>
+			    <p class="list-group-item-text"><%= @assessment.due_date.to_formatted_s(:rfc822) %></p>
+				</div>
 
-					<dt>Weightage</dt>
-					<dd><%= @assessment.weightage %></dd>
-					<dt>Maximum Marks</dt>
-					<dd><%= @assessment.maximum_marks %></dd>
-					<dt>Strategy</dt>
-					<dd><%= @assessment.strategy.humanize %></dd>
-				</dl>				
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Weightage</h6>
+			    <p class="list-group-item-text"><%= @assessment.weightage %></p>
+				</div>
+
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Maximum Marks</h6>
+			    <p class="list-group-item-text"><%= @assessment.maximum_marks %></p>
+				</div>
+
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Strategy</h6>
+			    <p class="list-group-item-text"><%= @assessment.strategy.humanize %></p>
+				</div>
 			</div>
 
 			<div class="panel-footer">

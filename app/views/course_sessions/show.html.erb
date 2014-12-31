@@ -53,17 +53,13 @@
 	</div>
 	<div class="col-sm-4">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				Class Groups
-				<span class="pull-right">
-					<%#= link_to 'Students => Class Groups', assign_group_course_session_path(@course_session) %>
-				</span>
-			</div>
+			<div class="panel-heading">Class Groups</div>
 			<div class="panel-body">
 				<% @course_session.class_groups.each do |group| %>
-					<%= link_to group do %>
-						<span class="primary-label"><%= group.name %></span>
-					<% end %>
+					<div class="list-group">
+				    <h5 class="list-group-item-heading"><%= link_to group.name, group %></h5>
+				    <p class="list-group-item-text"><%= group.students.length %> Students</p>
+					</div>
 				<% end %>
 			</div>
 		</div>

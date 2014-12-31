@@ -6,8 +6,10 @@ class Assessment < ActiveRecord::Base
 
 	# Associations
 
-  belongs_to :teaching_assignment
-  belongs_to :institute
+  belongs_to  :teaching_assignment
+  belongs_to  :institute
+  has_many    :tasks
+  has_many    :assessment_results
 
   # Validations
 

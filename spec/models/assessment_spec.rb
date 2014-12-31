@@ -4,6 +4,8 @@ RSpec.describe Assessment, :type => :model do
   describe "associations" do
     it { should belong_to :teaching_assignment }
     it { should belong_to :institute }
+    it { should have_many :tasks }
+    it { should have_many :assessment_results }
   end
 
   describe "validations" do

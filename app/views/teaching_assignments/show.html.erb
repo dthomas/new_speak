@@ -33,7 +33,14 @@
   					<td><%= assessment.due_date.to_formatted_s(:rfc822) %></td>
   				</tr>
   				<tr>
-  					<td colspan="5"></td>
+  					<td colspan="5">
+              <ul class="list-inline">
+                <% assessment.tasks.each do |task| %>
+                  <li><%= task.name %></li>
+                <% end %>
+                <li><%= link_to '[+Task]', new_assessment_task_path(assessment) %></li>  
+              </ul>
+            </td>
   				</tr>
   			<% end %>
   		</tbody>

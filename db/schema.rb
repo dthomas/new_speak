@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225124350) do
+ActiveRecord::Schema.define(version: 20141231024331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,21 @@ ActiveRecord::Schema.define(version: 20141225124350) do
   add_index "academic_terms", ["course_id"], name: "index_academic_terms_on_course_id", using: :btree
   add_index "academic_terms", ["institute_id"], name: "index_academic_terms_on_institute_id", using: :btree
   add_index "academic_terms", ["title", "course_id", "institute_id"], name: "index_academic_terms_on_title_and_course_id_and_institute_id", unique: true, using: :btree
+
+  create_table "assessment_results", force: :cascade do |t|
+    t.decimal  "marks_obtained", null: false
+    t.string   "grade"
+    t.integer  "student_id"
+    t.integer  "assessment_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "assessment_results", ["assessment_id"], name: "index_assessment_results_on_assessment_id", using: :btree
+  add_index "assessment_results", ["institute_id"], name: "index_assessment_results_on_institute_id", using: :btree
+  add_index "assessment_results", ["student_id", "assessment_id", "institute_id"], name: "unique_assessment_result_idx", unique: true, using: :btree
+  add_index "assessment_results", ["student_id"], name: "index_assessment_results_on_student_id", using: :btree
 
   create_table "assessments", force: :cascade do |t|
     t.string   "title",                                null: false
@@ -208,6 +223,38 @@ ActiveRecord::Schema.define(version: 20141225124350) do
   add_index "students", ["family_id"], name: "index_students_on_family_id", using: :btree
   add_index "students", ["institute_id"], name: "index_students_on_institute_id", using: :btree
 
+  create_table "task_results", force: :cascade do |t|
+    t.decimal  "marks_obtained",       null: false
+    t.integer  "task_id"
+    t.integer  "assessment_result_id"
+    t.integer  "student_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "task_results", ["assessment_result_id"], name: "index_task_results_on_assessment_result_id", using: :btree
+  add_index "task_results", ["institute_id"], name: "index_task_results_on_institute_id", using: :btree
+  add_index "task_results", ["student_id", "task_id", "assessment_result_id"], name: "unique_task_result_idx", unique: true, using: :btree
+  add_index "task_results", ["student_id"], name: "index_task_results_on_student_id", using: :btree
+  add_index "task_results", ["task_id"], name: "index_task_results_on_task_id", using: :btree
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name",          null: false
+    t.text     "description",   null: false
+    t.decimal  "maximum_marks", null: false
+    t.decimal  "weightage",     null: false
+    t.date     "due_date",      null: false
+    t.integer  "assessment_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "tasks", ["assessment_id"], name: "index_tasks_on_assessment_id", using: :btree
+  add_index "tasks", ["institute_id"], name: "index_tasks_on_institute_id", using: :btree
+  add_index "tasks", ["name", "assessment_id"], name: "index_tasks_on_name_and_assessment_id", unique: true, using: :btree
+
   create_table "teachers", force: :cascade do |t|
     t.date     "date_of_joining"
     t.date     "date_of_leaving"
@@ -252,6 +299,9 @@ ActiveRecord::Schema.define(version: 20141225124350) do
 
   add_foreign_key "academic_terms", "courses"
   add_foreign_key "academic_terms", "institutes"
+  add_foreign_key "assessment_results", "assessments"
+  add_foreign_key "assessment_results", "institutes"
+  add_foreign_key "assessment_results", "students"
   add_foreign_key "assessments", "institutes"
   add_foreign_key "assessments", "teaching_assignments"
   add_foreign_key "class_group_students", "class_groups"
@@ -272,6 +322,12 @@ ActiveRecord::Schema.define(version: 20141225124350) do
   add_foreign_key "personal_profiles", "institutes"
   add_foreign_key "students", "families"
   add_foreign_key "students", "institutes"
+  add_foreign_key "task_results", "assessment_results"
+  add_foreign_key "task_results", "institutes"
+  add_foreign_key "task_results", "students"
+  add_foreign_key "task_results", "tasks"
+  add_foreign_key "tasks", "assessments"
+  add_foreign_key "tasks", "institutes"
   add_foreign_key "teachers", "families"
   add_foreign_key "teachers", "institutes"
   add_foreign_key "teaching_assignments", "class_groups"

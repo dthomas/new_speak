@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="col-sm-8">
+			<%= f.input :name, placeholder: 'Task Name' %>
+	</div>
+
+	<div class="col-sm-4">
+		<%= f.input :due_date, placeholder: 'Task Due Date', as: :string, icon: "icon-calendar" ,input_html: { data: { provide: 'datepicker' } } %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+			<%= f.input :description, placeholder: 'Task Description' %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6">
+			<%= f.input :maximum_marks, placeholder: 'Maximum Marks', as: :string %>
+	</div>
+
+	<div class="col-sm-6">
+		<%= f.input :weightage, placeholder: 'Weightage', as: :string %>
+	</div>
+</div>

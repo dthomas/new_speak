@@ -15,6 +15,9 @@ class Institute < ActiveRecord::Base
   has_many :academic_terms, inverse_of: :institute
   has_many :teaching_assignments, inverse_of: :institute
   has_many :assessments, inverse_of: :institute
+  has_many :assessment_results, inverse_of: :institute
+  has_many :tasks, inverse_of: :institute
+  has_many :task_results, inverse_of: :institute
 
   # Validations
 

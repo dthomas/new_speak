@@ -8,6 +8,10 @@ class AssessmentsController < ApplicationController
 		@teaching_assignment = current_account.teaching_assignments.find(params[:teaching_assignment_id])
 		@assessment = current_account.assessments.build(assessment_params)
 		@assessment.teaching_assignment = @teaching_assignment
+		@teaching_assignment.class_group.students.each do |student|
+			@assessment.assessment_results.build(marks_obtained: 0.0, student: student, institute: current_account)
+		end
+
 		if @assessment.save
 			redirect_to @teaching_assignment, notice: "Assessment has been created successfully"
 		else

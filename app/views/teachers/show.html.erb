@@ -10,11 +10,11 @@
 	<div class="col-sm-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">About <%= @teacher.name %></h3>
+				<h3 class="panel-title">Assignments</h3>
 			</div>
 
 			<div class="panel-body">
-				TODO
+				Performance
 			</div>
 
 			<table class="table table-condensed">
@@ -28,12 +28,12 @@
 				</thead>
 
 				<tbody>
-					<% @course_subjects.uniq.each_with_index do |subject, index| %>
+					<% @teacher.teaching_assignments.each_with_index do |assignment, index| %>
 						<tr>
 							<td><%= index + 1 %></td>
-							<td><%= subject.title %></td>
-							<td><%= subject.class_groups.last.name %></td>
-							<td><%= subject.class_groups.last.course_session.name %></td>
+							<td><%= link_to assignment.course_subject.title, assignment %></td>
+							<td><%= assignment.class_group.name %></td>
+							<td><%= assignment.class_group.course_session.name %></td>
 						</tr>
 					<% end %>
 				</tbody>
@@ -47,7 +47,7 @@
 
 	<div class="col-sm-4">
 		<div class="panel panel-default">
-			<div class="panel-heading">Some Info</div>
+			<div class="panel-heading">About <%= @teacher.name %></div>
 			<div class="panel-body">Info</div>
 		</div>
 	</div>

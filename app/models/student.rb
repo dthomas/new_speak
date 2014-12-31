@@ -12,6 +12,8 @@ class Student < ActiveRecord::Base
   has_many :courses, through: :course_sessions
   has_many :class_group_students
   has_many :class_groups, through: :class_group_students
+  has_many :assessment_results
+  has_many :task_results
 
   # Validations
 

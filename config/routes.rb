@@ -3,17 +3,24 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :dashboards, only: :index
 
-  resources :courses do
-    resources :academic_terms, shallow: true do
-      resources :course_subjects, shallow: true do
-        resources :teaching_assignments, shallow: true do
-          resources :assessments, shallow: true
+  resources :courses, shallow: true do
+    resources :academic_terms do
+      resources :course_subjects do
+        resources :teaching_assignments do
+          resources :assessments do
+            resources :tasks do
+              member do
+                get 'marks'
+                patch 'marks_update'
+              end
+            end
+          end
         end
       end
     end
 
-    resources :course_sessions, shallow: true do
-      resources :class_groups, shallow: true
+    resources :course_sessions do
+      resources :class_groups
     end
   end
 

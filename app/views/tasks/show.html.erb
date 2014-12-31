@@ -1,0 +1,78 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Dashboard', dashboards_path %> </li>
+	  <li> <%= link_to @assessment.teaching_assignment.class_group.course_session.name, @assessment.teaching_assignment.class_group.course_session %></li>
+	  <li> <%= link_to @assessment.teaching_assignment.class_group.name, @assessment.teaching_assignment.class_group %></li>
+	  <li> <%= link_to @assessment.title, @assessment %></li>
+	  <li class="active"><%= @task.name %></li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Results</h3>
+				</div>
+
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>Student Name</td>
+							<td>Admission #</td>
+							<td>Marks Obtained</td>
+						</tr>
+					</thead>
+
+					<tbody>
+						<% @task.task_results.each_with_index do |result, index| %>
+							<tr>
+								<td><%= index + 1 %></td>
+								<td><%= result.student.name %></td>
+								<td><%= result.student.admission_number %></td>
+								<td><%= result.marks_obtained %></td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+
+				<div class="panel-footer">
+					<%= link_to 'Update Marks', marks_task_path(@task) %>
+				</div>
+			</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><%= @task.name %></h3>
+			</div>
+
+			<div class="panel-body">
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Description</h6>
+			    <p class="list-group-item-text"><%= @task.description %></p>
+				</div>
+
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Due Date</h6>
+			    <p class="list-group-item-text"><%= @task.due_date.to_formatted_s(:rfc822) %></p>
+				</div>
+
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Weightage</h6>
+			    <p class="list-group-item-text"><%= @task.weightage %></p>
+				</div>
+
+				<div class="list-group">
+			    <h6 class="list-group-item-heading">Maximum Marks</h6>
+			    <p class="list-group-item-text"><%= @task.maximum_marks %></p>
+				</div>
+			</div>
+
+			<div class="panel-footer">
+				<%= link_to 'Edit', edit_task_path(@task) %>
+			</div>
+		</div>
+	</div>
+</div>
