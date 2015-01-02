@@ -13,14 +13,14 @@ end
 
 Warden::Strategies.add(:password) do
 	def valid?
-		params["email"] && params["password"]
+		params["user"]["email"] && params["user"]["password"]
 	end
 	
 	def authenticate!
 		user = User.joins(:institute)
 		.where('institutes.subdomain = ? OR institutes.custom_domain = ? AND users.email = ?',
-			subdomain, request.host, params["email"]).first
-		if user && user.authenticate(params["password"])
+			subdomain, request.host, params["user"]["email"]).first
+		if user && user.authenticate(params["user"]["password"])
 			success! user
 		else
 			fail! "Invalid email or password"

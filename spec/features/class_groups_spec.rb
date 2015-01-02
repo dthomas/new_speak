@@ -36,6 +36,7 @@ feature "Class Groups" do
 		end
 
 		click_button "Add Class Group"
+		# binding.pry
 		expect(current_path).to eq class_group_path(course_session.class_groups.last)
 		expect(body).to have_content("New Class Group Created Successfully")
 	end

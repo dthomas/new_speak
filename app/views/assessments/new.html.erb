@@ -9,7 +9,7 @@
 
 <div class="row">
 	<div class="col-sm-8">
-		<%= bootstrap_form_for([@teaching_assignment, @assessment]) do |f| %>
+		<%= simple_form_for([@teaching_assignment, @assessment]) do |f| %>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -21,7 +21,7 @@
 					<%= render "form", f: f %>
 				</div>
 				<div class="panel-footer">
-					<%= f.submit 'Save Assessment' %>
+					<%= f.button :submit, 'Save Assessment' %>
 				</div>
 			</div>
 		<% end %>

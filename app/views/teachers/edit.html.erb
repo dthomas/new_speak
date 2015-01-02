@@ -19,7 +19,7 @@
 					<%= f.fields_for :personal_profile do |pf| %>
 						<%= render layout: "admissions/profile", locals: { f: pf } do %>
 							<div class="col-sm-4">
-								<%= f.date_field :date_of_joining, placeholder: "Date of Joining", control_col: "col-sm-12", label_col: "", hide_label: true, icon: "calendar" %>
+								<%= f.input :date_of_joining, placeholder: "Date of Joining", , as: :string,  input_html: { data: { provide: 'datepicker' }, value: format_date(f.object.date_of_joining) } %>
 							</div>
 						<% end %>
 					<% end %>
@@ -34,15 +34,15 @@
 			  		
 						<div class="row">
 							<div class="col-sm-4">
-								<%= uf.text_field :email, placeholder: "Email Address", control_col: "col-sm-12", label_col: "", hide_label: true %>
+								<%= uf.input :email, placeholder: "Email Address" %>
 							</div>
 							
 							<div class="col-sm-4">
-								<%= uf.password_field :password, placeholder: "Password", control_col: "col-sm-12", label_col: "", hide_label: true %>
+								<%= uf.password_field :password, placeholder: "Password" %>
 							</div>
 
 							<div class="col-sm-4">
-								<%= uf.password_field :password_confirmation, placeholder: "Confirmation Password", control_col: "col-sm-12", label_col: "", hide_label: true %>
+								<%= uf.password_field :password_confirmation, placeholder: "Confirmation Password"%>
 								<%= uf.hidden_field :institute_id %>
 							</div>
 						</div>

@@ -10,7 +10,7 @@
 
 <div class="row">
 	<div class="col-md-8">
-		<%= bootstrap_form_for([@course_session, @class_group]) do |f| %>
+		<%= simple_form_for([@course_session, @class_group]) do |f| %>
 			<div class="panel panel-default">
 			  <div class="panel-heading">
 			  	<h3 class="panel-title"> New Class Group in <%= @course_session.name %> </h3>

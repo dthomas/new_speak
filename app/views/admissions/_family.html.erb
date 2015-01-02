@@ -5,7 +5,7 @@
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-sm-12">
-				<%= f.text_field :name, placeholder: "Family Name", required: true, control_col: "col-sm-12", hide_label: true %>
+				<%= f.input :name, placeholder: "Family Name" %>
 			</div>
 		</div>
 
@@ -21,11 +21,11 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-6">
-							<%= pf.text_field :occupation, placeholder: "Occupation", required: true, control_col: "col-sm-12", hide_label: true %>
+						<div class="col-sm-8">
+							<%= pf.input :occupation, placeholder: "Occupation" %>
 						</div>
-						<div class="col-sm-6">
-						<%= pf.select :relation, [["Father", "father"], ["Mother", "mother"], ["Guardian", "guardian"]], hide_label: true, control_col:"col-sm-12", prompt: "Select Relation", required: true %>
+						<div class="col-sm-4">
+						<%= pf.input :relation, collection: [["Father", "father"], ["Mother", "mother"], ["Guardian", "guardian"]], prompt: "Select Relation" %>
 						</div>
 					</div>
 

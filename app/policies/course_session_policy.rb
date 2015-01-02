@@ -1,9 +1,9 @@
 class CourseSessionPolicy < ApplicationPolicy
-	def new?
-		user.loginable_type.nil?
+	def create?
+		manager? || principal?
 	end
 
-	def edit?
-		user.loginable_type.nil?
+	def update?
+		manager? || principal?
 	end
 end

@@ -19,7 +19,7 @@ feature "Teachers Admission" do
       fill_in "First Name", with: teacher_profile[:first_name]
       fill_in "Last Name", with: teacher_profile[:last_name]
       fill_in "Date of Birth", with: teacher_profile[:date_of_birth]
-      choose "Female"
+      select "Female"
     end
 
     click_button "Admit Teacher"

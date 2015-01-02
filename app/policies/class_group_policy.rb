@@ -1,5 +1,9 @@
 class ClassGroupPolicy < ApplicationPolicy
+	def create?
+		manager? || principal?
+	end
+
 	def show?
-		class_teacher? || principal? || class_teacher?
+		manager? || principal? || class_teacher?
 	end
 end

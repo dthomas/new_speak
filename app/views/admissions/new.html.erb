@@ -8,7 +8,7 @@
 
 <div class="row">
 	<div class="col-sm-8">
-		<%= bootstrap_form_for(@family, url: admissions_path, layout: :horizontal) do |f| %>
+		<%= simple_form_for(@family, url: admissions_path, layout: :horizontal) do |f| %>
 
 			<%= render "family", f: f %>
 			<%= render "student", f: f %>
@@ -29,7 +29,7 @@
 
 		  <div class="well well-sm">
 		  	<%= f.hidden_field :institute_id  %>
-		  	<%= f.submit "Complete Admission" %>
+		  	<%= f.button :submit, "Complete Admission" %>
 		  </div>
 		<% end %>
 	</div>

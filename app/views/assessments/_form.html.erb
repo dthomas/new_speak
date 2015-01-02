@@ -1,26 +1,26 @@
 <div class="row">
 	<div class="col-sm-8">
-		<%= f.text_field :title, placeholder: "Assessment Title", control_col: "col-sm-12", label_col: "", hide_label: true %>
+		<%= f.input :title, placeholder: "Assessment Title" %>
 	</div>
 	<div class="col-sm-4">
-		<%= f.text_field :due_date, placeholder: "Due Date", control_col: "col-sm-12", label_col: "", hide_label: true, icon: "calendar", data: { provide: 'datepicker' } %>
+		<%= f.input :due_date, placeholder: "Due Date", as: :string, input_html: { data: { provide: 'datepicker' }, value: format_date(f.object.due_date) } %>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-sm-12">
-		<%= f.text_area :description, placeholder: "Assessment Description", control_col: "col-sm-12", label_col: "", hide_label: true %>
+		<%= f.input :description, placeholder: "Assessment Description" %>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-sm-4">
-		<%= f.text_field :weightage, placeholder: "Weightage" %>
+		<%= f.input :weightage, placeholder: "Weightage", as: :string %>
 	</div>
 	<div class="col-sm-4">
-		<%= f.text_field :maximum_marks, placeholder: "Maximum Marks" %>
+		<%= f.input :maximum_marks, placeholder: "Maximum Marks", as: :string %>
 	</div>
 	<div class="col-sm-4">
-		<%= f.select :strategy, options_for_select([["Cumulative", "cumulative"], ["Best", "best"], ["Best Of", "best_of_n"], ["Average", "mean"]]) %>
+		<%= f.input :strategy, collection: [["Cumulative", "cumulative"], ["Best", "best"], ["Best Of", "best_of_n"], ["Average", "mean"]] %>
 	</div>
 </div>

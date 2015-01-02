@@ -3,12 +3,13 @@ class SessionsController < ApplicationController
   skip_after_action :verify_authorized
   
   def new
+    @user = User.new
     redirect_to dashboards_path, notice: "You are already signed in." and return if signed_in?
     flash.now.alert = warden.message if (warden && warden.message.present?)
   end
 
   def create
-  	user = warden.authenticate!
+  	@user = warden.authenticate!
     redirect_to dashboards_path, notice: "Signed In"
   end
 

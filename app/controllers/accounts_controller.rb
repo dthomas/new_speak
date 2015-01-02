@@ -20,6 +20,6 @@ class AccountsController < ApplicationController
 
   def account_params
   	params.require(:institute).permit(:name, :abbreviation, :subdomain, :phone,
-  		users_attributes: [:id, :email, :password, :password_confirmation])
+  		users_attributes: [:email, :password, :password_confirmation])
   end
 end
