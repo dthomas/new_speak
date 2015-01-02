@@ -2,12 +2,14 @@ class TasksController < ApplicationController
 	def new
 		@assessment = current_account.assessments.find(params[:assessment_id])
 		@task = @assessment.tasks.build
+		authorize @task
 	end
 
 	def create
 		@assessment = current_account.assessments.find(params[:assessment_id])
 		@task = @assessment.tasks.build(task_params)
 		@task.institute = current_account
+		authorize @task
 		
 		@assessment.assessment_results.each do |result|
 			@task.task_results.build(marks_obtained: 0.0, student_id: result.student.id, assessment_result: result, institute: current_account)
@@ -20,18 +22,38 @@ class TasksController < ApplicationController
 		end
 	end
 
+	def edit
+		@task = current_account.tasks.find(params[:id])
+		authorize @task
+		@assessment = @task.assessment
+	end
+
 	def show
 		@task = current_account.tasks.find(params[:id])
+		authorize @task
 		@assessment = @task.assessment
+	end
+
+	def update
+		@task = current_account.tasks.find(params[:id])
+		authorize @task
+		@assessment = @task.assessment
+		if @task.update(task_params)
+			redirect_to @task, notice: "Task was updated"
+		else
+			render :edit
+		end
 	end
 
 	def marks
 		@task = current_account.tasks.find(params[:id])
+		authorize @task
 		@assessment = @task.assessment
 	end
 
 	def marks_update
 		@task = current_account.tasks.find(params[:id])
+		authorize @task
 		@assessment = @task.assessment
 
 		if @task.update(marks_params)

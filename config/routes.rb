@@ -14,6 +14,7 @@ Rails.application.routes.draw do
                 patch 'marks_update'
               end
             end
+            get 'grade', on: :member
           end
         end
       end

@@ -39,7 +39,9 @@
 			</table>
 
 			<div class="panel-footer">
-				<%= link_to "New Teacher", new_teacher_path %>
+				<% if policy(Teacher).new? %>
+					<%= link_to "New Teacher", new_teacher_path %>
+				<% end %>
 			</div>
 		</div>
 	</div>

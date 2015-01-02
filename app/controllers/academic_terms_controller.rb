@@ -16,14 +16,30 @@ class AcademicTermsController < ApplicationController
 		end
 	end
 
-	def show
+	def edit
 		@term = current_account.academic_terms.find(params[:id])
 		@course = @term.course
+	end
+
+	def show
+		@term = current_account.academic_terms.find(params[:id])
+		authorize @term
+		@course = @term.course
+	end
+
+	def update
+		@term = current_account.academic_terms.find(params[:id])
+		@course = @term.course
+		if @term.update(academic_term_params)
+			redirect_to @term, notice: "Term has been updated"
+		else
+			render :edit
+		end
 	end
 
 	private
 
 	def academic_term_params
-		params.require(:academic_term).permit(:title, :code, :course_type)
+		params.require(:academic_term).permit(:title, :code, :term_type, :term_class)
 	end
 end

@@ -3,6 +3,7 @@ class CourseSubjectsController < ApplicationController
 		@term = current_account.academic_terms.find(params[:academic_term_id])
 		@course = @term.course
 		@subject = @term.course_subjects.build
+		authorize @subject
 	end
 
 	def create
@@ -26,6 +27,7 @@ class CourseSubjectsController < ApplicationController
 
 	def show
 		@subject = current_account.course_subjects.find(params[:id])
+		authorize @subject
 		@assignments = current_account.teaching_assignments.where(course_subject: @subject)
 	end
 

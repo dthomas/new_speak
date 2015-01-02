@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="col-sm-4">
-		<%= f.input :due_date, placeholder: 'Task Due Date', as: :string, icon: "icon-calendar" ,input_html: { data: { provide: 'datepicker' } } %>
+		<%= f.input :due_date, placeholder: 'Task Due Date', as: :string ,input_html: { data: { provide: 'datepicker' }, value: format_date(f.object.due_date) } %>
 	</div>
 </div>
 

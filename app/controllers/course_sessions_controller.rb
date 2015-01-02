@@ -2,6 +2,7 @@ class CourseSessionsController < ApplicationController
   def new
   	@course = current_account.courses.find(params[:course_id])
   	@course_session = @course.course_sessions.build
+    authorize @course_session
     2.times { @course_session.class_groups.build(institute_id: current_account.id) }
   end
 
@@ -18,11 +19,13 @@ class CourseSessionsController < ApplicationController
 
   def show
     @course_session = current_account.course_sessions.find(params[:id])
+    authorize @course_session
     @students = @course_session.students
   end
 
   def edit
     @course_session = current_account.course_sessions.find(params[:id])
+    authorize @course_session
     2.times { @course_session.class_groups.build(institute_id: current_account.id) }
   end
 

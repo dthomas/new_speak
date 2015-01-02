@@ -33,6 +33,8 @@ feature "Courses" do
 			within("#term-#{term}") do
 				fill_in "Term Title", with: academic_terms[term-1][:title]
 				fill_in "Term Code", with: academic_terms[term-1][:code]
+				select "Year"
+				select academic_terms[term-1][:term_class]
 			end
 		end
 

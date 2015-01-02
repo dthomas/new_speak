@@ -1,0 +1,37 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Dashboard', dashboards_path %> </li>
+	  <li> <%= link_to @assessment.teaching_assignment.class_group.name, @assessment.teaching_assignment.class_group %> </li>
+	  <li> <%= link_to @assessment.teaching_assignment.course_subject.title, @assessment.teaching_assignment.course_subject %> </li>
+	  <li> <%= link_to @assessment.title, @assessment %> </li>
+	  <li class="active"><%= @task.name %></li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-8">
+		<%= simple_form_for(@task) do |f| %>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Edit Task <%= @task.name %></h3>
+				</div>
+
+				<div class="panel-body">
+					<%= render "form", f: f %>
+				</div>
+				<div class="panel-footer">
+					<%= f.button :submit, "Save Task" %>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Info</h3>
+			</div>
+			<div class="panel-body"></div>
+			<div class="panel-footer"></div>
+		</div>		
+	</div>
+</div>

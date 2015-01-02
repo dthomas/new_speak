@@ -40,7 +40,9 @@
 			</table>
 
 			<div class="panel-footer">
-				<%= link_to 'Edit Information', edit_teacher_path(@teacher) %>
+				<% if policy(@teacher).edit? %>
+					<%= link_to 'Edit Information', edit_teacher_path(@teacher) %>
+				<% end %>
 			</div>
 		</div>
 	</div>

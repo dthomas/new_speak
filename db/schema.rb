@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141231024331) do
+ActiveRecord::Schema.define(version: 20150101145138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,11 +24,13 @@ ActiveRecord::Schema.define(version: 20141231024331) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "term_type",    default: 0
+    t.integer  "term_class"
   end
 
   add_index "academic_terms", ["code", "course_id", "institute_id"], name: "index_academic_terms_on_code_and_course_id_and_institute_id", unique: true, using: :btree
   add_index "academic_terms", ["course_id"], name: "index_academic_terms_on_course_id", using: :btree
   add_index "academic_terms", ["institute_id"], name: "index_academic_terms_on_institute_id", using: :btree
+  add_index "academic_terms", ["term_class", "course_id", "institute_id"], name: "unique_term_per_course_idx", unique: true, using: :btree
   add_index "academic_terms", ["title", "course_id", "institute_id"], name: "index_academic_terms_on_title_and_course_id_and_institute_id", unique: true, using: :btree
 
   create_table "assessment_results", force: :cascade do |t|
@@ -39,6 +41,7 @@ ActiveRecord::Schema.define(version: 20141231024331) do
     t.integer  "institute_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.decimal  "grade_point"
   end
 
   add_index "assessment_results", ["assessment_id"], name: "index_assessment_results_on_assessment_id", using: :btree

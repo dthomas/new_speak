@@ -1,7 +1,4 @@
 class ClassGroupsController < ApplicationController
-  def index
-  end
-
   def new
     @course_session = current_account.course_sessions.find(params[:course_session_id])
     @class_group = current_account.class_groups.build(course_session_id: params[:course_session_id], institute_id: current_account.id)
@@ -27,6 +24,7 @@ class ClassGroupsController < ApplicationController
 
   def show
   	@class_group = current_account.class_groups.find(params[:id])
+    authorize @class_group
     @course_session = @class_group.course_session
     @students = @class_group.students.order(:roll_number)
   end

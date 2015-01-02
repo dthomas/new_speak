@@ -56,7 +56,7 @@
 
 				<div class="list-group">
 			    <h6 class="list-group-item-heading">Due Date</h6>
-			    <p class="list-group-item-text"><%= @task.due_date.to_formatted_s(:rfc822) %></p>
+			    <p class="list-group-item-text"><%= l(@task.due_date) %></p>
 				</div>
 
 				<div class="list-group">

@@ -19,7 +19,8 @@ feature "Courses" do
 
 		fill_in "Term Title", with: academic_term.title
 		fill_in "Term Code", with: academic_term.code
-		choose "Year"
+		select "Year"
+		select "10"
 
 		click_button "Add Term"
 		expect(current_path).to eq course_path(course)

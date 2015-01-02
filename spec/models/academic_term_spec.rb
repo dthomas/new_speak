@@ -16,6 +16,8 @@ RSpec.describe AcademicTerm, :type => :model do
     it { should validate_presence_of :institute }
     it { should validate_presence_of :title }
     it { should validate_presence_of :code }
+    it { should validate_presence_of :term_type }
+    it { should validate_presence_of :term_class }
     it "validate uniquness of title and code scoped to the course" do
       FactoryGirl.create(:academic_term, course: course, institute: institute)
       should validate_uniqueness_of(:title).case_insensitive.scoped_to([:course_id, :institute_id])

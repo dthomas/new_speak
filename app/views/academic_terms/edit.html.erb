@@ -3,16 +3,16 @@
 	  <li> <%= link_to 'Settings', dashboards_path %> </li>
 	  <li> <%= link_to 'Courses', courses_path %> </li>
 	  <li> <%= link_to @course.name, course_path(@course) %> </li>
-	  <li class="active">New Term</li>
+	  <li class="active"><%= @term.title %></li>
 	</ol>
 <% end %>
 
 <div class="row">
 	<div class="col-md-8">
-  	<%= simple_form_for([@course, @term], layout: :horizontal) do |f| %>
+  	<%= simple_form_for(@term, layout: :horizontal) do |f| %>
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">Add New Term</h3>
+			    <h3 class="panel-title">Editing <%= @term.title %></h3>
 			  </div>
 			  <div class="panel-body">
 			  	<%= render "form", f: f %>

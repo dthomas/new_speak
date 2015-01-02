@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :ensure_authenticated, except: :destroy
+  skip_after_action :verify_authorized
   
   def new
     redirect_to dashboards_path, notice: "You are already signed in." and return if signed_in?
