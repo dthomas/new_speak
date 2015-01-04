@@ -8,6 +8,7 @@ class Teacher < ActiveRecord::Base
   has_many    :teaching_assignments
   has_many    :course_subjects, through: :teaching_assignments, inverse_of: :teachers
   has_many    :class_groups, through: :teaching_assignments, inverse_of: :teachers
+  has_many    :in_charge_classes, inverse_of: :class_teacher, foreign_key: "class_teacher_id", class_name: "ClassGroup"
 
   # Validations
 

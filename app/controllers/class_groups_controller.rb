@@ -15,6 +15,7 @@ class ClassGroupsController < ApplicationController
     @course_session = current_account.course_sessions.find(params[:course_session_id])
     @class_group = current_account.class_groups.build(class_group_params)
     @class_group.course_session = @course_session
+    @class_group.term_class = @course_session.term_class
     if @class_group.save
       redirect_to @class_group, notice: "New Class Group Created Successfully"
     else
@@ -53,7 +54,7 @@ class ClassGroupsController < ApplicationController
   private
 
   def class_group_params
-    params.require(:class_group).permit(:name, :start_date, :end_date, student_ids: [],
+    params.require(:class_group).permit(:name, :start_date, :end_date, :class_teacher_id ,student_ids: [],
       teaching_assignments_attributes: [:id, :course_subject_id, :teacher_id, :institute_id])
   end
 end

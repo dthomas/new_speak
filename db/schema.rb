@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150101145138) do
+ActiveRecord::Schema.define(version: 20150104150149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "academic_terms", force: :cascade do |t|
     t.string   "title",                    null: false
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 20150101145138) do
     t.integer  "institute_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "term_class"
   end
 
   add_index "class_groups", ["course_session_id"], name: "index_class_groups_on_course_session_id", using: :btree

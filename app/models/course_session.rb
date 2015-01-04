@@ -22,6 +22,9 @@ class CourseSession < ActiveRecord::Base
   scope :admissions_open, -> { where(admissions_open: true) }
   scope :admissions_closed, -> { where(admissions_open: false) }
 
+  # Delegations
+  delegate :term_class, to: :current_term
+
   # Nested Attributes
 
   accepts_nested_attributes_for :class_groups, reject_if: :invalid_class_group_attrs?

@@ -10,7 +10,7 @@ RSpec.describe TaskResult, :type => :model do
 
   describe "validations" do
     it { should validate_presence_of :student }
-    it { should validate_presence_of :task }
+    # it { should validate_presence_of :task }
     it { should validate_presence_of :assessment_result }
     it { should validate_presence_of :institute }
     it { should validate_presence_of :marks_obtained }

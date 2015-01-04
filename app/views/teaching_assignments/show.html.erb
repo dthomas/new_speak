@@ -17,7 +17,8 @@
   			<tr>
   				<th>#</th>
   				<th>Name</th>
-  				<th>Maximum Marks</th>
+          <th>Maximum Marks</th>
+  				<th>Weightage</th>
   				<th>Strategy</th>
   				<th>Due Date</th>
   			</tr>
@@ -28,13 +29,14 @@
   				<tr>
   					<td><%= index + 1 %></td>
   					<td><%= link_to assessment.title, assessment %></td>
-  					<td><%= assessment.maximum_marks %></td>
+            <td><%= assessment.maximum_marks %></td>
+  					<td><%= assessment.weightage %></td>
   					<td><%= assessment.strategy.humanize %></td>
   					<td><%= assessment.due_date.to_formatted_s(:rfc822) %></td>
   				</tr>
   				<tr>
-            <td><kbd>Tasks</kbd></td>
-  					<td colspan="4">
+            <td></td>
+            <td colspan="4">
               <ul class="list-inline">
                 <% assessment.tasks.each do |task| %>
                   <li><%= link_to task.name, task %></li>
@@ -42,6 +44,7 @@
                 <li><%= link_to '[+Task]', new_assessment_task_path(assessment) %></li>  
               </ul>
             </td>
+            <td><kbd>Tasks</kbd></td>
   				</tr>
   			<% end %>
   		</tbody>

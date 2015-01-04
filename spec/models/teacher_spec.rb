@@ -8,6 +8,7 @@ RSpec.describe Teacher, :type => :model do
     it { should have_many :teaching_assignments }
     it { should have_many :course_subjects }
     it { should have_many :class_groups }
+    it { should have_many :in_charge_classes }
   end
 
   describe "validations" do

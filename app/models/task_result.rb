@@ -9,7 +9,7 @@ class TaskResult < ActiveRecord::Base
   # Validations
 
   validates :student, presence: true
-  validates :task, presence: true
+  validates :task, presence: true, on: :update
   validates :assessment_result, presence: true
   validates :institute, presence: true
   validates :marks_obtained, presence: true, numericality: true

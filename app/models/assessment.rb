@@ -20,4 +20,8 @@ class Assessment < ActiveRecord::Base
   validates :strategy, presence: true
   validates :teaching_assignment, presence: true
   validates :institute, presence: true
+
+  # Delegations
+
+  delegate :term_class, to: :teaching_assignment
 end

@@ -26,11 +26,11 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'capybara'
-	gem 'pry-rails'
+  gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'web-console', '~> 2.0'
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'shoulda-matchers'

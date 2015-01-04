@@ -1,11 +1,18 @@
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 		<%= f.input :name, placeholder: 'Group Name' %>
 	</div>
-	<div class="col-sm-4">
+
+	<div class="col-sm-6">
+		<%= f.association :class_teacher %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6">
 		<%= f.input :start_date, placeholder: 'Start Date', as: :string, icon: "calendar", input_html: { value: format_date(f.object.start_date),data: { provide: 'datepicker' } } %>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 		<%= f.input :end_date, placeholder: 'End Date', as: :string, icon: "calendar", input_html: { value: format_date(f.object.end_date),data: { provide: 'datepicker' } } %>
 	</div>
 </div>

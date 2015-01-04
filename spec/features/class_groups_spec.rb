@@ -13,6 +13,8 @@ feature "Class Groups" do
 	given(:student2) { FactoryGirl.create(:student, family: family, institute: institute ) }
 	given(:student3) { FactoryGirl.create(:student, family: family, institute: institute ) }
 	given(:student4) { FactoryGirl.create(:student, family: family, institute: institute ) }
+	given(:teacher_profile) { FactoryGirl.create(:personal_profile, institute: institute) }
+	given!(:teacher) { FactoryGirl.create(:teacher, personal_profile: teacher_profile ,institute: institute) }
 	given!(:participant1) { FactoryGirl.create(:course_session_participant, course_session: course_session, student: student1, institute: institute) }
 	given!(:participant2) { FactoryGirl.create(:course_session_participant, course_session: course_session, student: student2, institute: institute) }
 	given!(:participant3) { FactoryGirl.create(:course_session_participant, course_session: course_session, student: student3, institute: institute) }
@@ -29,6 +31,7 @@ feature "Class Groups" do
 		click_link "#{course.name}"
 		click_link "+"
 		fill_in "Group Name", with: class_group[:name]
+		select teacher.name
 		fill_in "Start Date", with: class_group[:start_date]
 		fill_in "End Date", with: class_group[:end_date]
 		[0,2,3].each do |n|

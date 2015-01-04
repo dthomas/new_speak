@@ -1,5 +1,5 @@
 class TaskPolicy < ApplicationPolicy
-	def new?
+	def create?
 		true
 	end
 end

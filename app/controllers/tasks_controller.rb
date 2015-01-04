@@ -18,6 +18,7 @@ class TasksController < ApplicationController
 		if @task.save
 			redirect_to @assessment, notice: "#{@task.name} was added to the assessment"
 		else
+			p @task.errors
 			render :new
 		end
 	end
@@ -47,13 +48,13 @@ class TasksController < ApplicationController
 
 	def marks
 		@task = current_account.tasks.find(params[:id])
-		authorize @task
+		# authorize @task
 		@assessment = @task.assessment
 	end
 
 	def marks_update
 		@task = current_account.tasks.find(params[:id])
-		authorize @task
+		# authorize @task
 		@assessment = @task.assessment
 
 		if @task.update(marks_params)

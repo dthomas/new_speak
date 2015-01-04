@@ -58,7 +58,7 @@ class AssessmentsController < ApplicationController
 			result.task_results.each do |task_result|
 				total_marks += (task_result.marks_obtained) * (task_result.task.weightage/100)
 			end
-			result.update(marks_obtained: total_marks.round)
+			result.update(GradingService.assign_grade(assessment.term_class, total_marks.round))
 		end
 
 		redirect_to assessment, notice: "Grading has been completed"

@@ -5,6 +5,7 @@ FactoryGirl.define do
     end_date { 4.months.from_now }
 		institute nil
 		course_session nil
+		class_teacher nil
   end
 
 end
