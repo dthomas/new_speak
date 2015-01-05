@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="col-sm-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">All People</h3>
+			</div>
+
+			<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Date of Birth</th>
+					<th>Role</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @people.each_with_index do |person, index| %>
+					<tr>
+						<td><%= index + 1 %></td>
+						<td><%= person.name %></td>
+						<td><%= l(person.date_of_birth) %></td>
+						<td><%= person.person_type.humanize %></td>
+					</tr>
+				<% end %>
+			</tbody>
+			</table>
+				
+			<div class="panel-footer">
+				<%= link_to 'New Person', new_person_path %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		
+	</div>
+</div>

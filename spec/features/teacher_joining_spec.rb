@@ -18,7 +18,7 @@ feature "Teachers Admission" do
     within("#teacher-info") do
       fill_in "First Name", with: teacher_profile[:first_name]
       fill_in "Last Name", with: teacher_profile[:last_name]
-      fill_in "Date of Birth", with: teacher_profile[:date_of_birth]
+      fill_in "teacher[personal_profile_attributes][date_of_birth]", with: teacher_profile[:date_of_birth]
       select "Female"
     end
 

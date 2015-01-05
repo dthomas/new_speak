@@ -3,7 +3,7 @@
 		<%= f.input :title, placeholder: "Assessment Title" %>
 	</div>
 	<div class="col-sm-4">
-		<%= f.input :due_date, placeholder: "Due Date", as: :string, input_html: { data: { provide: 'datepicker' }, value: format_date(f.object.due_date) } %>
+		<%= f.input :due_date, placeholder: "Due Date", as: :date_picker %>
 	</div>
 </div>
 

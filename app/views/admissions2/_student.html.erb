@@ -7,7 +7,7 @@
 			<%= sf.fields_for :personal_profile do |p| %>
 				<%= render layout: "profile", locals: { f: p } do %>
 					<div class="col-sm-4">
-						<%= sf.input :date_of_admission, placeholder: "Date of Admission", as: :string, input_html: { data: { provide: 'datepicker' }, value: format_date(sf.object.date_of_admission) } %>
+						<%= sf.input :date_of_admission, placeholder: "Date of Admission", as: :date_picker %>
 					</div>
 				<% end %>
 				<%= sf.hidden_field :institute_id %>

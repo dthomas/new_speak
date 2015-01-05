@@ -1,0 +1,39 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Dashboard', dashboards_path %> </li>
+	  <li> <%= link_to 'Admissions', admissions_path %> </li>
+	  <li class="active">New Admission</li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-8">
+		<%= simple_form_for(@family, url: admissions_path, layout: :horizontal) do |f| %>
+
+			<%= render "family", f: f %>
+			<%= render "student", f: f %>
+
+		  <div class="panel panel-default">
+		  	<div class="panel-heading">
+		  		<h3 class="panel-title">Course Information</h3>
+		  	</div>
+		  	<div class="panel-body">
+		  		<% @course_sessions.each do |session| %>
+		  			<label class="radio-inline">
+		  				<input type="radio" name="course_session_id" value="<%= session.id %>">
+		  				<%= session.name %>
+		  			</label>
+		  		<% end %>
+		  	</div>
+		  </div>
+
+		  <div class="well well-sm">
+		  	<%= f.hidden_field :institute_id  %>
+		  	<%= f.button :submit, "Complete Admission" %>
+		  </div>
+		<% end %>
+	</div>
+	<div class="col-sm-4">
+		<%= render "sidebar" %>
+	</div>
+</div>

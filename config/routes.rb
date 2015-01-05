@@ -22,13 +22,14 @@ Rails.application.routes.draw do
 
     resources :course_sessions do
       resources :class_groups
+      resources :admissions, only: [:index, :new, :create]
     end
   end
 
-  resources :admissions, only: [:index, :new, :create]
   resources :students, except: [:new, :create]
 
   resources :teachers
+  resources :people
 
   class NewSpeakMain
     def self.matches?(request)

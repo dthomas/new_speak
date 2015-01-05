@@ -4,15 +4,15 @@
 	</div>
 
 	<div class="col-sm-6">
-		<%= f.association :class_teacher %>
+		<%= f.association :class_teacher, label: 'Class Teacher' %>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-sm-6">
-		<%= f.input :start_date, placeholder: 'Start Date', as: :string, icon: "calendar", input_html: { value: format_date(f.object.start_date),data: { provide: 'datepicker' } } %>
+		<%= f.input :start_date, placeholder: 'Start Date', as: :date_picker %>
 	</div>
 	<div class="col-sm-6">
-		<%= f.input :end_date, placeholder: 'End Date', as: :string, icon: "calendar", input_html: { value: format_date(f.object.end_date),data: { provide: 'datepicker' } } %>
+		<%= f.input :end_date, placeholder: 'End Date', as: :date_picker %>
 	</div>
 </div>

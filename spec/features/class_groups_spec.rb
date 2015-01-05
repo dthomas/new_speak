@@ -32,14 +32,13 @@ feature "Class Groups" do
 		click_link "+"
 		fill_in "Group Name", with: class_group[:name]
 		select teacher.name
-		fill_in "Start Date", with: class_group[:start_date]
-		fill_in "End Date", with: class_group[:end_date]
+		fill_in "Start date", with: class_group[:start_date]
+		fill_in "End date", with: class_group[:end_date]
 		[0,2,3].each do |n|
 			check "student-#{n}"
 		end
 
 		click_button "Add Class Group"
-		# binding.pry
 		expect(current_path).to eq class_group_path(course_session.class_groups.last)
 		expect(body).to have_content("New Class Group Created Successfully")
 	end

@@ -10,11 +10,11 @@
 
 <div class="row">
 	<div class="col-sm-4">
-		<%= f.input :start_date, placeholder: 'Session Start Date', as: :string, input_html: { data: { provide: 'datepicker' }, value: format_date(f.object.start_date) } %>
+		<%= f.input :start_date, placeholder: 'Session Start Date', as: :date_picker %>
 	</div>
 
 	<div class="col-sm-4">
-		<%= f.input :end_date, placeholder: 'Session End Date', as: :string, input_html: { data: { provide: 'datepicker' }, value: format_date(f.object.end_date) } %>
+		<%= f.input :end_date, placeholder: 'Session End Date', as: :date_picker %>
 	</div>
 
 	<div class="col-sm-4">

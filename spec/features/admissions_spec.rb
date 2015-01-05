@@ -27,7 +27,7 @@ feature "Student Admissions" do
       fill_in "First Name", with: student_profile[:first_name]
       fill_in "Middle Name", with: student_profile[:middle_name]
       fill_in "Last Name", with: student_profile[:last_name]
-      fill_in "Date of Birth", with: student_profile[:date_of_birth]
+      fill_in "family[students_attributes][0][personal_profile_attributes][date_of_birth]", with: student_profile[:date_of_birth]
       select "Male"
     end
 
@@ -36,7 +36,7 @@ feature "Student Admissions" do
       fill_in "First Name", with: father_profile[:first_name]
       fill_in "Middle Name", with: father_profile[:middle_name]
       fill_in "Last Name", with: father_profile[:last_name]
-      fill_in "Date of Birth", with: father_profile[:date_of_birth]
+      fill_in "family[parents_attributes][0][personal_profile_attributes][date_of_birth]", with: father_profile[:date_of_birth]
       select "Male"
     end
 
@@ -45,7 +45,7 @@ feature "Student Admissions" do
       fill_in "First Name", with: mother_profile[:first_name]
       fill_in "Middle Name", with: mother_profile[:middle_name]
       fill_in "Last Name", with: mother_profile[:last_name]
-      fill_in "Date of Birth", with: mother_profile[:date_of_birth]
+      fill_in "family[parents_attributes][1][personal_profile_attributes][date_of_birth]", with: mother_profile[:date_of_birth]
       select "Female"
     end
 

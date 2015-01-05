@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150104150149) do
+ActiveRecord::Schema.define(version: 20150104181355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,8 +87,10 @@ ActiveRecord::Schema.define(version: 20150104150149) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "term_class"
+    t.integer  "class_teacher_id"
   end
 
+  add_index "class_groups", ["class_teacher_id"], name: "index_class_groups_on_class_teacher_id", using: :btree
   add_index "class_groups", ["course_session_id"], name: "index_class_groups_on_course_session_id", using: :btree
   add_index "class_groups", ["institute_id"], name: "index_class_groups_on_institute_id", using: :btree
   add_index "class_groups", ["name", "course_session_id", "institute_id"], name: "unique_class_group_idx", unique: true, using: :btree
@@ -190,6 +192,28 @@ ActiveRecord::Schema.define(version: 20150104150149) do
 
   add_index "parents", ["family_id"], name: "index_parents_on_family_id", using: :btree
   add_index "parents", ["institute_id"], name: "index_parents_on_institute_id", using: :btree
+
+  create_table "people", force: :cascade do |t|
+    t.string   "first_name",                   null: false
+    t.string   "middle_name"
+    t.string   "last_name",                    null: false
+    t.date     "date_of_birth",                null: false
+    t.integer  "gender",                       null: false
+    t.integer  "person_type",     default: 0
+    t.hstore   "profile",         default: {}
+    t.string   "email"
+    t.string   "password_digest"
+    t.integer  "family_id"
+    t.integer  "institute_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "people", ["email", "institute_id"], name: "index_people_on_email_and_institute_id", unique: true, using: :btree
+  add_index "people", ["email", "password_digest", "institute_id"], name: "index_people_on_email_and_password_digest_and_institute_id", using: :btree
+  add_index "people", ["family_id"], name: "index_people_on_family_id", using: :btree
+  add_index "people", ["institute_id"], name: "index_people_on_institute_id", using: :btree
+  add_index "people", ["profile"], name: "index_people_on_profile", using: :gin
 
   create_table "person_types", force: :cascade do |t|
     t.string   "name",       null: false
@@ -324,6 +348,8 @@ ActiveRecord::Schema.define(version: 20150104150149) do
   add_foreign_key "families", "institutes"
   add_foreign_key "parents", "families"
   add_foreign_key "parents", "institutes"
+  add_foreign_key "people", "families"
+  add_foreign_key "people", "institutes"
   add_foreign_key "personal_profiles", "institutes"
   add_foreign_key "students", "families"
   add_foreign_key "students", "institutes"

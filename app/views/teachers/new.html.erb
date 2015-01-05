@@ -19,7 +19,7 @@
 					<%= f.fields_for :personal_profile do |pf| %>
 						<%= render layout: "admissions/profile", locals: { f: pf } do %>
 							<div class="col-sm-4">
-								<%= f.input :date_of_joining, placeholder: "Date of Joining", as: :string,  input_html: { data: { provide: 'datepicker' } } %>
+								<%= f.input :date_of_joining, placeholder: "Date of Joining", as: :date_picker %>
 							</div>
 						<% end %>
 					<% end %>

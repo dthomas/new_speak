@@ -5,4 +5,11 @@ $(document).ready(function(){
 	  autoclose: true,
 	  todayHighlight: true
 	});
+
+  $('.datepicker').datepicker({
+		format: "dd M yyyy",
+	  calendarWeeks: true,
+	  autoclose: true,
+	  todayHighlight: true
+	});
 });
