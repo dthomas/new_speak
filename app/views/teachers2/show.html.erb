@@ -1,0 +1,56 @@
+<%= content_for(:breadcrumb) do %>
+	<ol class="breadcrumb">
+	  <li> <%= link_to 'Settings', dashboards_path %> </li>
+	  <li> <%= link_to 'Teachers', teachers_path %> </li>
+	  <li class="active"> <%= @teacher.name %> </li>
+	</ol>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Assignments</h3>
+			</div>
+
+			<div class="panel-body">
+				Performance
+			</div>
+
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Subject</th>
+						<th>Class Group</th>
+						<th>Course Session</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @teacher.teaching_assignments.each_with_index do |assignment, index| %>
+						<tr>
+							<td><%= index + 1 %></td>
+							<td><%= link_to assignment.course_subject.title, assignment %></td>
+							<td><%= assignment.class_group.name %></td>
+							<td><%= assignment.class_group.course_session.name %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+			<div class="panel-footer">
+				<% if policy(@teacher).edit? %>
+					<%= link_to 'Edit Information', edit_teacher_path(@teacher) %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">About <%= @teacher.name %></div>
+			<div class="panel-body">Info</div>
+		</div>
+	</div>
+</div>

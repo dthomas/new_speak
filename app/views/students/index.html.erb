@@ -1,6 +1,6 @@
 <%= content_for(:breadcrumb) do %>
 	<ol class="breadcrumb">
-	  <li><%= link_to 'Settings', dashboards_path %></li>
+	  <li><%= link_to 'Dashboard', dashboards_path %></li>
 	  <li class="active">Students</li>
 	</ol>
 <% end %>
@@ -24,12 +24,6 @@
 
 				<tbody>
 
-				<% if @students.blank? %>
-					<tr>
-						<td colspan="4">Please select a course session from right.</td>
-					</tr>
-				<% end %>
-
 				<% @students.each_with_index do |student, index| %>
 					<tr>
 						<td> <%= index +1 %> </td>
@@ -51,12 +45,6 @@
 				<h3 class="panel-title">Active Sessions</h3>
 			</div>
 			<ul class="list-group">
-				<% @course_sessions.each do |session| %>
-					<li class="list-group-item">
-						<span class="badge"><%= session.students.length %></span>
-						<%= link_to session.name, students_path(session_id: session.id) %>
-					</li>
-				<% end %>
 			</ul>
 		</div>
 	</div>

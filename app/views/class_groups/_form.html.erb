@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="col-sm-6">
-		<%= f.association :class_teacher, label: 'Class Teacher' %>
+		<%= f.association :class_teacher, label: 'Class Teacher', collection: current_account.people.teacher, prompt: 'Select Class Teacher' %>
 	</div>
 </div>
 

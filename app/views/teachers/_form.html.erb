@@ -1,0 +1,16 @@
+<fieldset>
+  <legend>Personal Information</legend>
+  <%= render "people/teacher", f: f %>
+</fieldset>
+
+<fieldset>
+  <legend>Family Information</legend>
+  <%= f.simple_fields_for(:relatives) do |rf| %>
+    <%= render "people/relative", f: rf %>
+  <% end %>
+</fieldset>
+
+<fieldset>
+  <legend>Academic Qualifications</legend>
+  <%#= render "people/teacher", f: f %>
+</fieldset>

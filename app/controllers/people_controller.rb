@@ -9,7 +9,7 @@ class PeopleController < ApplicationController
 
 	def create
 		@person = current_account.people.build(person_attrs)
-		@person.person_type = "student"
+		@person.role = "student"
 		@person.admission_number = current_account.last_admission_number + 1
 		if @person.save
 			current_account.update(last_admission_number: @person.admission_number)

@@ -4,7 +4,7 @@ FactoryGirl.define do
 		description "A small task part of a big assessment"
 		maximum_marks "100"
 		weightage "40"
-		due_date { 5.days.from_today }
+		due_date { Date.today + 7.days }
 		assessment nil
 		institute nil
   end

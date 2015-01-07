@@ -22,10 +22,11 @@ Rails.application.routes.draw do
 
     resources :course_sessions do
       resources :class_groups
-      resources :admissions, only: [:index, :new, :create]
+      resources :admissions, only: [:new, :create]
     end
   end
 
+  resources :admissions, only: :index
   resources :students, except: [:new, :create]
 
   resources :teachers

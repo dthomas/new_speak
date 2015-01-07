@@ -1,0 +1,11 @@
+<fieldset>
+	<legend>Student Information</legend>
+	<%= render "people/student", f: f %>
+</fieldset>
+
+<fieldset>
+	<legend>Family Information</legend>
+	<%= f.simple_fields_for(:relatives) do |rf| %>
+	<%= render "people/relative", f: rf %>
+	<% end %>
+</fieldset>

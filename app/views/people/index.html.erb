@@ -21,14 +21,13 @@
 						<td><%= index + 1 %></td>
 						<td><%= person.name %></td>
 						<td><%= l(person.date_of_birth) %></td>
-						<td><%= person.person_type.humanize %></td>
+						<td><%= person.role.humanize %></td>
 					</tr>
 				<% end %>
 			</tbody>
 			</table>
 				
 			<div class="panel-footer">
-				<%= link_to 'New Person', new_person_path %>
 			</div>
 		</div>
 	</div>

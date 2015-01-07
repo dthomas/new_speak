@@ -1,13 +1,9 @@
 class StudentsController < ApplicationController
   def index
-  	@course_sessions ||= current_account.course_sessions
-  	@students = []
-  	if params[:session_id]
-  		@students = @course_sessions.find(params[:session_id]).students
-  	end
+  	@students = current_account.people.student
   end
 
   def show
-  	@student = current_account.students.find(params[:id])
+  	@student = current_account.people.student.find(params[:id])
   end
 end

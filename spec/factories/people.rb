@@ -4,11 +4,16 @@ FactoryGirl.define do
     sequence(:middle_name) { |n| "Middle #{n}" }
     sequence(:last_name) { |n| "Last #{n}" }
 		gender 0
-		person_type 0
-		date_of_birth { Date.today }
+		role 0
 		profile {}
+		date_of_birth { Date.today - 6.years }
+		date_of_admission { Date.today }
+		date_of_joining { Date.today }
+    sequence(:admission_number) { |n| n }
+    sequence(:employee_number) { |n| n }
 		sequence(:email) { |n| "user#{n}@example.com" }
-		family nil
+		password "sekret"
+		password_confirmation { password }
 		institute nil
   end
 

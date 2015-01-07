@@ -1,0 +1,44 @@
+<%= content_for(:breadcrumb) do %>
+  <ol class="breadcrumb">
+    <li> <%= link_to 'Dashboard', dashboards_path %> </li>
+    <li class="active">Admission Central</li>
+  </ol>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Admissions Open to</h3>
+			</div>
+
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Session</th>
+						<th>Course</th>
+						<th>Current Term</th>
+						<th>Admission</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @course_sessions.each_with_index do |session, index| %>
+						<tr>
+							<td><%= index + 1 %></td>
+							<td><%= session.name %></td>
+							<td><%= session.course.name %></td>
+							<td><%= session.current_term.title %></td>
+							<td><%= link_to 'Open', new_course_session_admission_path(session) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-sm-4">
+		
+	</div>
+</div>

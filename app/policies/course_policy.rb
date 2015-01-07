@@ -13,7 +13,7 @@ class CoursePolicy < ApplicationPolicy
 	end
 
 	def index?
-		user.loginable.nil? || user.loginable_type == "Teacher"
+		user.manager? || user.teacher?
 	end
 
 	def show?
@@ -21,6 +21,6 @@ class CoursePolicy < ApplicationPolicy
 	end
 
 	def create?
-		user.loginable.nil?
+		user.manager?
 	end
 end

@@ -1,0 +1,11 @@
+<div class="row">
+	<div class="col-sm-6">
+		<%= f.object.course_subject.title %>
+		<%= f.input :course_subject_id, as: :hidden %>
+		<%= f.input :institute_id, as: :hidden %>
+	</div>
+
+	<div class="col-sm-6">
+		<%= f.association :teacher, collection: current_account.people.teacher, label: false, prompt: 'Please select a techer' %>
+	</div>
+</div>

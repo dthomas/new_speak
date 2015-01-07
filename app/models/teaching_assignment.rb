@@ -2,7 +2,7 @@ class TeachingAssignment < ActiveRecord::Base
 	# Associations
 
   belongs_to :course_subject, inverse_of: :teaching_assignments
-  belongs_to :teacher, inverse_of: :teaching_assignments
+  belongs_to :teacher, class_name: "Person", foreign_key: :person_id
   belongs_to :class_group, inverse_of: :teaching_assignments
   belongs_to :institute, inverse_of: :teaching_assignments
 

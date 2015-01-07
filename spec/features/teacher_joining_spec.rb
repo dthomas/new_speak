@@ -2,8 +2,10 @@ require 'rails_helper'
 
 feature "Teachers Admission" do
   given(:institute) { FactoryGirl.create(:institute, custom_domain: "www.enchild.com") }
-  given(:user) { FactoryGirl.create(:user, institute: institute) }
-  given(:teacher_profile) { FactoryGirl.attributes_for(:personal_profile) }
+  given(:user) { FactoryGirl.create(:person, role: :manager, institute: institute) }
+  given(:teacher) { FactoryGirl.build(:person, role: :teacher) }
+  given(:father) { FactoryGirl.build(:person, role: :guardian) }
+  given(:mother) { FactoryGirl.build(:person, role: :guardian) }
 
   background do
     Capybara.app_host = 'http://www.enchild.com'
@@ -15,16 +17,33 @@ feature "Teachers Admission" do
     click_link "Teachers"
     click_link "New Teacher"
 
-    within("#teacher-info") do
-      fill_in "First Name", with: teacher_profile[:first_name]
-      fill_in "Last Name", with: teacher_profile[:last_name]
-      fill_in "teacher[personal_profile_attributes][date_of_birth]", with: teacher_profile[:date_of_birth]
-      select "Female"
-    end
+    fill_in "teacher[first_name]", with: teacher.first_name
+    fill_in "teacher[middle_name]", with: teacher.middle_name
+    fill_in "teacher[last_name]", with: teacher.last_name
+    fill_in "teacher[date_of_birth]", with: teacher.date_of_birth
+    fill_in "teacher[date_of_joining]", with: Date.today
+    select "Female", from: "teacher[gender]"
 
-    click_button "Admit Teacher"
+    fill_in "teacher[relatives_attributes][0][first_name]", with: father.first_name
+    fill_in "teacher[relatives_attributes][0][middle_name]", with: father.middle_name
+    fill_in "teacher[relatives_attributes][0][last_name]", with: father.last_name
+    fill_in "teacher[relatives_attributes][0][date_of_birth]", with: father.date_of_birth
+    fill_in "teacher[relatives_attributes][0][occupation]", with: "Business"
+    select "Male", from: "teacher[relatives_attributes][0][gender]"
+    select "Father", from: "teacher[relatives_attributes][0][relation]"
+
+    fill_in "teacher[relatives_attributes][1][first_name]", with: mother.first_name
+    fill_in "teacher[relatives_attributes][1][middle_name]", with: mother.middle_name
+    fill_in "teacher[relatives_attributes][1][last_name]", with: mother.last_name
+    fill_in "teacher[relatives_attributes][1][date_of_birth]", with: mother.date_of_birth
+    fill_in "teacher[relatives_attributes][1][occupation]", with: "Home Maker"
+    select "Female", from: "teacher[relatives_attributes][1][gender]"
+    select "Mother", from: "teacher[relatives_attributes][1][relation]"
+
+
+    click_button "Complete Joining"
     expect(current_path).to eq teachers_path
-    expect(body).to have_content("New teacher joined successfully")
+    expect(body).to have_content("Joining for #{teacher.name}")
   end
 
   private

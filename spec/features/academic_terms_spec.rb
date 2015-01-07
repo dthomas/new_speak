@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "Courses" do
 	given(:institute) { FactoryGirl.create(:institute, custom_domain: "www.enchild.com") }
-	given(:user) { FactoryGirl.create(:user, institute: institute) }
+	given(:user) { FactoryGirl.create(:person, role: :manager, institute: institute) }
 	given(:course) { FactoryGirl.build(:course, institute: institute) }
 	given(:academic_term) { FactoryGirl.build(:academic_term, course: course, institute: institute) }
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Account sign up" do
+feature "Account sign up", pending: true do
 
 	given(:institute) { FactoryGirl.attributes_for(:institute) }
 	given(:user) { FactoryGirl.attributes_for(:user) }

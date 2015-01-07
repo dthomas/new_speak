@@ -7,12 +7,20 @@
 
 <div class="row">
   <div class="col-sm-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">New Admission</h3>
+    <%= simple_form_for(@student, url: course_session_admissions_path(@course_session), as: :student) do |f| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">New Admission</h3>
+        </div>
+        <div class="panel-body">
+          <%= render "form", f: f %>
+        </div>
+
+        <div class="panel-footer">
+          <%= f.button :submit, "Complete Admission" %>
+        </div>
       </div>
-      <div class="panel-body"></div>
-    </div>
+    <% end %>
   </div>
   <div class="col-sm-4">
     <div class="panel panel-default">

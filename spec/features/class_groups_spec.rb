@@ -2,19 +2,17 @@ require 'rails_helper'
 
 feature "Class Groups" do
   given(:institute) { FactoryGirl.create(:institute, custom_domain: "www.enchild.com") }
-  given(:user) { FactoryGirl.create(:user, institute: institute) }
+  given(:user) { FactoryGirl.create(:person, role: :manager, institute: institute) }
 	given(:course) { FactoryGirl.create(:course, institute: institute) }
  	given(:academic_terms) { FactoryGirl.create_list(:academic_term, 2, course: course, institute: institute) }
 	given!(:course_session) { FactoryGirl.create(:course_session, course: course, current_term: academic_terms[0], institute: institute) }
-	given(:family) { FactoryGirl.create(:family, institute: institute) }
-	given(:father) { FactoryGirl.create(:parent, family: family, institute: institute) }
-	given(:mother) { FactoryGirl.create(:parent, family: family, institute: institute) }
-	given(:student1) { FactoryGirl.create(:student, family: family, institute: institute ) }
-	given(:student2) { FactoryGirl.create(:student, family: family, institute: institute ) }
-	given(:student3) { FactoryGirl.create(:student, family: family, institute: institute ) }
-	given(:student4) { FactoryGirl.create(:student, family: family, institute: institute ) }
-	given(:teacher_profile) { FactoryGirl.create(:personal_profile, institute: institute) }
-	given!(:teacher) { FactoryGirl.create(:teacher, personal_profile: teacher_profile ,institute: institute) }
+	given(:father) { FactoryGirl.create(:person, role: :guardian, institute: institute) }
+	given(:mother) { FactoryGirl.create(:person, role: :guardian, institute: institute) }
+	given(:student1) { FactoryGirl.create(:person, role: :student, institute: institute ) }
+	given(:student2) { FactoryGirl.create(:person, role: :student, institute: institute ) }
+	given(:student3) { FactoryGirl.create(:person, role: :student, institute: institute ) }
+	given(:student4) { FactoryGirl.create(:person, role: :student, institute: institute ) }
+	given!(:teacher) { FactoryGirl.create(:person, role: :teacher ,institute: institute) }
 	given!(:participant1) { FactoryGirl.create(:course_session_participant, course_session: course_session, student: student1, institute: institute) }
 	given!(:participant2) { FactoryGirl.create(:course_session_participant, course_session: course_session, student: student2, institute: institute) }
 	given!(:participant3) { FactoryGirl.create(:course_session_participant, course_session: course_session, student: student3, institute: institute) }

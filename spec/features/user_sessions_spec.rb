@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "User Sessions" do
 	given(:institute) { FactoryGirl.create(:institute, custom_domain: "www.enchild.com") }
-	given(:user) { FactoryGirl.create(:user, institute: institute) }
+	given(:user) { FactoryGirl.create(:person, role: :manager, institute: institute) }
 	
 	background do
 		Capybara.app_host = 'http://www.enchild.com'

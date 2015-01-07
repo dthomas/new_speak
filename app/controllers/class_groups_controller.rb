@@ -3,7 +3,7 @@ class ClassGroupsController < ApplicationController
     @course_session = current_account.course_sessions.find(params[:course_session_id])
     @class_group = current_account.class_groups.build(course_session_id: params[:course_session_id], institute_id: current_account.id)
     @course_session.students.each do |student|
-      @class_group.class_group_students.build(student_id: student.id)
+      @class_group.class_group_students.build(person_id: student.id)
     end
     
     @course_session.current_term.course_subjects.each do |subject|
@@ -19,6 +19,7 @@ class ClassGroupsController < ApplicationController
     if @class_group.save
       redirect_to @class_group, notice: "New Class Group Created Successfully"
     else
+    binding.pry
       render :new
     end
   end
@@ -33,7 +34,7 @@ class ClassGroupsController < ApplicationController
   def edit
   	@class_group = current_account.class_groups.find(params[:id])
     @course_session = @class_group.course_session
-    @students = @course_session.students.joins(:personal_profile).sort_by(&:first_name)
+    @students = @course_session.students
     @course_session.current_term.course_subjects.each do |subject|
       @class_group.teaching_assignments.build(course_subject: subject, institute: current_account)
     end
@@ -46,7 +47,7 @@ class ClassGroupsController < ApplicationController
       redirect_to @class_group, notice: "Class Group has been updated."
     else
       @course_session = @class_group.course_session
-      @students = @course_session.students.joins(:personal_profile).sort_by(&:first_name)
+      @students = @course_session.students
       render :edit
     end
   end
@@ -54,7 +55,7 @@ class ClassGroupsController < ApplicationController
   private
 
   def class_group_params
-    params.require(:class_group).permit(:name, :start_date, :end_date, :class_teacher_id ,student_ids: [],
-      teaching_assignments_attributes: [:id, :course_subject_id, :teacher_id, :institute_id])
+    params.require(:class_group).permit(:name, :start_date, :end_date, :person_id ,student_ids: [],
+      teaching_assignments_attributes: [:id, :course_subject_id, :person_id, :institute_id])
   end
 end

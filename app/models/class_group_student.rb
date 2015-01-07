@@ -2,7 +2,7 @@ class ClassGroupStudent < ActiveRecord::Base
 	# Associations
 
   belongs_to :class_group, inverse_of: :class_group_students
-  belongs_to :student, inverse_of: :class_group_students
+  belongs_to :student, class_name: "Person", foreign_key: :person_id
 
   # Validations
   validates :student, presence: true

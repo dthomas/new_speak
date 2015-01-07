@@ -1,6 +1,6 @@
 module UserRoles
   def manager?
-    user.loginable_type.nil?
+    user.manager?
   end
 
   def principal?
@@ -12,11 +12,11 @@ module UserRoles
   end
 
   def parent_of_current_user?
-    false
+    user.guardian?
   end
 
   def student?
-    false
+    user.student?
   end
 
   def class_mate?

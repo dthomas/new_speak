@@ -12,7 +12,7 @@ class TasksController < ApplicationController
 		authorize @task
 		
 		@assessment.assessment_results.each do |result|
-			@task.task_results.build(marks_obtained: 0.0, student_id: result.student.id, assessment_result: result, institute: current_account)
+			@task.task_results.build(marks_obtained: 0.0, student: result.student, assessment_result: result, institute: current_account)
 		end
 
 		if @task.save

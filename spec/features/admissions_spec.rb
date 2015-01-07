@@ -1,74 +1,66 @@
 require "rails_helper"
 
 feature "Student Admissions" do
-	given(:institute) { FactoryGirl.create(:institute, custom_domain: "www.enchild.com") }
-	given(:user) { FactoryGirl.create(:user, institute: institute) }
-	given(:course) { FactoryGirl.create(:course, institute: institute) }
+  given(:institute) { FactoryGirl.create(:institute, custom_domain: "www.enchild.com") }
+  given(:user) { FactoryGirl.create(:person, role: :manager, institute: institute) }
+  given(:course) { FactoryGirl.create(:course, institute: institute) }
   given(:academic_terms) { FactoryGirl.create_list(:academic_term, 2, course: course, institute: institute) }
-	given!(:course_session) { FactoryGirl.create(:course_session, course: course, current_term: academic_terms[0], institute: institute) }
-	given(:family) { FactoryGirl.attributes_for(:family) }
-	given(:student) { FactoryGirl.attributes_for(:student) }
-  given(:father) { FactoryGirl.attributes_for(:parent) }
-  given(:mother) { FactoryGirl.attributes_for(:parent) }
-  given(:student_profile) { FactoryGirl.attributes_for(:personal_profile) }
-  given(:father_profile) { FactoryGirl.attributes_for(:personal_profile) }
-  given(:mother_profile) { FactoryGirl.attributes_for(:personal_profile) }
+  given!(:course_session) { FactoryGirl.create(:course_session, course: course, current_term: academic_terms[0], institute: institute) }
+  given(:student) { FactoryGirl.build(:person) }
+  given(:father) { FactoryGirl.build(:person, role: :guardian) }
+  given(:mother) { FactoryGirl.build(:person, role: :guardian) }
 
-	background do
-	  Capybara.app_host = 'http://www.enchild.com'
-	end
+  background do
+    Capybara.app_host = 'http://www.enchild.com'
+  end
 
-	scenario "new admission" do
-		perform_valid_sign_in
-		visit admissions_path
-		click_link "New Admission"
+  scenario "new admission" do
+    perform_valid_sign_in
+    click_link "Admissions"
+    click_link "Open"
 
-    within("#student-info") do
-      fill_in "First Name", with: student_profile[:first_name]
-      fill_in "Middle Name", with: student_profile[:middle_name]
-      fill_in "Last Name", with: student_profile[:last_name]
-      fill_in "family[students_attributes][0][personal_profile_attributes][date_of_birth]", with: student_profile[:date_of_birth]
-      select "Male"
-    end
+    fill_in "student[first_name]", with: student.first_name
+    fill_in "student[middle_name]", with: student.middle_name
+    fill_in "student[last_name]", with: student.last_name
+    fill_in "student[date_of_birth]", with: student.date_of_birth
+    fill_in "student[date_of_admission]", with: Date.today
+    select "Male", from: "student[gender]"
 
-    within("#parent-0") do
-      select "Father"
-      fill_in "First Name", with: father_profile[:first_name]
-      fill_in "Middle Name", with: father_profile[:middle_name]
-      fill_in "Last Name", with: father_profile[:last_name]
-      fill_in "family[parents_attributes][0][personal_profile_attributes][date_of_birth]", with: father_profile[:date_of_birth]
-      select "Male"
-    end
+    fill_in "student[relatives_attributes][0][first_name]", with: father.first_name
+    fill_in "student[relatives_attributes][0][middle_name]", with: father.middle_name
+    fill_in "student[relatives_attributes][0][last_name]", with: father.last_name
+    fill_in "student[relatives_attributes][0][date_of_birth]", with: father.date_of_birth
+    fill_in "student[relatives_attributes][0][occupation]", with: "Business"
+    select "Male", from: "student[relatives_attributes][0][gender]"
+    select "Father", from: "student[relatives_attributes][0][relation]"
 
-    within("#parent-1") do
-      select "Mother"
-      fill_in "First Name", with: mother_profile[:first_name]
-      fill_in "Middle Name", with: mother_profile[:middle_name]
-      fill_in "Last Name", with: mother_profile[:last_name]
-      fill_in "family[parents_attributes][1][personal_profile_attributes][date_of_birth]", with: mother_profile[:date_of_birth]
-      select "Female"
-    end
+    fill_in "student[relatives_attributes][1][first_name]", with: mother.first_name
+    fill_in "student[relatives_attributes][1][middle_name]", with: mother.middle_name
+    fill_in "student[relatives_attributes][1][last_name]", with: mother.last_name
+    fill_in "student[relatives_attributes][1][date_of_birth]", with: mother.date_of_birth
+    fill_in "student[relatives_attributes][1][occupation]", with: "Home Maker"
+    select "Female", from: "student[relatives_attributes][1][gender]"
+    select "Mother", from: "student[relatives_attributes][1][relation]"
 
-    fill_in "Family Name", with: family[:name]
-    choose course_session.name
     click_button "Complete Admission"
-    expect(current_path).to eq admissions_path
-    expect(page).to have_content("Thank you.")
+    # binding.pry
+    expect(current_path).to eq course_session_path(course_session)
+    expect(page).to have_content("Admission for #{student.first_name}")
 
   end
 
-	scenario "recent admissions" do
+  scenario "recent admissions" do
 
-	end
+  end
 
-	private
+  private
 
-	def perform_valid_sign_in
-		visit new_session_path
+  def perform_valid_sign_in
+    visit new_session_path
 
-		fill_in "Email", with: user.email
-		fill_in "Password", with: user.password
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
 
-		click_button "Sign In"
-	end
+    click_button "Sign In"
+  end
 end

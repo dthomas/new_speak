@@ -1,7 +1,7 @@
 class AssessmentResult < ActiveRecord::Base
   # Assocaitions
 
-  belongs_to 	:student
+  belongs_to 	:student, class_name: "Person", foreign_key: :person_id
   belongs_to 	:assessment
   belongs_to 	:institute
   has_many 		:task_results

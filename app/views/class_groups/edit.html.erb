@@ -54,8 +54,8 @@
 								</td>
 								<td><%= student.name %></td>
 								<td><%= student.admission_number %></td>
-								<td><%= student.date_of_admission.to_formatted_s(:rfc822) %></td>
-								<td><%= student.date_of_birth.to_formatted_s(:rfc822) %></td>
+								<td><%= student.date_of_admission %></td>
+								<td><%= l(student.date_of_birth) %></td>
 								<td><%= student.gender.humanize %></td>
 							</tr>
 						<% end %>

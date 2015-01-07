@@ -3,7 +3,7 @@ class Institute < ActiveRecord::Base
   belongs_to :owner, class_name: "User"
   has_many :users, inverse_of: :institute
   has_many :personal_profiles
-  has_many :families
+  # has_many :families
   has_many :parents
   has_many :teachers
   has_many :students

@@ -3,12 +3,12 @@ Rails.application.config.middleware.use Warden::Manager do |manager|
 	manager.default_strategies :password
 end
 
-Warden::Manager.serialize_into_session do |user|
-	user.id
+Warden::Manager.serialize_into_session do |person|
+	person.id
 end
 
 Warden::Manager.serialize_from_session do |id|
-	User.find(id)
+	Person.find(id)
 end
 
 Warden::Strategies.add(:password) do
@@ -17,11 +17,11 @@ Warden::Strategies.add(:password) do
 	end
 	
 	def authenticate!
-		user = User.joins(:institute)
-		.where('institutes.subdomain = ? OR institutes.custom_domain = ? AND users.email = ?',
+		person = Person.joins(:institute)
+		.where('institutes.subdomain = ? OR institutes.custom_domain = ? AND people.email = ?',
 			subdomain, request.host, params["user"]["email"]).first
-		if user && user.authenticate(params["user"]["password"])
-			success! user
+		if person && person.authenticate(params["user"]["password"])
+			success! person
 		else
 			fail! "Invalid email or password"
 		end

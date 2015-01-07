@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :family do
-    name "Golden Family"
-		institute nil
+		person nil
   end
 
 end

@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-sm-4">
+		<%= f.input :first_name, placeholder: 'First Name' %>
+	</div>
+
+	<div class="col-sm-4">
+		<%= f.input :middle_name, placeholder: 'Middle Name' %>
+	</div>
+
+	<div class="col-sm-4">
+		<%= f.input :last_name, placeholder: 'Last Name' %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-4">
+		<%= f.input :gender, collection: [["Female", "female"], ["Male", "male"]] %>
+	</div>
+
+	<div class="col-sm-4">
+		<%= f.input :date_of_birth, as: :date_picker %>
+	</div>
+
+	<div class="col-sm-4">
+		<%= f.input :date_of_admission, as: :date_picker %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-4">
+		<%= f.input :religion, placeholder: 'Religion' %>
+	</div>
+
+	<div class="col-sm-4">
+		<%= f.input :caste, placeholder: 'Caste' %>
+	</div>
+
+	<div class="col-sm-4">
+		<%#= f.input :date_of_admission, as: :date_picker %>
+	</div>
+</div>

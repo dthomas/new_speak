@@ -26,12 +26,12 @@
 				</thead>
 
 				<tbody>
-					<% @class_group.students.joins(:class_group_students).sort_by(&:first_name).each do |student| %>
+					<% @class_group.students.each do |student| %>
 						<tr>
 							<td><%= student.admission_number %></td>
 							<td><%= student.name %></td>
-							<td><%= student.personal_profile.date_of_birth.to_formatted_s(:rfc822) %></td>
-							<td><%= student.date_of_admission.to_formatted_s(:rfc822) %></td>
+							<td><%= l(student.date_of_birth) %></td>
+							<td><%= student.date_of_admission %></td>
 						</tr>
 					<% end %>
 				</tbody>
