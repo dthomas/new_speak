@@ -12,7 +12,8 @@ class ClassGroup < ActiveRecord::Base
   has_many :course_subjects, through: :teaching_assignments, inverse_of: :class_groups
   has_many :teachers, through: :teaching_assignments, inverse_of: :class_groups
   has_many :course_subjects, through: :teaching_assignments, inverse_of: :class_group
-  has_many :students, -> { uniq } ,through: :class_group_students, inverse_of: :class_groups
+  # has_many :students, -> { uniq } ,through: :class_group_students, inverse_of: :class_groups, class_name: "Person", source: :person
+  has_many :students, through: :class_group_students, source: :student
 
   # Validations
 
