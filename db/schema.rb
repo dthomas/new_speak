@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150107142213) do
+ActiveRecord::Schema.define(version: 20150108151432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,10 +42,8 @@ ActiveRecord::Schema.define(version: 20150107142213) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.decimal  "grade_point"
-    t.integer  "person_id"
+    t.integer  "student_id"
   end
-
-  add_index "assessment_results", ["person_id", "assessment_id", "institute_id"], name: "unique_assessment_result_idx", unique: true, using: :btree
 
   create_table "assessments", force: :cascade do |t|
     t.string   "title",                                null: false
@@ -68,10 +66,8 @@ ActiveRecord::Schema.define(version: 20150107142213) do
     t.integer  "class_group_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "person_id"
+    t.integer  "student_id"
   end
-
-  add_index "class_group_students", ["person_id", "class_group_id"], name: "unique_student_class_group_idx", unique: true, using: :btree
 
   create_table "class_groups", force: :cascade do |t|
     t.string   "name",              null: false
@@ -82,23 +78,20 @@ ActiveRecord::Schema.define(version: 20150107142213) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "term_class"
-    t.integer  "person_id"
+    t.integer  "class_teacher_id"
   end
 
   add_index "class_groups", ["course_session_id"], name: "index_class_groups_on_course_session_id", using: :btree
   add_index "class_groups", ["institute_id"], name: "index_class_groups_on_institute_id", using: :btree
   add_index "class_groups", ["name", "course_session_id", "institute_id"], name: "unique_class_group_idx", unique: true, using: :btree
-  add_index "class_groups", ["person_id"], name: "index_class_groups_on_person_id", using: :btree
 
   create_table "course_session_participants", force: :cascade do |t|
     t.integer  "course_session_id"
     t.integer  "institute_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "person_id"
+    t.integer  "student_id"
   end
-
-  add_index "course_session_participants", ["person_id", "course_session_id", "institute_id"], name: "unique_course_participant_idx", unique: true, using: :btree
 
   create_table "course_sessions", force: :cascade do |t|
     t.string   "name",                           null: false
@@ -251,10 +244,8 @@ ActiveRecord::Schema.define(version: 20150107142213) do
     t.integer  "institute_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.integer  "person_id"
+    t.integer  "student_id"
   end
-
-  add_index "task_results", ["person_id", "task_id", "assessment_result_id", "institute_id"], name: "unique_task_result_idx", unique: true, using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name",          null: false
@@ -291,10 +282,8 @@ ActiveRecord::Schema.define(version: 20150107142213) do
     t.integer  "institute_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "person_id"
+    t.integer  "teacher_id"
   end
-
-  add_index "teaching_assignments", ["course_subject_id", "person_id", "class_group_id", "institute_id"], name: "unique_subject_teacher_idx", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
@@ -314,22 +303,23 @@ ActiveRecord::Schema.define(version: 20150107142213) do
   add_foreign_key "academic_terms", "institutes"
   add_foreign_key "assessment_results", "assessments"
   add_foreign_key "assessment_results", "institutes"
-  add_foreign_key "assessment_results", "people"
+  add_foreign_key "assessment_results", "people", column: "student_id"
   add_foreign_key "assessments", "institutes"
   add_foreign_key "assessments", "teaching_assignments"
   add_foreign_key "class_group_students", "class_groups"
-  add_foreign_key "class_group_students", "people"
+  add_foreign_key "class_group_students", "people", column: "student_id"
   add_foreign_key "class_groups", "course_sessions"
   add_foreign_key "class_groups", "institutes"
-  add_foreign_key "class_groups", "people"
+  add_foreign_key "class_groups", "people", column: "class_teacher_id"
   add_foreign_key "course_session_participants", "course_sessions"
   add_foreign_key "course_session_participants", "institutes"
-  add_foreign_key "course_session_participants", "people"
+  add_foreign_key "course_session_participants", "people", column: "student_id"
   add_foreign_key "course_sessions", "courses"
   add_foreign_key "course_sessions", "institutes"
   add_foreign_key "course_subjects", "academic_terms"
   add_foreign_key "course_subjects", "institutes"
   add_foreign_key "courses", "institutes"
+  add_foreign_key "institutes", "people", column: "owner_id"
   add_foreign_key "parents", "families"
   add_foreign_key "parents", "institutes"
   add_foreign_key "people", "institutes"
@@ -338,7 +328,7 @@ ActiveRecord::Schema.define(version: 20150107142213) do
   add_foreign_key "students", "institutes"
   add_foreign_key "task_results", "assessment_results"
   add_foreign_key "task_results", "institutes"
-  add_foreign_key "task_results", "people"
+  add_foreign_key "task_results", "people", column: "student_id"
   add_foreign_key "task_results", "tasks"
   add_foreign_key "tasks", "assessments"
   add_foreign_key "tasks", "institutes"
@@ -347,6 +337,6 @@ ActiveRecord::Schema.define(version: 20150107142213) do
   add_foreign_key "teaching_assignments", "class_groups"
   add_foreign_key "teaching_assignments", "course_subjects"
   add_foreign_key "teaching_assignments", "institutes"
-  add_foreign_key "teaching_assignments", "people"
+  add_foreign_key "teaching_assignments", "people", column: "teacher_id"
   add_foreign_key "users", "institutes"
 end

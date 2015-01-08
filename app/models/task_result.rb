@@ -3,7 +3,7 @@ class TaskResult < ActiveRecord::Base
 
   belongs_to :task
   belongs_to :assessment_result
-  belongs_to :student, class_name: "Person", foreign_key: :person_id
+  belongs_to :student, class_name: "Person"
   belongs_to :institute
 
   # Validations

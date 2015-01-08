@@ -3,7 +3,7 @@ class ClassGroupsController < ApplicationController
     @course_session = current_account.course_sessions.find(params[:course_session_id])
     @class_group = current_account.class_groups.build(course_session_id: params[:course_session_id], institute_id: current_account.id)
     @course_session.students.each do |student|
-      @class_group.class_group_students.build(person_id: student.id)
+      @class_group.class_group_students.build(student_id: student.id)
     end
     
     @course_session.current_term.course_subjects.each do |subject|
@@ -55,7 +55,7 @@ class ClassGroupsController < ApplicationController
   private
 
   def class_group_params
-    params.require(:class_group).permit(:name, :start_date, :end_date, :person_id ,student_ids: [],
-      teaching_assignments_attributes: [:id, :course_subject_id, :person_id, :institute_id])
+    params.require(:class_group).permit(:name, :start_date, :end_date, :class_teacher_id ,student_ids: [],
+      teaching_assignments_attributes: [:id, :course_subject_id, :teacher_id, :institute_id])
   end
 end

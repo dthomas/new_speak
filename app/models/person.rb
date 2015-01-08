@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
   has_many :relatives, through: :families, foreign_key: "relative_id"
   has_many :reverse_families, class_name: "Family", inverse_of: :person, foreign_key: "relative_id"
   has_many :reverse_relatives, through: :reverse_families, source: :person
-  has_many :teaching_assignments
+  has_many :teaching_assignments, foreign_key: :teacher_id
 
   belongs_to :institute
 

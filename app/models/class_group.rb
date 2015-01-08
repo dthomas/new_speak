@@ -3,7 +3,7 @@ class ClassGroup < ActiveRecord::Base
 
 	# Associations
 
-  belongs_to :class_teacher, class_name: "Person", foreign_key: :person_id
+  belongs_to :class_teacher, class_name: "Person"
   belongs_to :course_session, inverse_of: :class_groups
   belongs_to :institute, inverse_of: :class_groups
 
@@ -38,7 +38,7 @@ class ClassGroup < ActiveRecord::Base
   accepts_nested_attributes_for :teaching_assignments, reject_if: :teaching_assignment_is_invalid?
 
   def teaching_assignment_is_invalid?(attributes)
-    attributes[:course_subject_id].blank? || attributes[:person_id].blank?
+    attributes[:course_subject_id].blank? || attributes[:teacher_id].blank?
   end
 
   def term_class_matches_upstream
