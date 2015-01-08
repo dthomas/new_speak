@@ -1,12 +1,7 @@
 class Institute < ActiveRecord::Base
   # Associations
-  belongs_to :owner, class_name: "User"
-  has_many :users, inverse_of: :institute
-  has_many :personal_profiles
+  belongs_to :owner, class_name: "Person"
   # has_many :families
-  has_many :parents
-  has_many :teachers
-  has_many :students
   has_many :people
   has_many :courses, inverse_of: :institute
   has_many :course_sessions, inverse_of: :institute
@@ -30,5 +25,5 @@ class Institute < ActiveRecord::Base
 
   # Nested attributes
 
-  accepts_nested_attributes_for :users
+  accepts_nested_attributes_for :people
 end
