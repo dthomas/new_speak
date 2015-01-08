@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Teacher, :type => :model do
   describe "associations" do
-    it { should belong_to :institute }
+    # it { should belong_to :institute }
 
-    it { should have_one :personal_profile }
-    it { should have_many :teaching_assignments }
-    it { should have_many :course_subjects }
-    it { should have_many :class_groups }
-    it { should have_many :in_charge_classes }
+    # it { should have_one :personal_profile }
+    # it { should have_many :teaching_assignments }
+    # it { should have_many :course_subjects }
+    # it { should have_many :class_groups }
+    # it { should have_many :in_charge_classes }
   end
 
   describe "validations" do

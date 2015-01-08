@@ -3,13 +3,15 @@ require 'rails_helper'
 feature "Account sign up", pending: true do
 
 	given(:institute) { FactoryGirl.attributes_for(:institute) }
-	given(:user) { FactoryGirl.attributes_for(:user) }
+	given(:user) { FactoryGirl.attributes_for(:person, role: :manager) }
 
 	background do
 		Capybara.app_host = 'http://www.newspeak.com'
 	end
 
 	scenario "with valid params" do
+		fail
+		pending "To Refactor"
 		visit new_account_path
 		within("#sign-up-form") do
 			fill_in "Institute Name", with: institute[:name]
@@ -28,6 +30,8 @@ feature "Account sign up", pending: true do
 	end
 
 	scenario "with invalid params", pending: true do
+		fail
+		pending "To Refactor"
 		visit new_account_path
 		within "#sign-up-form" do
 			fill_in "Institute Name", with: institute[:name]

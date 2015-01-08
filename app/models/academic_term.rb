@@ -14,7 +14,7 @@ class AcademicTerm < ActiveRecord::Base
   validates :course, presence: true
   validates :institute, presence: true
   validates :term_type, presence: true
-  validates :term_class, presence: true
+  validates :term_class, presence: true, uniqueness: { case_sensitive: false, scope: [:course_id, :institute_id] }
   validates :title, presence: true, uniqueness: { case_sensitive: false, scope: [:course_id, :institute_id] }
   validates :code, presence: true, uniqueness: { case_sensitive: false, scope: [:course_id, :institute_id] }
 

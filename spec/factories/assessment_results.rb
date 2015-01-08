@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :assessment_result do
     marks_obtained 87
-		grade
+		grade ""
 		student nil
 		assessment nil
 		institute nil

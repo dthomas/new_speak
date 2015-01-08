@@ -19,7 +19,7 @@ class AssessmentPolicy < ApplicationPolicy
 		user.id == record.teaching_assignment.teacher.id
 	end
 
-	def grade?
+	def update?
 		user.id == record.teaching_assignment.teacher.id
 	end
 end

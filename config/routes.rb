@@ -9,12 +9,9 @@ Rails.application.routes.draw do
         resources :teaching_assignments do
           resources :assessments do
             resources :tasks do
-              member do
-                get 'marks'
-                patch 'marks_update'
-              end
+              resources :marks, only: [:edit, :update]
             end
-            get 'grade', on: :member
+            resources :grades, only: :update
           end
         end
       end

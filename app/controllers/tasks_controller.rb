@@ -46,31 +46,9 @@ class TasksController < ApplicationController
 		end
 	end
 
-	def marks
-		@task = current_account.tasks.find(params[:id])
-		# authorize @task
-		@assessment = @task.assessment
-	end
-
-	def marks_update
-		@task = current_account.tasks.find(params[:id])
-		# authorize @task
-		@assessment = @task.assessment
-
-		if @task.update(marks_params)
-			redirect_to @task, notice: "Marks updated"
-		else
-			render :marks
-		end
-	end
-
 	private
 
 	def task_params
 		params.require(:task).permit(:name, :description, :due_date, :maximum_marks, :weightage)
-	end
-
-	def marks_params
-		params.require(:task).permit(task_results_attributes: [:id, :marks_obtained])
 	end
 end

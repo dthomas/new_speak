@@ -4,13 +4,14 @@
 	  <li> <%= link_to @assessment.teaching_assignment.class_group.course_session.name, @assessment.teaching_assignment.class_group.course_session %></li>
 	  <li> <%= link_to @assessment.teaching_assignment.class_group.name, @assessment.teaching_assignment.class_group %></li>
 	  <li> <%= link_to @assessment.title, @assessment %></li>
-	  <li class="active"><%= @task.name %></li>
+	  <li><%= link_to @task.name, @task %></li>
+	  <li class="active">Edit Marks</li>
 	</ol>
 <% end %>
 
 <div class="row">
 	<div class="col-sm-8">
-			<%= simple_form_for(@task, url: marks_update_task_path(@task)) do |f| %>
+			<%= simple_form_for(@task, url: mark_path(@task)) do |f| %>
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">Results</h3>

@@ -15,7 +15,8 @@ feature "Assessments Tasks & Results" do
 	given!(:teaching_assignment) { FactoryGirl.create(:teaching_assignment, course_subject: course_subject, teacher: teacher, class_group: class_group, institute: institute) }
 	given(:assessment) { FactoryGirl.build(:assessment, teaching_assignment: teaching_assignment ,institute: institute) }
 	given(:assessment_result) { FactoryGirl.create(:assessment_result, student: student, assessment: assessment, institute: institute) }
-	given(:task) { FactoryGirl.build(:task, assessment: assessment, institute: institute) }
+	given(:task) { FactoryGirl.build(:task, weightage: 100, assessment: assessment, institute: institute) }
+  given(:task_result) { FactoryGirl.build(:task_result, assessment_result: assessment_result, student: student, task: task, institute: institute) }
 
   background do
     Capybara.app_host = 'http://www.enchild.com'
@@ -51,6 +52,22 @@ feature "Assessments Tasks & Results" do
   	click_button "Save Task"
   	expect(current_path).to eq assessment_path(assessment)
   	expect(page).to have_content "#{task.name} was added to the assessment"
+  end
+
+  scenario "task result and grading" do
+    perform_valid_sign_in
+    task.save
+    task_result.save
+    click_link "#{course_subject.title}"
+    click_link "#{assessment.title}"
+    click_link "#{task.name}"
+    click_link "Update Marks"
+    fill_in "task[task_results_attributes][0][marks_obtained]", with: "92"
+    click_button "Update Marks"
+    expect(current_path).to eq task_path(task)
+    click_link "#{assessment.title}"
+    click_link "Grade Assessment"
+    expect(body).to match /(A\+|A1)/
   end
 
 	private

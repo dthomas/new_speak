@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:title) { |n| "Term-#{n}" }
 		sequence(:code) { |n| "T#{n}" }
 		term_type 0
-		sequence(:term_class) { |n| n }
+		term_class { rand(12) }
 		course nil
 		institute nil
   end

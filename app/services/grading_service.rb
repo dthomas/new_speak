@@ -8,11 +8,11 @@ class GradingService
 
 	def self.grade_primary(marks)
 		case marks
-			when 90..100 	then { marks_obtained: marks, grade: 'A+ Outstanding', grade_point: 5.0 }
-			when 75..89 	then { marks_obtained: marks, grade: 'A Excellent', grade_point: 4.0 }
-			when 56..74 	then { marks_obtained: marks, grade: 'B Very Good', grade_point: 3.0 }
-			when 35..55 	then { marks_obtained: marks, grade: 'C Good', grade_point: 2.0 }
-			when 0..34 		then { marks_obtained: marks, grade: 'D Scope for Improvement', grade_point: 2.0 }
+			when 90..100 	then { marks_obtained: marks, grade: 'A+', grade_point: 5.0 }
+			when 75..89 	then { marks_obtained: marks, grade: 'A', grade_point: 4.0 }
+			when 56..74 	then { marks_obtained: marks, grade: 'B', grade_point: 3.0 }
+			when 35..55 	then { marks_obtained: marks, grade: 'C', grade_point: 2.0 }
+			when 0..34 		then { marks_obtained: marks, grade: 'D', grade_point: 2.0 }
 		end
 	end
 
