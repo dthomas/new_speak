@@ -1,10 +1,10 @@
-class TeachingAssignment < ActiveRecord::Base
+class Tutorial < ActiveRecord::Base
 	# Associations
 
-  belongs_to :course_subject, inverse_of: :teaching_assignments
+  belongs_to :course_subject, inverse_of: :tutorials
   belongs_to :teacher, class_name: "Person"
-  belongs_to :class_group, inverse_of: :teaching_assignments
-  belongs_to :institute, inverse_of: :teaching_assignments
+  belongs_to :class_group, inverse_of: :tutorials
+  belongs_to :institute, inverse_of: :tutorials
 
   has_many :assessments
 

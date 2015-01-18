@@ -1,8 +1,8 @@
 <%= content_for(:breadcrumb) do %>
 	<ol class="breadcrumb">
 	  <li> <%= link_to 'Dashboard', dashboards_path %> </li>
-	  <li> <%= link_to @assessment.teaching_assignment.class_group.name, @assessment.teaching_assignment.class_group %> </li>
-	  <li> <%= link_to @assessment.teaching_assignment.course_subject.title, @assessment.teaching_assignment.course_subject %> </li>
+	  <li> <%= link_to @assessment.tutorial.class_group.name, @assessment.tutorial.class_group %> </li>
+	  <li> <%= link_to @assessment.tutorial.course_subject.title, @assessment.tutorial.course_subject %> </li>
 	  <li> <%= link_to @assessment.title, @assessment %> </li>
 	  <li class="active"><%= @task.name %></li>
 	</ol>

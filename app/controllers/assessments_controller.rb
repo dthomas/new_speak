@@ -1,21 +1,21 @@
 class AssessmentsController < ApplicationController
 	def new
-		@teaching_assignment = current_account.teaching_assignments.find(params[:teaching_assignment_id])
-		@assessment = current_account.assessments.build(teaching_assignment: @teaching_assignment)
+		@tutorial = current_account.tutorials.find(params[:tutorial_id])
+		@assessment = current_account.assessments.build(tutorial: @tutorial)
 		authorize @assessment
 	end
 
 	def create
-		@teaching_assignment = current_account.teaching_assignments.find(params[:teaching_assignment_id])
+		@tutorial = current_account.tutorials.find(params[:tutorial_id])
 		@assessment = current_account.assessments.build(assessment_params)
-		@assessment.teaching_assignment = @teaching_assignment
+		@assessment.tutorial = @tutorial
 		authorize @assessment
-		@teaching_assignment.class_group.students.each do |student|
+		@tutorial.class_group.students.each do |student|
 			@assessment.assessment_results.build(marks_obtained: 0.0, student: student, institute: current_account)
 		end
 
 		if @assessment.save
-			redirect_to @teaching_assignment, notice: "Assessment has been created successfully"
+			redirect_to @tutorial, notice: "Assessment has been created successfully"
 		else
 			render :new
 		end
@@ -42,6 +42,6 @@ class AssessmentsController < ApplicationController
 	private
 
 	def assessment_params
-		params.require(:assessment).permit(:title, :description, :due_date, :weightage, :maximum_marks, :strategy)
+		params.require(:assessment).permit(:title, :description, :due_date, :weightage, :maximum_marks, :strategy, :assessment_type)
 	end
 end

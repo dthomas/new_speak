@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :courses, shallow: true do
     resources :academic_terms do
       resources :course_subjects do
-        resources :teaching_assignments do
+        resources :tutorials do
           resources :assessments do
             resources :tasks do
               resources :marks, only: [:edit, :update]

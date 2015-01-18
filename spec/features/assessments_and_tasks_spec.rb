@@ -12,8 +12,8 @@ feature "Assessments Tasks & Results" do
 	given(:participant) { FactoryGirl.create(:course_session_participant, course_session: course_session, student: student, institute: institute) }
 	given(:class_group) { FactoryGirl.create(:class_group, class_teacher: teacher, course_session: course_session, term_class: academic_terms[0].term_class, institute: institute) }
 	given(:student_class) { FactoryGirl.create(:class_group_student, student: student, class_group: class_group, institute: institute) }
-	given!(:teaching_assignment) { FactoryGirl.create(:teaching_assignment, course_subject: course_subject, teacher: teacher, class_group: class_group, institute: institute) }
-	given(:assessment) { FactoryGirl.build(:assessment, teaching_assignment: teaching_assignment ,institute: institute) }
+	given!(:tutorial) { FactoryGirl.create(:tutorial, course_subject: course_subject, teacher: teacher, class_group: class_group, institute: institute) }
+	given(:assessment) { FactoryGirl.build(:assessment, tutorial: tutorial ,institute: institute) }
 	given(:assessment_result) { FactoryGirl.create(:assessment_result, student: student, assessment: assessment, institute: institute) }
 	given(:task) { FactoryGirl.build(:task, weightage: 100, assessment: assessment, institute: institute) }
   given(:task_result) { FactoryGirl.build(:task_result, assessment_result: assessment_result, student: student, task: task, institute: institute) }
@@ -31,9 +31,10 @@ feature "Assessments Tasks & Results" do
   	fill_in "assessment[description]", with: assessment.description
   	fill_in "assessment[weightage]", with: assessment.weightage
   	fill_in "assessment[maximum_marks]", with: assessment.maximum_marks
-  	select "Cumulative", from: "assessment[strategy]"
+    select "Cumulative", from: "assessment[strategy]"
+  	select "Academic", from: "assessment[assessment_type]"
   	click_button "Save Assessment"
-  	expect(current_path).to eq teaching_assignment_path(teaching_assignment)
+  	expect(current_path).to eq tutorial_path(tutorial)
   	expect(page).to have_content "Assessment has been created successfully"
   end
 

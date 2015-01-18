@@ -1,15 +1,15 @@
 <%= content_for(:breadcrumb) do %>
 	<ol class="breadcrumb">
 	  <li> <%= link_to 'Dashboard', dashboards_path %> </li>
-	  <li> <%= link_to @teaching_assignment.class_group.name, @teaching_assignment.class_group %> </li>
-	  <li class="active"><%= @teaching_assignment.course_subject.title %></li>
+	  <li> <%= link_to @tutorial.class_group.name, @tutorial.class_group %> </li>
+	  <li class="active"><%= @tutorial.course_subject.title %></li>
 	</ol>
 <% end %>
 
 <div class="row">
 	<div class="col-md-8">
 	<div class="panel panel-default">
-		<div class="panel-heading"><%= @teaching_assignment.course_subject.title %> by <%= @teaching_assignment.teacher.name %></div>
+		<div class="panel-heading"><%= @tutorial.course_subject.title %> by <%= @tutorial.teacher.name %></div>
 
   	<table class="table table-condensed">
   		<caption><h4>Assessments</h4></caption>
@@ -25,7 +25,7 @@
   		</thead>
 
   		<tbody>
-  			<% @teaching_assignment.assessments.each_with_index do |assessment, index| %>
+  			<% @tutorial.assessments.each_with_index do |assessment, index| %>
   				<tr>
   					<td><%= index + 1 %></td>
   					<td><%= link_to assessment.title, assessment %></td>
@@ -50,7 +50,7 @@
   		</tbody>
   	</table>
 	<div class="panel-footer">
-		<%= link_to '[+Assessment]', new_teaching_assignment_assessment_path(@teaching_assignment) %>
+		<%= link_to '[+Assessment]', new_tutorial_assessment_path(@tutorial) %>
 	</div>
 	</div>
 	</div>

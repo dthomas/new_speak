@@ -22,7 +22,7 @@
 			</thead>
 
 			<tbody>
-				<% current_user.teaching_assignments.each_with_index do |assignment, index| %>
+				<% current_user.tutorials.each_with_index do |assignment, index| %>
 					<tr>
 						<td><%= index + 1 %></td>
 						<td><%= link_to assignment.course_subject.title, assignment %></td>

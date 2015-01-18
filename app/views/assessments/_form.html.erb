@@ -14,13 +14,16 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<%= f.input :weightage, placeholder: "Weightage", as: :string %>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<%= f.input :maximum_marks, placeholder: "Maximum Marks", as: :string %>
 	</div>
-	<div class="col-sm-4">
-		<%= f.input :strategy, collection: [["Cumulative", "cumulative"], ["Best", "best"], ["Best Of", "best_of_n"], ["Average", "mean"]] %>
+	<div class="col-sm-3">
+		<%= f.input :strategy, collection: [["Cumulative", "cumulative"]], include_blank: false %>
+	</div>
+	<div class="col-sm-3">
+		<%= f.input :assessment_type, collection: [["Academic", "academic"], ["Behavioural", "behavioural"]], include_blank: false %>
 	</div>
 </div>

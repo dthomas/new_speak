@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :teaching_assignment do
+  factory :tutorial do
     course_subject nil
 		teacher nil
 		class_group nil

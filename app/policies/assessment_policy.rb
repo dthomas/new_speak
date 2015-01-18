@@ -12,14 +12,14 @@ class AssessmentPolicy < ApplicationPolicy
 		end
 	end
 	def create?
-		user.id == record.teaching_assignment.teacher.id
+		user.id == record.tutorial.teacher.id
 	end
 
 	def show?
-		user.id == record.teaching_assignment.teacher.id
+		user.id == record.tutorial.teacher.id
 	end
 
 	def update?
-		user.id == record.teaching_assignment.teacher.id
+		user.id == record.tutorial.teacher.id
 	end
 end

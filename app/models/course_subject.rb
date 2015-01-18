@@ -3,9 +3,9 @@ class CourseSubject < ActiveRecord::Base
 
   belongs_to :academic_term
   belongs_to :institute
-  has_many :teaching_assignments
-  has_many :teachers, through: :teaching_assignments, inverse_of: :course_subjects
-  has_many :class_groups, through: :teaching_assignments, inverse_of: :course_subjects
+  has_many :tutorials
+  has_many :teachers, through: :tutorials, inverse_of: :course_subjects
+  has_many :class_groups, through: :tutorials, inverse_of: :course_subjects
 
   # Validations
 

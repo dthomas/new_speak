@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TeachingAssignment, :type => :model do
+RSpec.describe Tutorial, :type => :model do
   describe "associations" do
     it { should belong_to :institute }
     it { should belong_to :class_group }

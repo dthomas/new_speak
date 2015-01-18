@@ -19,7 +19,7 @@ Warden::Strategies.add(:password) do
 	def authenticate!
 		person = Person.joins(:institute)
 		.where('institutes.subdomain = ? OR institutes.custom_domain = ? AND people.email = ?',
-			subdomain, request.host, params["user"]["email"]).first
+			subdomain.last, request.host, params["user"]["email"]).first
 		if person && person.authenticate(params["user"]["password"])
 			success! person
 		else

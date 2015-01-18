@@ -1,4 +1,4 @@
-class TeachingAssignmentPolicy < ApplicationPolicy
+class TutorialPolicy < ApplicationPolicy
 	def create?
 		manager? || principal?
 	end

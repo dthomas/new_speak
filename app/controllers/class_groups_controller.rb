@@ -7,7 +7,7 @@ class ClassGroupsController < ApplicationController
     end
     
     @course_session.current_term.course_subjects.each do |subject|
-      @class_group.teaching_assignments.build(course_subject: subject, institute: current_account)
+      @class_group.tutorials.build(course_subject: subject, institute: current_account)
     end
   end
 
@@ -36,7 +36,7 @@ class ClassGroupsController < ApplicationController
     @course_session = @class_group.course_session
     @students = @course_session.students
     @course_session.current_term.course_subjects.each do |subject|
-      @class_group.teaching_assignments.build(course_subject: subject, institute: current_account)
+      @class_group.tutorials.build(course_subject: subject, institute: current_account)
     end
   end
 
@@ -56,6 +56,6 @@ class ClassGroupsController < ApplicationController
 
   def class_group_params
     params.require(:class_group).permit(:name, :start_date, :end_date, :class_teacher_id ,student_ids: [],
-      teaching_assignments_attributes: [:id, :course_subject_id, :teacher_id, :institute_id])
+      tutorials_attributes: [:id, :course_subject_id, :teacher_id, :institute_id])
   end
 end

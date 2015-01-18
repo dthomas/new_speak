@@ -10,7 +10,7 @@ class Task < ActiveRecord::Base
   validates :assessment, presence: true
   validates :institute, presence: true
   
-  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :institute_id }
+  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :assessment_id }
   validates :due_date, presence: true
   validates :description, presence: true
   validates :maximum_marks, presence: true, numericality: true

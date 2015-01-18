@@ -28,7 +28,7 @@ class CourseSubjectsController < ApplicationController
 	def show
 		@subject = current_account.course_subjects.find(params[:id])
 		authorize @subject
-		@assignments = current_account.teaching_assignments.where(course_subject: @subject)
+		@assignments = current_account.tutorials.where(course_subject: @subject)
 	end
 
 	def update

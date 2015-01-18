@@ -2,11 +2,12 @@ class Assessment < ActiveRecord::Base
 
   # Enum
 
-  enum strategy: [:cumulative, :best, :best_of_n, :mean]
+  enum strategy: [:cumulative]
+  enum assessment_type: [:academic, :behavioural]
 
 	# Associations
 
-  belongs_to  :teaching_assignment
+  belongs_to  :tutorial
   belongs_to  :institute
   has_many    :tasks
   has_many    :assessment_results
@@ -18,10 +19,11 @@ class Assessment < ActiveRecord::Base
   validates :due_date, presence: true
   validates :maximum_marks, presence: true
   validates :strategy, presence: true
-  validates :teaching_assignment, presence: true
+  validates :assessment_type, presence: true
+  validates :tutorial, presence: true
   validates :institute, presence: true
 
   # Delegations
 
-  delegate :term_class, to: :teaching_assignment
+  delegate :term_class, to: :tutorial
 end

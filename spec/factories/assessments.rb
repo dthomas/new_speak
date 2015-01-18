@@ -5,8 +5,9 @@ FactoryGirl.define do
 		weightage 30
 		maximum_marks 100
 		strategy :cumulative
+		assessment_type :academic
 		due_date { Date.today + 14.days }
-		teaching_assignment nil
+		tutorial nil
 		institute nil
   end
 

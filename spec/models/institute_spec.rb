@@ -10,7 +10,7 @@ RSpec.describe Institute, :type => :model do
     it { should have_many :class_groups }
     it { should have_many :course_subjects }
     it { should have_many :academic_terms }
-    it { should have_many :teaching_assignments }
+    it { should have_many :tutorials }
     it { should have_many :assessments }
     it { should have_many :assessment_results }
     it { should have_many :tasks }

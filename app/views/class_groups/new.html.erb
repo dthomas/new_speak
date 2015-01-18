@@ -23,8 +23,8 @@
 
 	  		<div class="panel-heading">Subject Allottment</div>
 	  		<div class="panel-body">
-	  			<%= f.fields_for :teaching_assignments do |taf| %>
-		  			<%= render "teaching_assignments/form", f: taf %>
+	  			<%= f.fields_for :tutorials do |taf| %>
+		  			<%= render "tutorials/form", f: taf %>
 		  		<% end %>
 	  		</div>
 	  		
